@@ -1,5 +1,7 @@
 <template>
-    
+    <div>
+        <admin-side-menu></admin-side-menu>
+    </div>
 </template>
 
 <script>

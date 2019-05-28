@@ -36,6 +36,7 @@ require('./bootstrap')
 Vue.use(VueRouter)
 
 Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
+Vue.component('admin-side-menu', require('./components/Admin/SideMenu'))
 
 const router = new VueRouter({
     mode: 'history',
