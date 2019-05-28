@@ -23,6 +23,12 @@
 
 
 import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+window.Vue = Vue;
+
+Vue.use(BootstrapVue)
 import VueRouter from 'vue-router'
 
 require('./bootstrap')
@@ -36,6 +42,8 @@ const router = new VueRouter({
     routes: [
         { path: '/', component: require('./components/Articles/Index.vue') },
         { path: '/about', component: require('./components/About.vue') },
+        { path: '/bstest', component: require('./components/Bstest.vue') },
+        { path: '/admin', component: require('./components/Admin/Index.vue') }
     ]
 })
 
