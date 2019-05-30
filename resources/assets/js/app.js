@@ -37,6 +37,7 @@ Vue.use(VueRouter)
 
 Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
 Vue.component('admin-side-menu', require('./components/Admin/SideMenu'))
+Vue.component('regist-user', require('./components/Admin/RegistUser'))
 
 const router = new VueRouter({
     mode: 'history',

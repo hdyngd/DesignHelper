@@ -29,6 +29,12 @@ Route::group(['middleware' => 'api'], function() {
         ];
         return $articles;
     });
+
+//    Route::post('admin/create_user', ''function() {
+//
+//    });
+
+    Route::resource('user', 'UserController');
 });
 
 //Route::group(['middleware' => 'api'], function() {
