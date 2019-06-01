@@ -1,4 +1,5 @@
 <?php
+use Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,11 +11,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::any('{all}', function (){
+    Log::Debug('web root');
+    return view('app');
+})->where(['all' => '.*']);
 
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+//
+//Auth::routes();
+//
+//Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/{any}', function () {
-    return view('app');
-})->where('any', '.*');
+//Route::get('/{any}', function () {
+//    return view('app');
+//})->where('any', '.*');

@@ -1,11 +1,12 @@
 <template>
     <div>
-        <admin-side-menu></admin-side-menu>
+        this is home!!
     </div>
 </template>
 
 <script>
     export default {
+
     }
 </script>
 

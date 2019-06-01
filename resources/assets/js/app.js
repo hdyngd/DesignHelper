@@ -20,36 +20,50 @@
 // const app = new Vue({
 //     el: '#app'
 // });
+require('./bootstrap')
 
 
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-window.Vue = Vue;
+import store from './store';
+import router from './router';
 
-Vue.use(BootstrapVue)
-import VueRouter from 'vue-router'
+//import BootstrapVue from 'bootstrap-vue'
+//Vue.use(BootstrapVue)
 
-require('./bootstrap')
+window.state = store.state;
 
-Vue.use(VueRouter)
-
-Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
-Vue.component('admin-side-menu', require('./components/Admin/SideMenu'))
-Vue.component('regist-user', require('./components/Admin/RegistUser'))
-
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        { path: '/', component: require('./components/Articles/Index.vue') },
-        { path: '/about', component: require('./components/About.vue') },
-        { path: '/bstest', component: require('./components/Bstest.vue') },
-        { path: '/admin', component: require('./components/Admin/Index.vue') }
-    ]
-})
+Vue.component('app', require('./components/App.vue'));
 
 const app = new Vue({
-    router,
-    el: '#app'
-})
+    router
+}).$mount('#app');
+
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
+//window.Vue = Vue;
+
+
+// import VueRouter from 'vue-router'
+//
+// //require('./bootstrap')
+//
+// Vue.use(VueRouter)
+//
+// // Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
+// // Vue.component('admin-side-menu', require('./components/Admin/SideMenu'))
+// // Vue.component('regist-user', require('./components/Admin/RegistUser'))
+//
+// const router = new VueRouter({
+//     mode: 'history',
+//     routes: [
+//         // { path: '/', component: require('./components/Articles/Index.vue') },
+//         // { path: '/about', component: require('./components/About.vue') },
+//         // { path: '/bstest', component: require('./components/Bstest.vue') },
+//         // { path: '/admin', component: require('./components/Admin/Index.vue') }
+//     ]
+// })
+//
+// const app = new Vue({
+//     router,
+//     el: '#app'
+// })
