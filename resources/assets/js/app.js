@@ -27,6 +27,26 @@ import Vue from 'vue'
 import store from './store';
 import router from './router';
 
+//import { MdApp, MdToolbar, MdDrawer, MdContent, MdList, MdIcon } from 'vue-material/dist/components'
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+Vue.use(VueMaterial)
+
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+
+
+// Vue.use(MdApp)
+// Vue.use(MdToolbar)
+// Vue.use(MdDrawer)
+// Vue.use(MdContent)
+// Vue.use(MdList)
+// Vue.use(MdIcon)
+
+
+
+
 //import BootstrapVue from 'bootstrap-vue'
 //Vue.use(BootstrapVue)
 

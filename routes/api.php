@@ -1,7 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
-use Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +17,13 @@ use Log;
 Route::post('/login', 'AuthController@login');
 
 Route::group(['middleware' => 'auth:api'], function () {
-    \Log::Debug('api root');
+
+
     Route::get('/me', 'AuthController@me');
     Route::post('/logout', 'AuthController@logout');
+
+    //Route::post('/user/store', 'Api\UserController@store');
+    Route::post('/user/store', 'Auth\RegisterController@register');
 });
 
 //Route::group([
@@ -40,25 +44,25 @@ Route::group(['middleware' => 'auth:api'], function () {
 //    return $request->user();
 //});
 
-Route::group(['middleware' => 'api'], function() {
-    Route::get('articles',  function() {
-//        $articles = Article::all()->take(5);
-        $articles = [
-            ['id' => 1, 'title' => 'taro', 'content' => 'aaa'],
-            ['id' => 2, 'title' => 'jiro', 'content' => 'bbb'],
-            ['id' => 3, 'title' => 'sabro', 'content' => 'ccc'],
-            ['id' => 4, 'title' => 'shiro', 'content' => 'ddd'],
-            ['id' => 5, 'title' => 'goro', 'content' => 'eee'],
-        ];
-        return $articles;
-    });
-
-//    Route::post('admin/create_user', ''function() {
-//
+//Route::group(['middleware' => 'api'], function() {
+//    Route::get('articles',  function() {
+////        $articles = Article::all()->take(5);
+//        $articles = [
+//            ['id' => 1, 'title' => 'taro', 'content' => 'aaa'],
+//            ['id' => 2, 'title' => 'jiro', 'content' => 'bbb'],
+//            ['id' => 3, 'title' => 'sabro', 'content' => 'ccc'],
+//            ['id' => 4, 'title' => 'shiro', 'content' => 'ddd'],
+//            ['id' => 5, 'title' => 'goro', 'content' => 'eee'],
+//        ];
+//        return $articles;
 //    });
-
-    Route::resource('user', 'UserController');
-});
+//
+////    Route::post('admin/create_user', ''function() {
+////
+////    });
+//
+//    Route::resource('user', 'UserController');
+//});
 
 //Route::group(['middleware' => 'api'], function() {
 //    Route::get('articles',  'ArticleController@index');
