@@ -14,12 +14,16 @@
 
 <script>
     export default {
+        created () {
+          this.getToken();
+        },
         methods: {
             logout() {
                 axios.post('/api/logout').then(res => {
-                    axios.defaults.headers.common['Authorization'] = '';
-                    state.isLogin = false;
+                    this.removeToken();
                     this.$router.push({path: '/'});
+                }).catch(error => {
+                    this.removeToken();
                 });
             }
         }

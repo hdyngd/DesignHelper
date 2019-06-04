@@ -2669,7 +2669,7 @@ function updateLink (link, options, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(19);
-module.exports = __webpack_require__(115);
+module.exports = __webpack_require__(116);
 
 
 /***/ }),
@@ -2690,6 +2690,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_material_dist_theme_default_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_material_dist_theme_default_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuelidate__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vuelidate__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__localStorage__ = __webpack_require__(112);
 
 // /**
 //  * First we will load all of this project's JavaScript dependencies which
@@ -2727,6 +2728,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_vuelidate___default.a);
 
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.mixin(__WEBPACK_IMPORTED_MODULE_7__localStorage__["a" /* default */]);
+
 // Vue.use(MdApp)
 // Vue.use(MdToolbar)
 // Vue.use(MdDrawer)
@@ -2740,7 +2744,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_vuel
 
 window.state = __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].state;
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __webpack_require__(112));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __webpack_require__(113));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     router: __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */]
@@ -49252,15 +49256,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             isError: false,
             email: '',
-            password: '',
-            remember: ''
+            password: ''
         };
     },
 
@@ -49272,10 +49274,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 email: this.email,
                 password: this.password
             }).then(function (res) {
-                var token = res.data.access_token;
-                console.log(res.data);
-                axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-                state.isLogin = true;
+                _this.setToken('Bearer ' + res.data.access_token);
                 _this.$router.push({ path: '/' });
             }).catch(function (error) {
                 _this.isError = true;
@@ -49359,44 +49358,6 @@ var render = function() {
                 return
               }
               _vm.password = $event.target.value
-            }
-          }
-        }),
-        _vm._v("\n        Remember Me: "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.remember,
-              expression: "remember"
-            }
-          ],
-          attrs: { type: "checkbox", name: "remember" },
-          domProps: {
-            checked: Array.isArray(_vm.remember)
-              ? _vm._i(_vm.remember, null) > -1
-              : _vm.remember
-          },
-          on: {
-            change: function($event) {
-              var $$a = _vm.remember,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false
-              if (Array.isArray($$a)) {
-                var $$v = null,
-                  $$i = _vm._i($$a, $$v)
-                if ($$el.checked) {
-                  $$i < 0 && (_vm.remember = $$a.concat([$$v]))
-                } else {
-                  $$i > -1 &&
-                    (_vm.remember = $$a
-                      .slice(0, $$i)
-                      .concat($$a.slice($$i + 1)))
-                }
-              } else {
-                _vm.remember = $$c
-              }
             }
           }
         }),
@@ -86642,14 +86603,43 @@ exports.push([module.i, ":root{--md-theme-default-primary: #448aff\n    ;--md-th
 
 /***/ }),
 /* 112 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        setToken: function setToken(token) {
+            console.log('set!!');
+            axios.defaults.headers.common['Authorization'] = token;
+            localStorage.setItem('dhApiToken', token);
+            state.isLogin = true;
+        },
+        getToken: function getToken() {
+            console.log('get!!');
+            var token = localStorage.getItem('dhApiToken');
+            console.log(token);
+            console.log(token);
+            if (token) this.setToken(token);
+        },
+        removeToken: function removeToken() {
+            console.log('remove!!');
+            axios.defaults.headers.common['Authorization'] = '';
+            state.isLogin = false;
+            localStorage.removeItem("dhApiToken");
+        }
+    }
+});
+
+/***/ }),
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(113)
+var __vue_script__ = __webpack_require__(114)
 /* template */
-var __vue_template__ = __webpack_require__(114)
+var __vue_template__ = __webpack_require__(115)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -86688,7 +86678,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86709,21 +86699,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    created: function created() {
+        this.getToken();
+    },
+
     methods: {
         logout: function logout() {
             var _this = this;
 
             axios.post('/api/logout').then(function (res) {
-                axios.defaults.headers.common['Authorization'] = '';
-                state.isLogin = false;
+                _this.removeToken();
                 _this.$router.push({ path: '/' });
+            }).catch(function (error) {
+                _this.removeToken();
             });
         }
     }
 });
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -86789,7 +86784,7 @@ if (false) {
 }
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

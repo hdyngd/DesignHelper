@@ -36,6 +36,8 @@ Vue.use(VueMaterial)
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 
+import localStorage from './localStorage';
+Vue.mixin(localStorage);
 
 // Vue.use(MdApp)
 // Vue.use(MdToolbar)
