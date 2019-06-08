@@ -1,78 +1,3 @@
-<!--<template>-->
-<!--    <div>-->
-<!--        <b-card bg-variant="light">-->
-<!--            <b-form-group-->
-<!--                    label-cols-lg="3"-->
-<!--                    label="ユーザ登録"-->
-<!--                    label-size="lg"-->
-<!--                    label-class="font-weight-bold pt-0"-->
-<!--                    class="mb-0"-->
-<!--            >-->
-<!--                <b-form-group-->
-<!--                        label-cols-sm="3"-->
-<!--                        label="ユーザ名:"-->
-<!--                        label-align-sm="right"-->
-<!--                        label-for="user-name"-->
-<!--                >-->
-<!--                    <b-form-input id="user-name" type="text" v-model="name"></b-form-input>-->
-<!--                </b-form-group>-->
-
-<!--                <b-form-group-->
-<!--                        label-cols-sm="3"-->
-<!--                        label="EMail:"-->
-<!--                        label-align-sm="right"-->
-<!--                        label-for="email"-->
-<!--                >-->
-<!--                    <b-form-input id="email" type="email" v-model="email"></b-form-input>-->
-<!--                </b-form-group>-->
-
-<!--                <b-form-group-->
-<!--                        label-cols-sm="3"-->
-<!--                        label="ロール:"-->
-<!--                        label-align-sm="right" class="mb-0"-->
-<!--                >-->
-<!--                    <b-form-radio v-model="selected" value="2">一般ユーザー</b-form-radio>-->
-<!--                    <b-form-radio v-model="selected" value="1">クリエイター</b-form-radio>-->
-<!--                    <b-form-radio v-model="selected" value="0">管理者</b-form-radio>-->
-<!--                </b-form-group>-->
-<!--                <b-button variant="primary" @click="createUser">登録</b-button>-->
-<!--            </b-form-group>-->
-<!--        </b-card>-->
-<!--    </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--    export default {-->
-<!--        data() {-->
-<!--            return {-->
-<!--                name: '',-->
-<!--                email: '',-->
-<!--                selected: '2'-->
-<!--            }-->
-<!--        },-->
-<!--        methods: {-->
-<!--            createUser() {-->
-<!--                let params = {-->
-<!--                    name: this.name,-->
-<!--                    email: this.email,-->
-<!--                    role: this.selected-->
-<!--                }-->
-<!--                this.$http.post('api/user', params)-->
-<!--                    .then(response => {-->
-<!--                        console.log(response);-->
-<!--                    })-->
-<!--                    .catch(error => {-->
-<!--                        console.log(error);-->
-<!--                    });-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->
-
-<!--<style scoped>-->
-
-<!--</style>-->
-
 <template>
     <div>
         <form novalidate class="md-layout" @submit.prevent="validateUser">
@@ -127,7 +52,6 @@
     } from 'vuelidate/lib/validators'
 
     export default {
-        //name: 'FormValidation',
         mixins: [validationMixin],
         data: () => ({
             form: {
@@ -157,7 +81,6 @@
         methods: {
             getValidationClass (fieldName) {
                 const field = this.$v.form[fieldName]
-                console.log(field);
                 if (field) {
                     return {
                         'md-invalid': field.$invalid && field.$dirty
@@ -182,10 +105,8 @@
                     password: password,
                     password_confirmation: password,
                 }
-                //console.log(params);
                 axios.post('/api/user/store', params)
                     .then(response => {
-                        //console.log(response);
                         this.lastUser = response.data.name
                         this.userSaved = true
                         this.sending = false
@@ -194,12 +115,10 @@
                     .catch(error => {
                         this.sending = false
                         for (let index in error.response.data.errors) {
-                            this.$toasted.global.my_app_error({
+                            this.$toasted.global.error({
                                 message : error.response.data.errors[index]
                             });
                         }
-                        //this.$toastr.e("ERRROR MESSAGE");
-                        console.log(error.response.data.message);
                     });
             },
             validateUser () {
@@ -227,12 +146,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-    .md-progress-bar {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-    }
-</style>

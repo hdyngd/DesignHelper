@@ -48,7 +48,7 @@ let options = {
 };
 
 // register the toast with the custom message
-Vue.toasted.register('my_app_error',
+Vue.toasted.register('error',
     (payload) => {
 
         // if there is no message passed show default message

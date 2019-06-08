@@ -33,7 +33,7 @@
 
                     <md-list-item>
                         <md-icon>create_new_folder</md-icon>
-                        <span class="md-list-item-text">カテゴリ追加</span>
+                        <span class="md-list-item-text"><router-link to="/admin/add_category">カテゴリ追加</router-link></span>
                     </md-list-item>
 
                     <md-list-item>
@@ -60,7 +60,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .md-app {
         max-height: 800px;
         border: 1px solid rgba(#000, .12);
@@ -70,6 +70,13 @@
     .md-drawer {
         width: 230px;
         max-width: calc(100vw - 125px);
+    }
+
+    .md-progress-bar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
     }
 </style>
 
