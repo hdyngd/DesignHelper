@@ -22,8 +22,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/me', 'AuthController@me');
     Route::post('/logout', 'AuthController@logout');
 
-    //Route::post('/user/store', 'Api\UserController@store');
     Route::post('/user/store', 'Auth\RegisterController@register');
+    Route::post('/category/store', 'Api\CategoryController@store');
 });
 
 //Route::group([
