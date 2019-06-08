@@ -23,6 +23,7 @@
         "bootstrap-vue": "^2.0.0-rc.21",
         "vue-material": "^1.0.0-beta-11",
         "vue-router": "^3.0.6",
+        "vue-toasted": "^1.1.27",
         "vuelidate": "^0.7.4"
     }
 }

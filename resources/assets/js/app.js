@@ -39,13 +39,28 @@ Vue.use(Vuelidate)
 import localStorage from './localStorage';
 Vue.mixin(localStorage);
 
-// Vue.use(MdApp)
-// Vue.use(MdToolbar)
-// Vue.use(MdDrawer)
-// Vue.use(MdContent)
-// Vue.use(MdList)
-// Vue.use(MdIcon)
+import Toasted from 'vue-toasted';
+Vue.use(Toasted)
+let options = {
+    type : 'error',
+    icon : 'error_outline',
+    duration : 5000
+};
 
+// register the toast with the custom message
+Vue.toasted.register('my_app_error',
+    (payload) => {
+
+        // if there is no message passed show default message
+        if(! payload.message) {
+            return "Oops.. Something Went Wrong.."
+        }
+
+        // if there is a message show it with the message
+        return "Oops.. " + payload.message;
+    },
+    options
+)
 
 
 

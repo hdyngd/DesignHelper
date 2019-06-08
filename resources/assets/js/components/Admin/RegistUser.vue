@@ -127,7 +127,7 @@
     } from 'vuelidate/lib/validators'
 
     export default {
-        name: 'FormValidation',
+        //name: 'FormValidation',
         mixins: [validationMixin],
         data: () => ({
             form: {
@@ -138,7 +138,6 @@
             userSaved: false,
             sending: false,
             lastUser: null,
-
         }),
         validations: {
             form: {
@@ -158,7 +157,7 @@
         methods: {
             getValidationClass (fieldName) {
                 const field = this.$v.form[fieldName]
-
+                console.log(field);
                 if (field) {
                     return {
                         'md-invalid': field.$invalid && field.$dirty
@@ -183,24 +182,25 @@
                     password: password,
                     password_confirmation: password,
                 }
-                console.log(params);
+                //console.log(params);
                 axios.post('/api/user/store', params)
                     .then(response => {
-                        console.log(response);
+                        //console.log(response);
                         this.lastUser = response.data.name
                         this.userSaved = true
                         this.sending = false
                         this.clearForm()
                     })
                     .catch(error => {
-                        console.log(error);
+                        this.sending = false
+                        for (let index in error.response.data.errors) {
+                            this.$toasted.global.my_app_error({
+                                message : error.response.data.errors[index]
+                            });
+                        }
+                        //this.$toastr.e("ERRROR MESSAGE");
+                        console.log(error.response.data.message);
                     });
-                // window.setTimeout(() => {
-                //     this.lastUser = this.form.userName
-                //     this.userSaved = true
-                //     this.sending = false
-                //     this.clearForm()
-                // }, 1500)
             },
             validateUser () {
                 this.$v.$touch()
