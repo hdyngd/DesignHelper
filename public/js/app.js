@@ -46509,10 +46509,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Admin_RegistUser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Admin_RegistUser__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Admin_AddCategory__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Admin_AddCategory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Admin_AddCategory__);
-var _ref;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -46530,9 +46526,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('regist-user', __webpack_r
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_2__components_pages_Home___default.a }, { path: '/login', component: __WEBPACK_IMPORTED_MODULE_3__components_pages_Login___default.a }, { path: '/user', component: __WEBPACK_IMPORTED_MODULE_4__components_pages_User___default.a, meta: { requiresAuth: true } }, { path: '/admin', component: __WEBPACK_IMPORTED_MODULE_5__components_Admin_Index___default.a, meta: { requiresAuth: true },
-    children: [(_ref = {
-        path: 'regist_user', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_RegistUser___default.a
-    }, _defineProperty(_ref, 'path', 'add_category'), _defineProperty(_ref, 'component', __WEBPACK_IMPORTED_MODULE_7__components_Admin_AddCategory___default.a), _ref)]
+    children: [{ path: 'regist_user', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_RegistUser___default.a }, { path: 'add_category', component: __WEBPACK_IMPORTED_MODULE_7__components_Admin_AddCategory___default.a }]
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
@@ -51276,6 +51270,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -51285,7 +51286,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             form: {
-                categoryName: null
+                categoryName: null,
+                description: null
             },
             categoryAdded: false,
             sending: false
@@ -51317,7 +51319,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.sending = true;
 
             var params = {
-                name: this.form.categoryName
+                name: this.form.categoryName,
+                description: this.form.description
             };
             axios.post('/api/category/store', params).then(function (response) {
                 _this.categoryName = response.data.name;
@@ -51412,6 +51415,33 @@ var render = function() {
               1
             ),
             _vm._v(" "),
+            _c(
+              "md-card-content",
+              [
+                _c(
+                  "md-field",
+                  [
+                    _c("label", { attrs: { for: "description" } }, [
+                      _vm._v("Description")
+                    ]),
+                    _vm._v(" "),
+                    _c("md-textarea", {
+                      attrs: { name: "description", id: "description" },
+                      model: {
+                        value: _vm.form.description,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "description", $$v)
+                        },
+                        expression: "form.description"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
             _vm.sending
               ? _c("md-progress-bar", { attrs: { "md-mode": "indeterminate" } })
               : _vm._e(),
@@ -51437,20 +51467,20 @@ var render = function() {
         _c(
           "md-snackbar",
           {
-            attrs: { "md-active": _vm.userSaved },
+            attrs: { "md-active": _vm.categoryAdded },
             on: {
               "update:mdActive": function($event) {
-                _vm.userSaved = $event
+                _vm.categoryAdded = $event
               },
               "update:md-active": function($event) {
-                _vm.userSaved = $event
+                _vm.categoryAdded = $event
               }
             }
           },
           [
             _vm._v(
               "The category " +
-                _vm._s(_vm.categoryName) +
+                _vm._s(_vm.form.categoryName) +
                 " was added with success!"
             )
           ]

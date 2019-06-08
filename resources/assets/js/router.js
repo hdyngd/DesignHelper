@@ -20,10 +20,8 @@ const routes = [
     { path: '/user', component: User, meta: { requiresAuth: true } },
     { path: '/admin', component: Admin, meta: { requiresAuth: true },
         children: [
-            {
-                path: 'regist_user', component: RegistUser,
-                path: 'add_category', component: AddCategory,
-            }
+            {path: 'regist_user', component: RegistUser},
+            {path: 'add_category', component: AddCategory},
         ]
     },
 ];

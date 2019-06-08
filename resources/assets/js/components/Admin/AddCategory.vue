@@ -14,6 +14,13 @@
                     </md-field>
                 </md-card-content>
 
+                <md-card-content>
+                    <md-field>
+                        <label for="description">Description</label>
+                        <md-textarea name="description" id="description" v-model="form.description"></md-textarea>
+                    </md-field>
+                </md-card-content>
+
                 <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
                 <md-card-actions>
@@ -21,7 +28,7 @@
                 </md-card-actions>
             </md-card>
 
-            <md-snackbar :md-active.sync="userSaved">The category {{ categoryName }} was added with success!</md-snackbar>
+            <md-snackbar :md-active.sync="categoryAdded">The category {{ form.categoryName }} was added with success!</md-snackbar>
         </form>
     </div>
 </template>
@@ -37,6 +44,7 @@
         data: () => ({
             form: {
                 categoryName: null,
+                description: null,
             },
             categoryAdded: false,
             sending: false,
@@ -66,6 +74,7 @@
 
                 let params = {
                     name: this.form.categoryName,
+                    description: this.form.description
                 }
                 axios.post('/api/category/store', params)
                     .then(response => {
