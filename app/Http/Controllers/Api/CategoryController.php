@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreCategoryPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Category
+use App\Category;
 
 class CategoryController extends Controller
 {
@@ -34,9 +35,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryPost $request)
     {
-        //
+        $category = Category::create($request->all());
+        return $category;
     }
 
     /**

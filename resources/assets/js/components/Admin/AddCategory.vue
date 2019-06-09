@@ -28,7 +28,7 @@
                 </md-card-actions>
             </md-card>
 
-            <md-snackbar :md-active.sync="categoryAdded">The category {{ form.categoryName }} was added with success!</md-snackbar>
+            <md-snackbar :md-active.sync="categoryAdded">The category {{ categoryName }} was added with success!</md-snackbar>
         </form>
     </div>
 </template>
@@ -46,6 +46,7 @@
                 categoryName: null,
                 description: null,
             },
+            categoryName: null,
             categoryAdded: false,
             sending: false,
         }),
@@ -68,6 +69,7 @@
             clearForm() {
                 this.$v.$reset()
                 this.form.categoryName = null
+                this.form.description = null
             },
             addCategory() {
                 this.sending = true

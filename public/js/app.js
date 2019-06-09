@@ -51289,6 +51289,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 categoryName: null,
                 description: null
             },
+            categoryName: null,
             categoryAdded: false,
             sending: false
         };
@@ -51312,6 +51313,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         clearForm: function clearForm() {
             this.$v.$reset();
             this.form.categoryName = null;
+            this.form.description = null;
         },
         addCategory: function addCategory() {
             var _this = this;
@@ -51323,6 +51325,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 description: this.form.description
             };
             axios.post('/api/category/store', params).then(function (response) {
+                console.log(response.data.name);
                 _this.categoryName = response.data.name;
                 _this.categoryAdded = true;
                 _this.sending = false;
@@ -51480,7 +51483,7 @@ var render = function() {
           [
             _vm._v(
               "The category " +
-                _vm._s(_vm.form.categoryName) +
+                _vm._s(_vm.categoryName) +
                 " was added with success!"
             )
           ]
