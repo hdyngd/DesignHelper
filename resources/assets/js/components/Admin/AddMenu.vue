@@ -9,7 +9,7 @@
                 <md-card-content>
                     <md-field :class="getValidationClass('category')">
                         <label for="category">カテゴリ</label>
-                        <md-select v-model="form.category" name="category" id="category">
+                        <md-select name="category" id="category" v-model="form.category">
                             <md-option v-for="item in categoryList" :value="item.id" :key="item.id">{{ item.name }}</md-option>
                         </md-select>
                         <span class="md-error" v-if="!$v.form.category.required">The select category is required</span>
@@ -26,7 +26,8 @@
 
                 <md-card-content>
                     <md-field :class="getValidationClass('price')">
-                        <label for="price">¥</label>
+                        <label for="price">価格</label>
+                        <span class="md-prefix">¥</span>
                         <md-input name="price" id="price" autocomplete="given-menu-price" v-model="form.price" type="number" :disabled="sending" />
                         <span class="md-error" v-if="!$v.form.price.required">The price is required</span>
                     </md-field>

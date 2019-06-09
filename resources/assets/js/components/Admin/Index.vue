@@ -27,6 +27,11 @@
 
                 <md-list>
                     <md-list-item>
+                        <md-icon>dashboard</md-icon>
+                        <span class="md-list-item-text"><router-link to="/admin/dash_board/user">ダッシュボード</router-link></span>
+                    </md-list-item>
+
+                    <md-list-item>
                         <md-icon>person_add</md-icon>
                         <span class="md-list-item-text"><router-link to="/admin/regist_user">ユーザ登録</router-link></span>
                     </md-list-item>
@@ -39,16 +44,6 @@
                     <md-list-item>
                         <md-icon>note_add</md-icon>
                         <span class="md-list-item-text"><router-link to="/admin/add_menu">メニュー追加</router-link></span>
-                    </md-list-item>
-
-                    <md-list-item>
-                        <md-icon>group</md-icon>
-                        <span class="md-list-item-text">ユーザ一覧</span>
-                    </md-list-item>
-
-                    <md-list-item>
-                        <md-icon>work</md-icon>
-                        <span class="md-list-item-text">案件一覧</span>
                     </md-list-item>
                 </md-list>
             </md-app-drawer>
