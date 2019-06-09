@@ -38,7 +38,7 @@
 
                     <md-list-item>
                         <md-icon>note_add</md-icon>
-                        <span class="md-list-item-text">メニュー追加</span>
+                        <span class="md-list-item-text"><router-link to="/admin/add_menu">メニュー追加</router-link></span>
                     </md-list-item>
 
                     <md-list-item>

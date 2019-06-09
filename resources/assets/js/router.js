@@ -7,6 +7,7 @@ import User from './components/pages/User'
 import Admin from './components/Admin/Index'
 import RegistUser from "./components/Admin/RegistUser";
 import AddCategory from "./components/Admin/AddCategory";
+import AddMenu from "./components/Admin/AddMenu";
 
 Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
 Vue.component('admin-side-menu', require('./components/Admin/SideMenu'))
@@ -22,6 +23,7 @@ const routes = [
         children: [
             {path: 'regist_user', component: RegistUser},
             {path: 'add_category', component: AddCategory},
+            {path: 'add_menu', component: AddMenu},
         ]
     },
 ];

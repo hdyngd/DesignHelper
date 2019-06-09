@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreCategoryPost;
+use App\Http\Requests\StoreMenuPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Category;
+use App\Menu;
 
-class CategoryController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return response()->json(Category::all());
-//        dd(Category::all());
-//        //return Category::all();
+        //
     }
 
     /**
@@ -37,10 +35,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryPost $request)
+    public function store(StoreMenuPost $request)
     {
-        $category = Category::create($request->all());
-        return $category;
+        $menu = Menu::create($request->all());
+        return $menu;
     }
 
     /**
