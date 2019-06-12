@@ -50322,8 +50322,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 var toLower = function toLower(text) {
     return text.toString().toLowerCase();
@@ -52951,13 +52949,13 @@ var content = __webpack_require__(119);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("57bde8ba", content, false, {});
+var update = __webpack_require__(4)("36579914", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eece3be2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuList.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eece3be2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuList.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eece3be2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuList.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eece3be2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuList.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -52975,7 +52973,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.md-field[data-v-eece3be2] {\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -52992,9 +52990,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var toLower = function toLower(text) {
+    return text.toString().toLowerCase();
+};
+
+var searchByName = function searchByName(items, term) {
+    if (term) {
+        return items.filter(function (item) {
+            return toLower(item.name).includes(toLower(term));
+        });
+    }
+
+    return items;
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "MenuList"
+    data: function data() {
+        return {
+            search: null,
+            searched: [],
+            menus: []
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/api/menu/get').then(function (response) {
+            console.log(response.data);
+            _this.menus = response.data;
+            _this.searched = response.data;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    methods: {
+        getClass: function getClass() {
+            return {
+                'md-primary': true
+            };
+        },
+        searchOnTable: function searchOnTable() {
+            this.searched = searchByName(this.menus, this.search);
+        },
+        onSelect: function onSelect(item) {
+            console.log(item);
+        },
+        edit: function edit(id) {
+            console.log(id);
+        }
+    }
 });
 
 /***/ }),
@@ -53005,7 +53075,163 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    メニュー一覧！！\n")])
+  return _c(
+    "div",
+    [
+      _c(
+        "md-table",
+        {
+          attrs: {
+            "md-sort": "name",
+            "md-sort-order": "asc",
+            "md-card": "",
+            "md-fixed-header": ""
+          },
+          on: { "md-selected": _vm.onSelect },
+          scopedSlots: _vm._u([
+            {
+              key: "md-table-row",
+              fn: function(ref) {
+                var item = ref.item
+                return _c(
+                  "md-table-row",
+                  {
+                    class: _vm.getClass(item),
+                    attrs: { "md-selectable": "single" }
+                  },
+                  [
+                    _c(
+                      "md-table-cell",
+                      {
+                        attrs: {
+                          "md-label": "ID",
+                          "md-sort-by": "id",
+                          "md-numeric": ""
+                        }
+                      },
+                      [_vm._v(_vm._s(item.id))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-table-cell",
+                      {
+                        attrs: {
+                          "md-label": "CategoryName",
+                          "md-sort-by": "CategoryName"
+                        }
+                      },
+                      [_vm._v(_vm._s(item.categoryName))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-table-cell",
+                      { attrs: { "md-label": "Name", "md-sort-by": "name" } },
+                      [_vm._v(_vm._s(item.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-table-cell",
+                      {
+                        attrs: {
+                          "md-label": "Price",
+                          "md-sort-by": "price",
+                          "md-numeric": ""
+                        }
+                      },
+                      [_vm._v("¥ " + _vm._s(item.price))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-table-cell",
+                      {
+                        attrs: {
+                          "md-label": "Description",
+                          "md-sort-by": "description"
+                        }
+                      },
+                      [_vm._v(_vm._s(item.description))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-table-cell",
+                      { attrs: { "md-label": "Edit" } },
+                      [
+                        _c(
+                          "md-icon",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.edit(item.id)
+                              }
+                            }
+                          },
+                          [_vm._v("create")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              }
+            }
+          ]),
+          model: {
+            value: _vm.searched,
+            callback: function($$v) {
+              _vm.searched = $$v
+            },
+            expression: "searched"
+          }
+        },
+        [
+          _c(
+            "md-table-toolbar",
+            [
+              _c("div", { staticClass: "md-toolbar-section-start" }, [
+                _c("h1", { staticClass: "md-title" }, [_vm._v("Menus")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "md-field",
+                {
+                  staticClass: "md-toolbar-section-end",
+                  attrs: { "md-clearable": "" }
+                },
+                [
+                  _c("md-input", {
+                    attrs: { placeholder: "Search by name..." },
+                    on: { input: _vm.searchOnTable },
+                    model: {
+                      value: _vm.search,
+                      callback: function($$v) {
+                        _vm.search = $$v
+                      },
+                      expression: "search"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("md-table-empty-state", {
+            attrs: {
+              "md-label": "No Menus found",
+              "md-description":
+                "No menu found for this '" +
+                _vm.search +
+                "' query. Try a different search term or create a new menu."
+            }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

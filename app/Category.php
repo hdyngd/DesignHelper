@@ -17,4 +17,9 @@ class Category extends Model
         'name',
         'description'
     ];
+
+    public function menus()
+    {
+        return $this->hasMany('App\Menu');
+    }
 }

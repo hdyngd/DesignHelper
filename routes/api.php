@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/category/get', 'Api\CategoryController@index');
     Route::post('/menu/store', 'Api\MenuController@store');
     Route::get('/user/get', 'Api\UserController@getAll');
+    Route::get('/menu/get', 'Api\MenuController@getAll');
 });
 
 //Route::group([

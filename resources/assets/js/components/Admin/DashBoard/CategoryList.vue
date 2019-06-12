@@ -14,7 +14,6 @@
             <md-table-empty-state
                     md-label="No categories found"
                     :md-description="`No category found for this '${search}' query. Try a different search term or create a new category.`">
-                <!--                <md-button class="md-primary md-raised" @click="newUser">Create New User</md-button>-->
             </md-table-empty-state>
 
             <md-table-row slot="md-table-row" slot-scope="{ item }" :class="getClass(item)" md-selectable="single">
@@ -22,7 +21,6 @@
                 <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
                 <md-table-cell md-label="Description" md-sort-by="description">{{ item.description }}</md-table-cell>
                 <md-table-cell md-label="Edit"><md-icon @click="edit(item.id)">create</md-icon></md-table-cell>
-                <!--                <md-table-cell md-label="Role" md-sort-by="role">{{ item.role | conversion }}</md-table-cell>-->
             </md-table-row>
         </md-table>
     </div>

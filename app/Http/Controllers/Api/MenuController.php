@@ -16,7 +16,16 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+
+    }
+
+    public function getAll()
+    {
+        $menus = Menu::select('menus.id', 'menus.name', 'price', 'menus.description', 'category_id', 'categories.name as categoryName')
+            ->join('categories', 'categories.id', '=', 'menus.category_id')
+            ->get();
+        //dd($menus);
+        return response()->json($menus);
     }
 
     /**
