@@ -22,6 +22,7 @@
                 <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
                 <md-table-cell md-label="Email" md-sort-by="email">{{ item.email }}</md-table-cell>
                 <md-table-cell md-label="Role" md-sort-by="role">{{ item.role }}</md-table-cell>
+                <md-table-cell md-label="Edit"><md-icon @click="edit(item.id)">create</md-icon></md-table-cell>
 <!--                <md-table-cell md-label="Role" md-sort-by="role">{{ item.role | conversion }}</md-table-cell>-->
             </md-table-row>
         </md-table>
@@ -85,7 +86,12 @@
                 this.searched = searchByName(this.users, this.search)
             },
             onSelect (item) {
+                console.log('select!!');
                 console.log(item);
+            },
+            edit (id) {
+                console.log('click!!');
+                console.log(id);
             }
         }
     }
