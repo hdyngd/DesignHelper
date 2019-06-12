@@ -2360,7 +2360,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-d634c3da"
+var __vue_scopeId__ = "data-v-5b3584a4"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -2371,7 +2371,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Admin/CategoryList.vue"
+Component.options.__file = "resources/assets/js/components/Admin/DashBoard/CategoryList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2380,9 +2380,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d634c3da", Component.options)
+    hotAPI.createRecord("data-v-5b3584a4", Component.options)
   } else {
-    hotAPI.reload("data-v-d634c3da", Component.options)
+    hotAPI.reload("data-v-5b3584a4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -46556,8 +46556,8 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_pages_User___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_pages_User__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Admin_Index__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Admin_Index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Admin_Index__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard_DashBoard__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard_DashBoard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard_DashBoard__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Admin_RegistUser__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Admin_RegistUser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Admin_RegistUser__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Admin_AddCategory__ = __webpack_require__(104);
@@ -46572,10 +46572,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 
 
-// import UserList from './components/Admin/UserList';
-// import CategoryList from './components/Admin/CategoryList';
-// import MenuList from './components/Admin/MenuList';
-// import PropositionList from './components/Admin/PropositionList';
 
 
 
@@ -46592,15 +46588,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('regist-user', __webpack_r
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_2__components_pages_Home___default.a }, { path: '/login', component: __WEBPACK_IMPORTED_MODULE_3__components_pages_Login___default.a }, { path: '/user', component: __WEBPACK_IMPORTED_MODULE_4__components_pages_User___default.a, meta: { requiresAuth: true } }, { path: '/admin', component: __WEBPACK_IMPORTED_MODULE_5__components_Admin_Index___default.a, meta: { requiresAuth: true },
-    children: [{ path: 'dash_board', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard___default.a }, { path: 'dash_board/user', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard___default.a }, { path: 'dash_board/category', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard___default.a }, { path: 'dash_board/menu', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard___default.a }, { path: 'dash_board/proposition', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard___default.a },
-    //     children: [
-    //         {path: '/user', component: UserList},
-    //         {path: '/category', component: CategoryList},
-    //         {path: '/menu', component: MenuList},
-    //         {path: '/proposition', component: PropositionList},
-    //     ]
-    // },
-    { path: 'regist_user', component: __WEBPACK_IMPORTED_MODULE_7__components_Admin_RegistUser___default.a }, { path: 'add_category', component: __WEBPACK_IMPORTED_MODULE_8__components_Admin_AddCategory___default.a }, { path: 'add_menu', component: __WEBPACK_IMPORTED_MODULE_9__components_Admin_AddMenu___default.a }]
+    children: [{ path: 'dash_board', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard_DashBoard___default.a }, { path: 'dash_board/user', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard_DashBoard___default.a }, { path: 'dash_board/category', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard_DashBoard___default.a }, { path: 'dash_board/menu', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard_DashBoard___default.a }, { path: 'dash_board/proposition', component: __WEBPACK_IMPORTED_MODULE_6__components_Admin_DashBoard_DashBoard___default.a }, { path: 'regist_user', component: __WEBPACK_IMPORTED_MODULE_7__components_Admin_RegistUser___default.a }, { path: 'add_category', component: __WEBPACK_IMPORTED_MODULE_8__components_Admin_AddCategory___default.a }, { path: 'add_menu', component: __WEBPACK_IMPORTED_MODULE_9__components_Admin_AddMenu___default.a }]
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
@@ -49983,21 +49971,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'Waterfall'
@@ -50166,7 +50139,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-313f26a6"
+var __vue_scopeId__ = "data-v-75b76af2"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -50177,7 +50150,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Admin/DashBoard.vue"
+Component.options.__file = "resources/assets/js/components/Admin/DashBoard/DashBoard.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -50186,9 +50159,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-313f26a6", Component.options)
+    hotAPI.createRecord("data-v-75b76af2", Component.options)
   } else {
-    hotAPI.reload("data-v-313f26a6", Component.options)
+    hotAPI.reload("data-v-75b76af2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -50209,13 +50182,13 @@ var content = __webpack_require__(71);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("47a8704a", content, false, {});
+var update = __webpack_require__(4)("0424b81e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-313f26a6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DashBoard.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-313f26a6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DashBoard.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-75b76af2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DashBoard.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-75b76af2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./DashBoard.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -50286,13 +50259,13 @@ var content = __webpack_require__(74);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0c9abb82", content, false, {});
+var update = __webpack_require__(4)("0e5e3201", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d634c3da\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CategoryList.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d634c3da\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CategoryList.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5b3584a4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CategoryList.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5b3584a4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CategoryList.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -50348,7 +50321,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-d634c3da", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5b3584a4", module.exports)
   }
 }
 
@@ -50435,7 +50408,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-313f26a6", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-75b76af2", module.exports)
   }
 }
 
@@ -52375,7 +52348,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-79e7e760"
+var __vue_scopeId__ = "data-v-d174e70a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -52386,7 +52359,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Admin/UserList.vue"
+Component.options.__file = "resources/assets/js/components/Admin/DashBoard/UserList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -52395,9 +52368,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-79e7e760", Component.options)
+    hotAPI.createRecord("data-v-d174e70a", Component.options)
   } else {
-    hotAPI.reload("data-v-79e7e760", Component.options)
+    hotAPI.reload("data-v-d174e70a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -52418,13 +52391,13 @@ var content = __webpack_require__(114);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("68b8f879", content, false, {});
+var update = __webpack_require__(4)("5cac653b", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-79e7e760\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UserList.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-79e7e760\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UserList.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d174e70a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UserList.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d174e70a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UserList.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -52442,7 +52415,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.md-field[data-v-d174e70a] {\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -52459,9 +52432,97 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var toLower = function toLower(text) {
+    return text.toString().toLowerCase();
+};
+
+var searchByName = function searchByName(items, term) {
+    if (term) {
+        return items.filter(function (item) {
+            return toLower(item.name).includes(toLower(term));
+        });
+    }
+
+    return items;
+};
+
+var roleName = {
+    0: "管理者",
+    1: "クリエイター",
+    2: "一般ユーザー"
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "UserList"
+    data: function data() {
+        return {
+            search: null,
+            searched: [],
+            users: []
+        };
+    },
+    // filters: {
+    //    conversion: (role) => {
+    //         return roleName[role];
+    //    }
+    // },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/api/user/get').then(function (response) {
+            var tmp = [];
+            // なぜかロールがソートされないのでここで文字に変換する
+            for (var index in response.data) {
+                tmp[index] = response.data[index];
+                tmp[index].role = roleName[tmp[index].role];
+            }
+            _this.users = tmp;
+            _this.searched = tmp;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    methods: {
+        // newUser () {
+        //     window.alert('Noop')
+        // },
+        getClass: function getClass() {
+            return {
+                'md-primary': true
+            };
+        },
+        searchOnTable: function searchOnTable() {
+            this.searched = searchByName(this.users, this.search);
+        },
+        onSelect: function onSelect(item) {
+            console.log(item);
+        }
+    }
 });
 
 /***/ }),
@@ -52472,7 +52533,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    ユーザ一覧！！\n")])
+  return _c(
+    "div",
+    [
+      _c(
+        "md-table",
+        {
+          attrs: {
+            "md-sort": "name",
+            "md-sort-order": "asc",
+            "md-card": "",
+            "md-fixed-header": ""
+          },
+          on: { "md-selected": _vm.onSelect },
+          scopedSlots: _vm._u([
+            {
+              key: "md-table-row",
+              fn: function(ref) {
+                var item = ref.item
+                return _c(
+                  "md-table-row",
+                  {
+                    class: _vm.getClass(item),
+                    attrs: { "md-selectable": "single" }
+                  },
+                  [
+                    _c(
+                      "md-table-cell",
+                      {
+                        attrs: {
+                          "md-label": "ID",
+                          "md-sort-by": "id",
+                          "md-numeric": ""
+                        }
+                      },
+                      [_vm._v(_vm._s(item.id))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-table-cell",
+                      { attrs: { "md-label": "Name", "md-sort-by": "name" } },
+                      [_vm._v(_vm._s(item.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-table-cell",
+                      { attrs: { "md-label": "Email", "md-sort-by": "email" } },
+                      [_vm._v(_vm._s(item.email))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "md-table-cell",
+                      { attrs: { "md-label": "Role", "md-sort-by": "role" } },
+                      [_vm._v(_vm._s(item.role))]
+                    )
+                  ],
+                  1
+                )
+              }
+            }
+          ]),
+          model: {
+            value: _vm.searched,
+            callback: function($$v) {
+              _vm.searched = $$v
+            },
+            expression: "searched"
+          }
+        },
+        [
+          _c(
+            "md-table-toolbar",
+            [
+              _c("div", { staticClass: "md-toolbar-section-start" }, [
+                _c("h1", { staticClass: "md-title" }, [_vm._v("Users")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "md-field",
+                {
+                  staticClass: "md-toolbar-section-end",
+                  attrs: { "md-clearable": "" }
+                },
+                [
+                  _c("md-input", {
+                    attrs: { placeholder: "Search by name..." },
+                    on: { input: _vm.searchOnTable },
+                    model: {
+                      value: _vm.search,
+                      callback: function($$v) {
+                        _vm.search = $$v
+                      },
+                      expression: "search"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("md-table-empty-state", {
+            attrs: {
+              "md-label": "No users found",
+              "md-description":
+                "No user found for this '" +
+                _vm.search +
+                "' query. Try a different search term or create a new user."
+            }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52480,7 +52656,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-79e7e760", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-d174e70a", module.exports)
   }
 }
 
@@ -52503,7 +52679,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-6b3b3cf4"
+var __vue_scopeId__ = "data-v-eece3be2"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -52514,7 +52690,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Admin/MenuList.vue"
+Component.options.__file = "resources/assets/js/components/Admin/DashBoard/MenuList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -52523,9 +52699,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6b3b3cf4", Component.options)
+    hotAPI.createRecord("data-v-eece3be2", Component.options)
   } else {
-    hotAPI.reload("data-v-6b3b3cf4", Component.options)
+    hotAPI.reload("data-v-eece3be2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -52546,13 +52722,13 @@ var content = __webpack_require__(119);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("702e367a", content, false, {});
+var update = __webpack_require__(4)("57bde8ba", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b3b3cf4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuList.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b3b3cf4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuList.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eece3be2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuList.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-eece3be2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuList.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -52608,7 +52784,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6b3b3cf4", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-eece3be2", module.exports)
   }
 }
 
@@ -52631,7 +52807,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-5a46fe0d"
+var __vue_scopeId__ = "data-v-00f57492"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -52642,7 +52818,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Admin/PropositionList.vue"
+Component.options.__file = "resources/assets/js/components/Admin/DashBoard/PropositionList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -52651,9 +52827,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5a46fe0d", Component.options)
+    hotAPI.createRecord("data-v-00f57492", Component.options)
   } else {
-    hotAPI.reload("data-v-5a46fe0d", Component.options)
+    hotAPI.reload("data-v-00f57492", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -52674,13 +52850,13 @@ var content = __webpack_require__(124);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0875781c", content, false, {});
+var update = __webpack_require__(4)("89163b94", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5a46fe0d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PropositionList.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5a46fe0d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PropositionList.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-00f57492\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PropositionList.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-00f57492\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PropositionList.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -52736,7 +52912,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5a46fe0d", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-00f57492", module.exports)
   }
 }
 

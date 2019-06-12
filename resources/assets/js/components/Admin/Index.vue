@@ -1,18 +1,3 @@
-<!--<template>-->
-<!--    <div>-->
-<!--        <admin-side-menu></admin-side-menu>-->
-<!--    </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--    export default {-->
-<!--    }-->
-<!--</script>-->
-
-<!--<style scoped>-->
-
-<!--</style>-->
-
 <template>
     <div class="page-container">
         <md-app md-waterfall md-mode="fixed">

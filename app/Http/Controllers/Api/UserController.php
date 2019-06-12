@@ -13,9 +13,8 @@ class UserController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
-    public function store(Request $request)
+    public function getAll()
     {
-        //dd($request);
-        return $request->all();
+        return response()->json(User::all());
     }
 }
