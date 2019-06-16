@@ -18,8 +18,11 @@ import localStorage from './localStorage';
 Vue.mixin(localStorage);
 
 import Toasted from 'vue-toasted';
-Vue.use(Toasted)
-let options = {
+Vue.use(Toasted, {
+    iconPack : 'material'
+})
+
+let errorOptions = {
     type : 'error',
     icon : 'error_outline',
     duration : 5000
@@ -37,7 +40,21 @@ Vue.toasted.register('error',
         // if there is a message show it with the message
         return "Oops.. " + payload.message;
     },
-    options
+    errorOptions
+)
+
+let addCartOptions = {
+    message : 'カートに追加しました',
+    type : 'info',
+    icon : 'add_shopping_cart',
+    duration : 5000
+};
+// register the toast with the custom message
+Vue.toasted.register('addCart',
+    () => {
+        return "カートに追加しました";
+    },
+    addCartOptions
 )
 
 

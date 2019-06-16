@@ -7,6 +7,10 @@
             パスワード: <input type="password" v-model="password">
             <button type="submit" class="btn btn-primary">ログイン</button>
         </form>
+        <div>お試しユーザ1</div>
+            <p>admin@example.com password</p>
+        <div>お試しユーザ2</div>
+            <p>test@aaa.com !fwxo!fs</p>
     </div>
 </template>
 
@@ -26,7 +30,7 @@
                     password: this.password
                 }).then(res => {
                     this.setToken('Bearer ' + res.data.access_token);
-                    this.$router.push({path: '/'});
+                    this.$router.push({path: '/home'});
                 }).catch(error => {
                     this.isError = true;
                 });

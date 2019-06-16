@@ -1,9 +1,17 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Home from './components/pages/Home'
+// ログイン
 import Login from './components/pages/Login'
+
+//プロフィール
 import User from './components/pages/User'
+
+// topページ
+import Home from './components/Home/Index'
+import MenuList from './components/Home/MenuList'
+
+// 管理画面
 import Admin from './components/Admin/Index'
 import DashBoard from './components/Admin/DashBoard/DashBoard';
 import RegistUser from "./components/Admin/RegistUser";
@@ -19,9 +27,13 @@ Vue.component('regist-user', require('./components/Admin/RegistUser'))
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', component: Home },
     { path: '/login', component: Login },
     { path: '/user', component: User, meta: { requiresAuth: true } },
+    { path: '/home', component: Home, meta: { requiresAuth: true },
+        children: [
+            {path: 'category/:id', component: MenuList},
+        ]
+    },
     { path: '/admin', component: Admin, meta: { requiresAuth: true },
         children: [
             {path: 'dash_board', component: DashBoard},

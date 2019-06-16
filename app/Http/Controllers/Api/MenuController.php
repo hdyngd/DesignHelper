@@ -6,6 +6,7 @@ use App\Http\Requests\StoreMenuPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Menu;
+use App\Category;
 
 class MenuController extends Controller
 {
@@ -24,8 +25,19 @@ class MenuController extends Controller
         $menus = Menu::select('menus.id', 'menus.name', 'price', 'menus.description', 'category_id', 'categories.name as categoryName')
             ->join('categories', 'categories.id', '=', 'menus.category_id')
             ->get();
-        //dd($menus);
         return response()->json($menus);
+    }
+
+    public function get($id)
+    {
+        $category = Category::find($id);
+        $menus = $category->menus;
+
+        $response = [
+            'category' => $category,
+            'menus' => $menus
+        ];
+        return response()->json($response);
     }
 
     /**
