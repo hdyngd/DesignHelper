@@ -14,9 +14,6 @@ Vue.component('user-list', require('./components/Admin/DashBoard/UserList.vue'))
 Vue.component('category-list', require('./components/Admin/DashBoard/CategoryList.vue'));
 Vue.component('menu-list', require('./components/Admin/DashBoard/MenuList.vue'));
 Vue.component('proposition-list', require('./components/Admin/DashBoard/PropositionList.vue'));
-
-Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
-Vue.component('admin-side-menu', require('./components/Admin/SideMenu'))
 Vue.component('regist-user', require('./components/Admin/RegistUser'))
 
 Vue.use(VueRouter);
