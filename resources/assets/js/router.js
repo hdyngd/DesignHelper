@@ -18,6 +18,7 @@ import RegistUser from "./components/Admin/RegistUser";
 import AddCategory from "./components/Admin/AddCategory";
 import AddMenu from "./components/Admin/AddMenu";
 
+Vue.component('toolbar', require('./components/Toolbar.vue'));
 Vue.component('user-list', require('./components/Admin/DashBoard/UserList.vue'));
 Vue.component('category-list', require('./components/Admin/DashBoard/CategoryList.vue'));
 Vue.component('menu-list', require('./components/Admin/DashBoard/MenuList.vue'));
