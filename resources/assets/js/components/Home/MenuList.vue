@@ -30,6 +30,7 @@
 </template>
 
 <script>
+
     export default {
         data: () => ({
             category: [],
@@ -55,7 +56,9 @@
                     });
             },
             addShoppingCart(id) {
+                this.addCart(id);
                 this.$toasted.global.addCart();
+
             }
         }
 

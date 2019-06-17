@@ -18,11 +18,13 @@
                 <router-link to="/login">LOGIN</router-link>
             </md-button>
 
-            <md-button @click="logout">LOGOUT</md-button>
+            <md-button @click="logout" class="md-primary">LOGOUT</md-button>
 
-            <md-button class="md-icon-button">
-                <md-icon>shopping_cart</md-icon>
-            </md-button>
+            <md-badge :md-content="cartList.length">
+                <md-button class="md-icon-button" @click="show">
+                    <md-icon>shopping_cart</md-icon>
+                </md-button>
+            </md-badge>
 
         </md-toolbar>
     </div>
@@ -30,6 +32,9 @@
 
 <script>
     export default {
+        data: () => ({
+            cartList: state.cart,
+        }),
         methods: {
             logout() {
                 axios.post('/api/logout').then(res => {
@@ -38,6 +43,9 @@
                 }).catch(error => {
                     this.removeToken();
                 });
+            },
+            show() {
+                console.log(this.showCart());
             }
         }
     }

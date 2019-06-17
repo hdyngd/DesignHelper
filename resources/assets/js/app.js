@@ -15,7 +15,10 @@ import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 
 import localStorage from './localStorage';
+import shopCart from './shopCart';
+
 Vue.mixin(localStorage);
+Vue.mixin(shopCart);
 
 import Toasted from 'vue-toasted';
 Vue.use(Toasted, {

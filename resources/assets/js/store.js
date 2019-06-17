@@ -1,5 +1,6 @@
 export default {
     state: {
-        isLogin: false
+        isLogin: false,
+        cart: [],
     },
 }
