@@ -5,7 +5,6 @@ import Vue from 'vue'
 import store from './store';
 import router from './router';
 
-//import { MdApp, MdToolbar, MdDrawer, MdContent, MdList, MdIcon } from 'vue-material/dist/components'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
@@ -16,11 +15,6 @@ Vue.use(Vuelidate)
 
 import mutation from './mutation'
 Vue.mixin(mutation);
-// import localStorage from './localStorage';
-// import shopCart from './shopCart';
-//
-// Vue.mixin(localStorage);
-// Vue.mixin(shopCart);
 
 import Toasted from 'vue-toasted';
 Vue.use(Toasted, {
@@ -62,11 +56,6 @@ Vue.toasted.register('addCart',
     addCartOptions
 )
 
-
-
-//import BootstrapVue from 'bootstrap-vue'
-//Vue.use(BootstrapVue)
-
 window.state = store.state;
 
 Vue.component('app', require('./components/App.vue'));
@@ -74,7 +63,3 @@ Vue.component('app', require('./components/App.vue'));
 const app = new Vue({
     router
 }).$mount('#app');
-
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
-//window.Vue = Vue;
