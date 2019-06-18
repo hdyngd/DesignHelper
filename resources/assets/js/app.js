@@ -14,11 +14,13 @@ Vue.use(VueMaterial)
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 
-import localStorage from './localStorage';
-import shopCart from './shopCart';
-
-Vue.mixin(localStorage);
-Vue.mixin(shopCart);
+import mutation from './mutation'
+Vue.mixin(mutation);
+// import localStorage from './localStorage';
+// import shopCart from './shopCart';
+//
+// Vue.mixin(localStorage);
+// Vue.mixin(shopCart);
 
 import Toasted from 'vue-toasted';
 Vue.use(Toasted, {

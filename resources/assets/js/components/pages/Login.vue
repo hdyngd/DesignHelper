@@ -31,6 +31,7 @@
                 }).then(res => {
                     this.setToken('Bearer ' + res.data.access_token);
                     this.$router.push({path: '/home'});
+                    this.setUser();
                 }).catch(error => {
                     this.isError = true;
                 });

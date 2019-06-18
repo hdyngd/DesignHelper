@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p v-show="isError">情報の取得に失敗しました。</p>
+        <p v-show="user.length == 0">情報の取得に失敗しました。</p>
         <h1>ユーザー情報</h1>
         <table>
             <tr>
@@ -31,16 +31,8 @@
     export default {
         data () {
             return {
-                isError: false,
-                user: {}
+                user: state.user
             }
         },
-        created() {
-            axios.get('/api/me').then(res => {
-                this.user = res.data;
-            }).catch(error => {
-                this.isError = true;
-            });
-        }
     }
 </script>
