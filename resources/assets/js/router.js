@@ -21,9 +21,11 @@ import AddMenu from "./components/Admin/AddMenu";
 Vue.component('toolbar', require('./components/Toolbar.vue'));
 Vue.component('user-list', require('./components/Admin/DashBoard/UserList.vue'));
 Vue.component('category-list', require('./components/Admin/DashBoard/CategoryList.vue'));
+Vue.component('category-dialog', require('./components/Home/CategoryDialog'));
 Vue.component('menu-list', require('./components/Admin/DashBoard/MenuList.vue'));
 Vue.component('proposition-list', require('./components/Admin/DashBoard/PropositionList.vue'));
-Vue.component('regist-user', require('./components/Admin/RegistUser'))
+Vue.component('regist-user', require('./components/Admin/RegistUser'));
+
 
 Vue.use(VueRouter);
 

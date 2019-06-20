@@ -1,7 +1,9 @@
 require('./bootstrap')
 
 
-import Vue from 'vue'
+import Vue from 'vue';
+window.Bus = new Vue();
+
 import store from './store';
 import router from './router';
 

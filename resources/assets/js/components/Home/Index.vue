@@ -10,15 +10,50 @@
                 <md-list>
                     <md-list-item v-for="item in categories" :key="item.id">
 <!--                        <md-icon>dashboard</md-icon>-->
-                        <span class="md-list-item-text"><router-link :to="'/home/category/' + item.id">{{ item.name }} {{ item.id }}</router-link></span>
+<!--                        <span class="md-list-item-text"><router-link :to="'/home/category/' + item.id">{{ item.name }} {{ item.id }}</router-link></span>-->
+                        <md-button @click="showDialog(item.id)">{{ item.name }}</md-button>
+
                     </md-list-item>
                 </md-list>
             </md-app-drawer>
 
             <md-app-content>
-                <router-view></router-view>
+<!--                <router-view></router-view>-->
             </md-app-content>
+
         </md-app>
+        <category-dialog
+            :show-dialog="false"
+        ></category-dialog>
+<!--        <md-dialog :md-active.sync="showDialog">-->
+<!--            <md-dialog-title>Preferences</md-dialog-title>-->
+
+<!--            <md-tabs md-dynamic-height>-->
+<!--                <md-tab md-label="General">-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                </md-tab>-->
+
+<!--                <md-tab md-label="Activity">-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                </md-tab>-->
+
+<!--                <md-tab md-label="Account">-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>-->
+<!--                </md-tab>-->
+<!--            </md-tabs>-->
+
+<!--            <md-dialog-actions>-->
+<!--                <md-button class="md-primary" @click="showDialog = false">Close</md-button>-->
+<!--                <md-button class="md-primary" @click="showDialog = false">Save</md-button>-->
+<!--            </md-dialog-actions>-->
+<!--        </md-dialog>-->
     </div>
 </template>
 
@@ -36,6 +71,11 @@
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        methods: {
+            showDialog(id) {
+                Bus.$emit('showDialog', {id: id});
+            }
         }
     }
 </script>
@@ -58,4 +98,8 @@
         right: 0;
         left: 0;
     }
+
+    /*.md-dialog {*/
+    /*    max-width: 768px;*/
+    /*}*/
 </style>
