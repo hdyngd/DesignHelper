@@ -8,7 +8,7 @@
                     <router-link to="/user">{{ user.name }}</router-link>
                 </md-button>
                 <md-badge :md-content="cartList.length">
-                    <md-button class="md-icon-button" @click="show">
+                    <md-button class="md-icon-button" @click="showShoppingCart">
                         <md-icon>shopping_cart</md-icon>
                     </md-button>
                 </md-badge>
@@ -41,6 +41,7 @@
                 </md-list-item>
             </md-list>
         </md-drawer>
+        <shopping-cart></shopping-cart>
     </div>
 </template>
 
@@ -62,8 +63,8 @@
                     this.removeToken();
                 });
             },
-            show() {
-                console.log(this.cartList);
+            showShoppingCart() {
+                Bus.$emit('showShoppingCart', {});
             }
         }
     }

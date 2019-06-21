@@ -21,9 +21,6 @@
             </md-app-content>
 
         </md-app>
-        <category-dialog
-            :show-dialog="false"
-        ></category-dialog>
     </div>
 </template>
 
@@ -73,8 +70,4 @@
         right: 0;
         left: 0;
     }
-
-    /*.md-dialog {*/
-    /*    max-width: 768px;*/
-    /*}*/
 </style>
