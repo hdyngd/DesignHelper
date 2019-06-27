@@ -53647,13 +53647,13 @@ var content = __webpack_require__(129);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("3e6801cf", content, false, {});
+var update = __webpack_require__(4)("64d3d2c4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-36f46a5f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ShoppingCart.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-36f46a5f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ShoppingCart.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-36f46a5f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ShoppingCart.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-36f46a5f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ShoppingCart.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -53671,7 +53671,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.md-card[data-v-36f46a5f] {\n  width: 320px;\n  margin: 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n.md-field[data-v-36f46a5f] {\n  width: 10%;\n}\n", ""]);
 
 // exports
 
@@ -53694,6 +53694,113 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "ShoppingCart",
@@ -53701,7 +53808,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             active: false,
             value: null,
-            cartList: state.cart
+            cartList: state.cart,
+            amount: 1,
+            total: 3000
         };
     },
     mounted: function mounted() {
@@ -53726,30 +53835,278 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("md-dialog-prompt", {
-        attrs: {
-          "md-active": _vm.active,
-          "md-title": "What's your name?",
-          "md-input-maxlength": "30",
-          "md-input-placeholder": "Type your name...",
-          "md-confirm-text": "Done"
-        },
-        on: {
-          "update:mdActive": function($event) {
-            _vm.active = $event
-          },
-          "update:md-active": function($event) {
-            _vm.active = $event
+      _c(
+        "md-dialog",
+        {
+          attrs: { "md-active": _vm.active },
+          on: {
+            "update:mdActive": function($event) {
+              _vm.active = $event
+            },
+            "update:md-active": function($event) {
+              _vm.active = $event
+            }
           }
         },
-        model: {
-          value: _vm.value,
-          callback: function($$v) {
-            _vm.value = $$v
-          },
-          expression: "value"
-        }
-      })
+        [
+          _c("md-dialog-title", [_vm._v("ShoppingCart")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c(
+                "md-card",
+                [
+                  _c(
+                    "md-card-header",
+                    [
+                      _c("md-card-media", [
+                        _c("img", {
+                          attrs: { src: "/images/menu/nouka_ase_fuku.png" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("md-card-header-text", [
+                        _c("div", { staticClass: "md-title" }, [
+                          _vm._v("test title")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "md-subhead" }, [
+                          _vm._v("subhead")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("md-card-content", [_vm._v("¥ 1200")])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-card-actions",
+                    [
+                      _c(
+                        "md-button",
+                        { staticClass: "md-icon-button" },
+                        [_c("md-icon", [_vm._v("add_shopping_cart")])],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "md-card",
+                [
+                  _c(
+                    "md-card-header",
+                    [
+                      _c("md-card-media", [
+                        _c("img", {
+                          attrs: { src: "/images/menu/nouka_ase_fuku.png" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("md-card-header-text", [
+                        _c("div", { staticClass: "md-title" }, [
+                          _vm._v("test title")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "md-subhead" }, [
+                          _vm._v("subhead")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("md-card-content", [_vm._v("¥ 1200")])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-card-actions",
+                    [
+                      _c(
+                        "md-button",
+                        { staticClass: "md-icon-button" },
+                        [_c("md-icon", [_vm._v("add_shopping_cart")])],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "md-card",
+                [
+                  _c(
+                    "md-card-header",
+                    [
+                      _c("md-card-media", [
+                        _c("img", {
+                          attrs: { src: "/images/menu/nouka_ase_fuku.png" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("md-card-header-text", [
+                        _c("div", { staticClass: "md-title" }, [
+                          _vm._v("test title")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "md-subhead" }, [
+                          _vm._v("subhead")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("md-card-content", [_vm._v("¥ 1200")])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-card-actions",
+                    [
+                      _c(
+                        "md-button",
+                        { staticClass: "md-icon-button" },
+                        [_c("md-icon", [_vm._v("add_shopping_cart")])],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "md-card",
+                [
+                  _c(
+                    "md-card-header",
+                    [
+                      _c("md-card-media", [
+                        _c("img", {
+                          attrs: { src: "/images/menu/nouka_ase_fuku.png" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("md-card-header-text", [
+                        _c("div", { staticClass: "md-title" }, [
+                          _vm._v("test title")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "md-subhead" }, [
+                          _vm._v("subhead")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("md-card-content", [_vm._v("¥ 1200")])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-card-actions",
+                    [
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-icon-button",
+                          on: {
+                            click: function($event) {
+                              _vm.amount--
+                            }
+                          }
+                        },
+                        [_c("md-icon", [_vm._v("exposure_neg_1")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-field",
+                        [
+                          _c("md-input", {
+                            attrs: { type: "number", readonly: "" },
+                            model: {
+                              value: _vm.amount,
+                              callback: function($$v) {
+                                _vm.amount = $$v
+                              },
+                              expression: "amount"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-icon-button",
+                          on: {
+                            click: function($event) {
+                              _vm.amount++
+                            }
+                          }
+                        },
+                        [_c("md-icon", [_vm._v("exposure_plus_1")])],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "md-dialog-actions",
+            [
+              _c(
+                "md-field",
+                [
+                  _c("span", { staticClass: "md-prefix" }, [_vm._v("¥ ")]),
+                  _vm._v(" "),
+                  _c("md-input", {
+                    attrs: { readonly: "" },
+                    model: {
+                      value: _vm.total,
+                      callback: function($$v) {
+                        _vm.total = $$v
+                      },
+                      expression: "total"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "md-button",
+                {
+                  staticClass: "md-primary",
+                  on: {
+                    click: function($event) {
+                      _vm.active = false
+                    }
+                  }
+                },
+                [_vm._v("Confirm")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
