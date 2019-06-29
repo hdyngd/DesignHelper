@@ -56,9 +56,21 @@
                     });
             },
             addShoppingCart(id) {
-                this.addCart(id);
-                this.$toasted.global.addCart();
+                //カートに入れるのは1回だけ
+                for (let j in state.cart) {
+                    if(state.cart[j].id === id) return;
+                }
 
+                for(let i in this.menus) {
+                    if(this.menus[i].id === id) {
+                        this.$set(this.menus[i], 'amount', 1)
+                        //this.menus[i].amount = 1;
+                        this.addCart(this.menus[i]);
+                        this.$toasted.global.addCart();
+                        //console.log(this.menus[i]);
+                        break;
+                    }
+                }
             }
         }
 

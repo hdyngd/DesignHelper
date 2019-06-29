@@ -50064,8 +50064,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         addShoppingCart: function addShoppingCart(id) {
-            this.addCart(id);
-            this.$toasted.global.addCart();
+            //カートに入れるのは1回だけ
+            for (var j in state.cart) {
+                if (state.cart[j].id === id) return;
+            }
+
+            for (var i in this.menus) {
+                if (this.menus[i].id === id) {
+                    this.$set(this.menus[i], 'amount', 1);
+                    //this.menus[i].amount = 1;
+                    this.addCart(this.menus[i]);
+                    this.$toasted.global.addCart();
+                    //console.log(this.menus[i]);
+                    break;
+                }
+            }
         }
     }
 
@@ -53671,7 +53684,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.md-card[data-v-36f46a5f] {\n  width: 320px;\n  margin: 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n.md-field[data-v-36f46a5f] {\n  width: 10%;\n}\n", ""]);
+exports.push([module.i, "\n.md-card[data-v-36f46a5f] {\n  width: 400px;\n  margin: 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n.md-field[data-v-36f46a5f] {\n  width: 10%;\n}\n.md-dialog[data-v-36f46a5f] {\n  max-width: 90%;\n}\n", ""]);
 
 // exports
 
@@ -53724,83 +53737,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "ShoppingCart",
@@ -53808,19 +53744,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             active: false,
             value: null,
-            cartList: state.cart,
-            amount: 1,
-            total: 3000
+            cartList: state.cart
         };
+    },
+    computed: {
+        totalPrice: function totalPrice() {
+            var total = 0;
+            for (var i in this.cartList) {
+                total += this.cartList[i].price * this.cartList[i].amount;
+            }
+            return total;
+        }
     },
     mounted: function mounted() {
         var _this = this;
 
         Bus.$on('showShoppingCart', function () {
             _this.active = true;
-            console.log(_this.cartList);
+            //console.log(this.cartList);
             //this.setData(categoryId.id);
         });
+    },
+
+    methods: {
+        setData: function setData(id) {
+            var _this2 = this;
+
+            axios.get('/api/menu/get/' + id).then(function (response) {
+                _this2.category = response.data.category;
+                _this2.menus = response.data.menus;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        amountCounter: function amountCounter(index, operator) {
+            // マイナスにはしない
+            if (this.cartList[index].amount + operator < 0) {
+                this.cartList[index].amount = 0;
+                return;
+            }
+
+            this.cartList[index].amount += operator;
+        }
     }
 });
 
@@ -53853,9 +53818,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            [
-              _c(
+            _vm._l(_vm.cartList, function(item, index) {
+              return _c(
                 "md-card",
+                { key: item.id },
                 [
                   _c(
                     "md-card-header",
@@ -53868,144 +53834,15 @@ var render = function() {
                       _vm._v(" "),
                       _c("md-card-header-text", [
                         _c("div", { staticClass: "md-title" }, [
-                          _vm._v("test title")
+                          _vm._v(_vm._s(item.name))
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "md-subhead" }, [
-                          _vm._v("subhead")
+                          _vm._v(_vm._s(item.description))
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("md-card-content", [_vm._v("¥ 1200")])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-card-actions",
-                    [
-                      _c(
-                        "md-button",
-                        { staticClass: "md-icon-button" },
-                        [_c("md-icon", [_vm._v("add_shopping_cart")])],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "md-card",
-                [
-                  _c(
-                    "md-card-header",
-                    [
-                      _c("md-card-media", [
-                        _c("img", {
-                          attrs: { src: "/images/menu/nouka_ase_fuku.png" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("md-card-header-text", [
-                        _c("div", { staticClass: "md-title" }, [
-                          _vm._v("test title")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "md-subhead" }, [
-                          _vm._v("subhead")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("md-card-content", [_vm._v("¥ 1200")])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-card-actions",
-                    [
-                      _c(
-                        "md-button",
-                        { staticClass: "md-icon-button" },
-                        [_c("md-icon", [_vm._v("add_shopping_cart")])],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "md-card",
-                [
-                  _c(
-                    "md-card-header",
-                    [
-                      _c("md-card-media", [
-                        _c("img", {
-                          attrs: { src: "/images/menu/nouka_ase_fuku.png" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("md-card-header-text", [
-                        _c("div", { staticClass: "md-title" }, [
-                          _vm._v("test title")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "md-subhead" }, [
-                          _vm._v("subhead")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("md-card-content", [_vm._v("¥ 1200")])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-card-actions",
-                    [
-                      _c(
-                        "md-button",
-                        { staticClass: "md-icon-button" },
-                        [_c("md-icon", [_vm._v("add_shopping_cart")])],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "md-card",
-                [
-                  _c(
-                    "md-card-header",
-                    [
-                      _c("md-card-media", [
-                        _c("img", {
-                          attrs: { src: "/images/menu/nouka_ase_fuku.png" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("md-card-header-text", [
-                        _c("div", { staticClass: "md-title" }, [
-                          _vm._v("test title")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "md-subhead" }, [
-                          _vm._v("subhead")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("md-card-content", [_vm._v("¥ 1200")])
+                      _c("md-card-content", [_vm._v("¥ " + _vm._s(item.price))])
                     ],
                     1
                   ),
@@ -54019,7 +53856,7 @@ var render = function() {
                           staticClass: "md-icon-button",
                           on: {
                             click: function($event) {
-                              _vm.amount--
+                              return _vm.amountCounter(index, -1)
                             }
                           }
                         },
@@ -54033,11 +53870,11 @@ var render = function() {
                           _c("md-input", {
                             attrs: { type: "number", readonly: "" },
                             model: {
-                              value: _vm.amount,
+                              value: item.amount,
                               callback: function($$v) {
-                                _vm.amount = $$v
+                                _vm.$set(item, "amount", $$v)
                               },
-                              expression: "amount"
+                              expression: "item.amount"
                             }
                           })
                         ],
@@ -54050,7 +53887,7 @@ var render = function() {
                           staticClass: "md-icon-button",
                           on: {
                             click: function($event) {
-                              _vm.amount++
+                              return _vm.amountCounter(index, 1)
                             }
                           }
                         },
@@ -54063,7 +53900,7 @@ var render = function() {
                 ],
                 1
               )
-            ],
+            }),
             1
           ),
           _vm._v(" "),
@@ -54078,11 +53915,11 @@ var render = function() {
                   _c("md-input", {
                     attrs: { readonly: "" },
                     model: {
-                      value: _vm.total,
+                      value: _vm.totalPrice,
                       callback: function($$v) {
-                        _vm.total = $$v
+                        _vm.totalPrice = $$v
                       },
-                      expression: "total"
+                      expression: "totalPrice"
                     }
                   })
                 ],
