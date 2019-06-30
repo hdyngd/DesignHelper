@@ -2981,6 +2981,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.toasted.register('addCart', function
     return "カートに追加しました";
 }, addCartOptions);
 
+var execOrderOptions = {
+    type: 'info',
+    icon: 'info',
+    duration: 5000
+};
+// register the toast with the custom message
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.toasted.register('execOrder', function () {
+    return "発注しました";
+}, execOrderOptions);
+
 window.state = __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].state;
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __webpack_require__(155));
@@ -49341,6 +49351,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -49456,13 +49471,17 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", [_vm._v("お試しユーザ1")]),
+    _c("div", [_vm._v("お試しユーザ1(管理者)")]),
     _vm._v(" "),
     _c("p", [_vm._v("admin@example.com password")]),
     _vm._v(" "),
-    _c("div", [_vm._v("お試しユーザ2")]),
+    _c("div", [_vm._v("お試しユーザ2(クリエイター)")]),
     _vm._v(" "),
-    _c("p", [_vm._v("test@aaa.com !fwxo!fs")])
+    _c("p", [_vm._v("otameshi_creater@example.com xEs%592m")]),
+    _vm._v(" "),
+    _c("div", [_vm._v("お試しユーザ3(一般ユーザ)")]),
+    _vm._v(" "),
+    _c("p", [_vm._v("otameshi_ippan@example.com RpQ2%SR4")])
   ])
 }
 var staticRenderFns = []
@@ -51096,7 +51115,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.userSaved = true;
                 _this.sending = false;
                 _this.clearForm();
-                console.log(response.data.password);
+                alert('password: ' + response.data.password);
+                //console.log(response.data.password);
             }).catch(function (error) {
                 _this.sending = false;
                 for (var index in error.response.data.errors) {
@@ -53684,7 +53704,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.md-card[data-v-36f46a5f] {\n  width: 400px;\n  margin: 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n.md-field[data-v-36f46a5f] {\n  width: 10%;\n}\n.md-dialog[data-v-36f46a5f] {\n  max-width: 90%;\n}\n", ""]);
+exports.push([module.i, "\n.md-card[data-v-36f46a5f] {\n  width: 320px;\n  margin: 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n.md-field[data-v-36f46a5f] {\n  width: 10%;\n}\n", ""]);
 
 // exports
 
@@ -53785,6 +53805,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             this.cartList[index].amount += operator;
+        },
+        confirmOrder: function confirmOrder() {
+            if (confirm('この内容で発注してよろしいですか？')) {
+                this.execOrder();
+                this.active = false;
+            }
+        },
+        execOrder: function execOrder() {
+            var _this3 = this;
+
+            axios.post('/api/proposition/store', { data: this.cartList }).then(function (response) {
+                _this3.$toasted.global.execOrder();
+                _this3.clearCart();
+                console.log(response.data);
+            }).catch(function (error) {
+                for (var index in error.response.data.errors) {
+                    _this3.$toasted.global.error({
+                        message: error.response.data.errors[index]
+                    });
+                }
+            });
         }
     }
 });
@@ -53913,14 +53954,7 @@ var render = function() {
                   _c("span", { staticClass: "md-prefix" }, [_vm._v("¥ ")]),
                   _vm._v(" "),
                   _c("md-input", {
-                    attrs: { readonly: "" },
-                    model: {
-                      value: _vm.totalPrice,
-                      callback: function($$v) {
-                        _vm.totalPrice = $$v
-                      },
-                      expression: "totalPrice"
-                    }
+                    attrs: { value: _vm.totalPrice, readonly: "" }
                   })
                 ],
                 1
@@ -53928,14 +53962,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "md-button",
-                {
-                  staticClass: "md-primary",
-                  on: {
-                    click: function($event) {
-                      _vm.active = false
-                    }
-                  }
-                },
+                { staticClass: "md-primary", on: { click: _vm.confirmOrder } },
                 [_vm._v("Confirm")]
               )
             ],
@@ -89587,6 +89614,13 @@ exports.push([module.i, ":root{--md-theme-default-primary: #448aff\n    ;--md-th
         // cart
         addCart: function addCart(item) {
             state.cart.push(item);
+        },
+        clearCart: function clearCart() {
+            var i = 0;
+            while (i <= state.cart.length) {
+                state.cart.pop();
+                i++;
+            }
         },
 
 

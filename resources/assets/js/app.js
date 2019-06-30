@@ -58,6 +58,19 @@ Vue.toasted.register('addCart',
     addCartOptions
 )
 
+let execOrderOptions = {
+    type : 'info',
+    icon : 'info',
+    duration : 5000
+};
+// register the toast with the custom message
+Vue.toasted.register('execOrder',
+    () => {
+        return "発注しました";
+    },
+    execOrderOptions
+)
+
 window.state = store.state;
 
 Vue.component('app', require('./components/App.vue'));

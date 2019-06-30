@@ -111,7 +111,8 @@
                         this.userSaved = true
                         this.sending = false
                         this.clearForm()
-                        console.log(response.data.password);
+                        alert('password: ' + response.data.password);
+                        //console.log(response.data.password);
                     })
                     .catch(error => {
                         this.sending = false

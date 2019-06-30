@@ -21,6 +21,14 @@ export default {
             state.cart.push(item);
         },
 
+        clearCart() {
+            let i = 0;
+            while (i <= state.cart.length) {
+                state.cart.pop();
+                i++;
+            }
+        },
+
         // user
         setUser() {
             axios.get('/api/me').then(res => {

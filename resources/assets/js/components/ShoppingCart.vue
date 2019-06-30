@@ -32,9 +32,9 @@
             <md-dialog-actions>
                 <md-field>
                     <span class="md-prefix">¥ </span>
-                    <md-input v-model="totalPrice" readonly></md-input>
+                    <md-input :value="totalPrice" readonly></md-input>
                 </md-field>
-                <md-button class="md-primary" @click="active = false">Confirm</md-button>
+                <md-button class="md-primary" @click="confirmOrder">Confirm</md-button>
             </md-dialog-actions>
         </md-dialog>
     </div>
@@ -83,6 +83,27 @@
                 }
 
                 this.cartList[index].amount += operator;
+            },
+            confirmOrder() {
+                if(confirm('この内容で発注してよろしいですか？')) {
+                    this.execOrder();
+                    this.active = false;
+                }
+            },
+            execOrder() {
+
+                axios.post('/api/proposition/store', {data: this.cartList})
+                    .then(response => {
+                        this.$toasted.global.execOrder();
+                        this.clearCart();
+                    })
+                    .catch(error => {
+                        for (let index in error.response.data.errors) {
+                            this.$toasted.global.error({
+                                message: error.response.data.errors[index]
+                            });
+                        }
+                    });
             }
         }
     }

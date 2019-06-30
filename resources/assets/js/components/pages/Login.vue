@@ -7,10 +7,15 @@
             パスワード: <input type="password" v-model="password">
             <button type="submit" class="btn btn-primary">ログイン</button>
         </form>
-        <div>お試しユーザ1</div>
+        <div>お試しユーザ1(管理者)</div>
             <p>admin@example.com password</p>
-        <div>お試しユーザ2</div>
-            <p>test@aaa.com !fwxo!fs</p>
+
+        <div>お試しユーザ2(クリエイター)</div>
+            <p>otameshi_creater@example.com xEs%592m</p>
+
+        <div>お試しユーザ3(一般ユーザ)</div>
+            <p>otameshi_ippan@example.com RpQ2%SR4</p>
+
     </div>
 </template>
 
