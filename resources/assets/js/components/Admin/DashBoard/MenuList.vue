@@ -50,7 +50,6 @@
         created() {
             axios.get('/api/menu/get')
                 .then(response => {
-                    console.log(response.data);
                     this.menus = response.data;
                     this.searched = response.data;
                 })

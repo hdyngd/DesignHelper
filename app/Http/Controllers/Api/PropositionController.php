@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StorePropositionPost;
+use App\Http\Requests\AttachCreatorPost;
 use App\Proposition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,6 +18,12 @@ class PropositionController extends Controller
     public function index()
     {
         //
+    }
+
+    public function getAll()
+    {
+        $proposition = new Proposition();
+        return response()->json($proposition->getAll());
     }
 
     /**
@@ -49,6 +56,18 @@ class PropositionController extends Controller
 
         return response()->json();
     }
+
+    public function attachCreator(AttachCreatorPost $request)
+    {
+        //dd($request->all());
+        $proposition = Proposition::find($request->input('proposition_id'));
+        $proposition->designer_id = $request->input('designer_id');
+        $proposition->progress = 1;
+        $proposition->save();
+
+        return response()->json();
+    }
+
 
     /**
      * Display the specified resource.

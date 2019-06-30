@@ -26,6 +26,7 @@ Vue.component('menu-list', require('./components/Admin/DashBoard/MenuList.vue'))
 Vue.component('proposition-list', require('./components/Admin/DashBoard/PropositionList.vue'));
 Vue.component('regist-user', require('./components/Admin/RegistUser'));
 Vue.component('description', require('./components/Home/Description'));
+Vue.component('attach-designer', require('./components/Admin/DashBoard/AttachDesigner'));
 
 
 Vue.use(VueRouter);

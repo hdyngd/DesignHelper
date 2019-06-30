@@ -17,4 +17,9 @@ class UserController extends Controller
     {
         return response()->json(User::all());
     }
+
+    public function getCreator()
+    {
+        return response()->json(User::where('role', 2)->get());
+    }
 }

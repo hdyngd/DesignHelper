@@ -71,6 +71,19 @@ Vue.toasted.register('execOrder',
     execOrderOptions
 )
 
+let attachCreatorOptions = {
+    type : 'info',
+    icon : 'info',
+    duration : 5000
+};
+// register the toast with the custom message
+Vue.toasted.register('attachCreator',
+    () => {
+        return "担当クリエイターを決定しました";
+    },
+    attachCreatorOptions
+)
+
 window.state = store.state;
 
 Vue.component('app', require('./components/App.vue'));

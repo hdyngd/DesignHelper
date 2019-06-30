@@ -27,9 +27,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/category/get', 'Api\CategoryController@index');
     Route::post('/menu/store', 'Api\MenuController@store');
     Route::get('/user/get', 'Api\UserController@getAll');
+    Route::get('/user/getCreator', 'Api\UserController@getCreator');
     Route::get('/menu/get', 'Api\MenuController@getAll');
     Route::get('/menu/get/{id}', 'Api\MenuController@get');
     Route::post('/proposition/store', 'Api\PropositionController@store');
+    Route::get('/proposition/get', 'Api\PropositionController@getAll');
+    Route::post('/proposition/attachCreator', 'Api\PropositionController@attachCreator');
+
 });
 
 //Route::group([
