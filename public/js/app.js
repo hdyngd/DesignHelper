@@ -46574,7 +46574,8 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
             name: "",
             email: "",
             role: ""
-        }
+        },
+        propositions: []
     }
 });
 
@@ -49439,6 +49440,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.setToken('Bearer ' + res.data.access_token);
                 _this.$router.push({ path: '/home' });
                 _this.setUser();
+                _this.setPropositions();
             }).catch(function (error) {
                 _this.isError = true;
             });
@@ -53119,13 +53121,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             cartList: state.cart,
             showSidepanel: false,
-            user: state.user
+            user: state.user,
+            propositions: state.propositions
         };
     },
     methods: {
@@ -53174,6 +53192,33 @@ var render = function() {
           "div",
           { staticClass: "md-toolbar-section-end" },
           [
+            _c(
+              "md-field",
+              [
+                _c("label", { attrs: { for: "proposition" } }, [
+                  _vm._v(
+                    "\n                        Proposition\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "md-select",
+                  { attrs: { name: "proposition", id: "proposition" } },
+                  _vm._l(_vm.propositions, function(item) {
+                    return _c("md-option", { key: item.id }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(item.menuName) +
+                          "\n                        "
+                      )
+                    ])
+                  }),
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
             _c(
               "md-button",
               [
@@ -54575,7 +54620,6 @@ var progressName = {
 
         Bus.$on('setPropositions', function () {
             _this.setPropositions();
-            //Bus.$emit('hideAttachDesigner');
         });
     },
 
@@ -54589,13 +54633,12 @@ var progressName = {
             this.searched = searchByName(this.propositions, this.search);
         },
         onSelect: function onSelect(item) {
-            console.log('trace');
             Bus.$emit('showAttachDesigner', { proposition: item });
         },
         setPropositions: function setPropositions() {
             var _this2 = this;
 
-            axios.get('/api/proposition/get').then(function (response) {
+            axios.get('/api/proposition/getAll').then(function (response) {
                 var tmp = [];
 
                 for (var index in response.data) {
@@ -54646,7 +54689,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54706,10 +54749,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this2.proposition = data.proposition;
             _this2.active = true;
         });
-
-        // Bus.$on('hideAttachDesigner', () => {
-        //     this.active = false;
-        // });
     },
 
     methods: {
@@ -54723,6 +54762,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/proposition/attachCreator', params).then(function (response) {
                 _this3.$toasted.global.attachCreator();
                 Bus.$emit('setPropositions');
+                _this3.active = false;
             }).catch(function (error) {
                 for (var index in error.response.data.errors) {
                     _this3.$toasted.global.error({
@@ -90178,6 +90218,17 @@ exports.push([module.i, ":root{--md-theme-default-primary: #448aff\n    ;--md-th
             state.user.name = "";
             state.user.email = "";
             state.user.role = "";
+        },
+        setPropositions: function setPropositions() {
+            var _this2 = this;
+
+            axios.get('/api/proposition/get').then(function (res) {
+                for (var index in res.data) {
+                    state.propositions.push(res.data[index]);
+                }
+            }).catch(function (error) {
+                _this2.isError = true;
+            });
         }
     }
 });

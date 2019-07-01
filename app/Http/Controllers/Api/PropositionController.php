@@ -26,6 +26,13 @@ class PropositionController extends Controller
         return response()->json($proposition->getAll());
     }
 
+    public function get()
+    {
+        $user = auth()->user();
+        $proposition = new Proposition();
+        return response()->json($proposition->get($user));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

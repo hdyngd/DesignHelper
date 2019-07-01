@@ -31,9 +31,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/menu/get', 'Api\MenuController@getAll');
     Route::get('/menu/get/{id}', 'Api\MenuController@get');
     Route::post('/proposition/store', 'Api\PropositionController@store');
-    Route::get('/proposition/get', 'Api\PropositionController@getAll');
+    Route::get('/proposition/get', 'Api\PropositionController@get');
+    Route::get('/proposition/getAll', 'Api\PropositionController@getAll');
     Route::post('/proposition/attachCreator', 'Api\PropositionController@attachCreator');
-
 });
 
 //Route::group([

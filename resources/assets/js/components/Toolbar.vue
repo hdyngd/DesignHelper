@@ -4,9 +4,23 @@
             <h3 class="md-title" style="flex: 1"><router-link to="/home">DesignHelper</router-link></h3>
 
             <div class="md-toolbar-section-end">
+
+                <md-field>
+                    <label for="proposition">
+                        Proposition
+                    </label>
+                    <md-select name="proposition" id="proposition">
+                        <md-option v-for="item in propositions" :key="item.id">
+<!--                            <router-link :to="'/proposition/' + item.id">{{ item.menuName }}</router-link>-->
+                            {{item.menuName}}
+                        </md-option>
+                    </md-select>
+                </md-field>
+
                 <md-button>
                     <router-link to="/user">{{ user.name }}</router-link>
                 </md-button>
+
                 <md-badge :md-content="cartList.length">
                     <md-button class="md-icon-button" @click="showShoppingCart">
                         <md-icon>shopping_cart</md-icon>
@@ -18,6 +32,7 @@
                 </md-button>
             </div>
         </md-toolbar>
+
         <md-drawer class="md-right" :md-active.sync="showSidepanel">
             <md-toolbar class="md-transparent" md-elevation="0">
                 <span class="md-title">Menu</span>
@@ -50,7 +65,8 @@
         data: () => ({
             cartList: state.cart,
             showSidepanel: false,
-            user: state.user
+            user: state.user,
+            propositions: state.propositions,
         }),
         methods: {
             logout() {

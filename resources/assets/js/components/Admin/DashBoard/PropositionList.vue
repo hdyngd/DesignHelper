@@ -80,7 +80,7 @@
                 Bus.$emit('showAttachDesigner', {proposition: item});
             },
             setPropositions() {
-                axios.get('/api/proposition/get')
+                axios.get('/api/proposition/getAll')
                     .then(response => {
                         let tmp = [];
 

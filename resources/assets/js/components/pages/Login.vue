@@ -37,6 +37,7 @@
                     this.setToken('Bearer ' + res.data.access_token);
                     this.$router.push({path: '/home'});
                     this.setUser();
+                    this.setPropositions();
                 }).catch(error => {
                     this.isError = true;
                 });

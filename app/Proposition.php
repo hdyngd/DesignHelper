@@ -40,6 +40,8 @@ class Proposition extends Model
         foreach (Proposition::query()->cursor() as $proposition) {
             $data = [
                 'id' => $proposition->id,
+                'client_id' => $proposition->client_id,
+                'designer_id' => $proposition->designer_id,
                 'menuName' => $menus[$proposition->menu_id]->name,
                 'clientName' => $users[$proposition->client_id]->name,
                 'designerName' => ($proposition->designer_id  !== null) ? $users[$proposition->designer_id]->name : '',
@@ -52,5 +54,20 @@ class Proposition extends Model
         }
 
         return $propositions;
+    }
+
+    public function get($user) {
+        $propositions = $this->getAll();
+
+        $key = 'client_id';
+        if($user->role == 1) $key = 'designer_id';
+
+        $res = [];
+        foreach ($propositions as $value) {
+            if($value[$key] == $user->id) {
+                $res[] = $value;
+            }
+        }
+        return $res;
     }
 }
