@@ -21,6 +21,6 @@ class UserController extends Controller
 
     public function getCreator()
     {
-        return response()->json(User::where('role', 2)->get());
+        return response()->json(User::where('role', 1)->get());
     }
 }
