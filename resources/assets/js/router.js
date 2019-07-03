@@ -11,6 +11,11 @@ import User from './components/pages/User'
 import Home from './components/Home/Index'
 import MenuList from './components/Home/MenuList'
 
+// 案件一覧ページ
+import Propositions from './components/pages/Propositions'
+
+//　案件ページ
+import Proposition from './components/pages/Proposition'
 // 管理画面
 import Admin from './components/Admin/Index'
 import DashBoard from './components/Admin/DashBoard/DashBoard';
@@ -39,6 +44,8 @@ const routes = [
             {path: 'category/:id', component: MenuList},
         ]
     },
+    { path: '/propositions', component: Propositions, meta: { requiresAuth: true } },
+    { path: '/proposition/:id', component: Proposition, meta: { requiresAuth: true } },
     { path: '/admin', component: Admin, meta: { requiresAuth: true },
         children: [
             {path: 'dash_board', component: DashBoard},

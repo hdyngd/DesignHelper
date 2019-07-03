@@ -46,15 +46,15 @@ export default {
             state.user.email = "";
             state.user.role = "";
         },
-        setPropositions() {
-            axios.get('/api/proposition/get').then(res => {
-                for(let index in res.data) {
-                    state.propositions.push(res.data[index])
-                }
-            }).catch(error => {
-                this.isError = true;
-            });
-        }
+        // setPropositions() {
+        //     axios.get('/api/proposition/get').then(res => {
+        //         for(let index in res.data) {
+        //             state.propositions.push(res.data[index])
+        //         }
+        //     }).catch(error => {
+        //         this.isError = true;
+        //     });
+        // }
 
     }
 }

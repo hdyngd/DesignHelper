@@ -27,7 +27,6 @@
                 <md-table-cell md-label="OrderDate" md-sort-by="created_at">{{ item.created_at }}</md-table-cell>
             </md-table-row>
         </md-table>
-        <attach-designer></attach-designer>
     </div>
 </template>
 
@@ -62,11 +61,6 @@
         created() {
             this.setPropositions();
         },
-        mounted() {
-            Bus.$on('setPropositions', () => {
-                this.setPropositions();
-            });
-        },
         methods: {
             getClass: () => ({
                 'md-primary': true,
@@ -75,10 +69,10 @@
                 this.searched = searchByName(this.propositions, this.search)
             },
             onSelect (item) {
-                Bus.$emit('showAttachDesigner', {proposition: item});
+                this.$router.push('/proposition/' + item.id)
             },
             setPropositions() {
-                axios.get('/api/proposition/getAll')
+                axios.get('/api/proposition/get')
                     .then(response => {
                         let tmp = [];
 

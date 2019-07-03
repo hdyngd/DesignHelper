@@ -5,17 +5,17 @@
 
             <div class="md-toolbar-section-end">
 
-                <md-field>
-                    <label for="proposition">
-                        Proposition
-                    </label>
-                    <md-select name="proposition" id="proposition">
-                        <md-option v-for="item in propositions" :key="item.id">
-<!--                            <router-link :to="'/proposition/' + item.id">{{ item.menuName }}</router-link>-->
-                            {{item.menuName}}
-                        </md-option>
-                    </md-select>
-                </md-field>
+<!--                <md-field>-->
+<!--                    <label for="proposition">-->
+<!--                        Proposition-->
+<!--                    </label>-->
+<!--                    <md-select name="proposition" id="proposition">-->
+<!--                        <md-option v-for="item in propositions" :key="item.id">-->
+<!--&lt;!&ndash;                            <router-link :to="'/proposition/' + item.id">{{ item.menuName }}</router-link>&ndash;&gt;-->
+<!--                            {{item.menuName}}-->
+<!--                        </md-option>-->
+<!--                    </md-select>-->
+<!--                </md-field>-->
 
                 <md-button>
                     <router-link to="/user">{{ user.name }}</router-link>
@@ -51,6 +51,12 @@
 
                 <md-list-item>
                     <md-button @click="showSidepanel = false">
+                        <router-link to="/propositions">PROPOSITIONS</router-link>
+                    </md-button>
+                </md-list-item>
+
+                <md-list-item>
+                    <md-button @click="showSidepanel = false">
                         <router-link to="/admin/dash_board/user">ADMIN</router-link>
                     </md-button>
                 </md-list-item>
@@ -66,7 +72,7 @@
             cartList: state.cart,
             showSidepanel: false,
             user: state.user,
-            propositions: state.propositions,
+            // propositions: state.propositions,
         }),
         methods: {
             logout() {
