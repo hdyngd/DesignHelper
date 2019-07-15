@@ -15,6 +15,9 @@ Vue.use(VueMaterial)
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 
+import Chat from 'vue-beautiful-chat'
+Vue.use(Chat)
+
 import mutation from './mutation'
 Vue.mixin(mutation);
 

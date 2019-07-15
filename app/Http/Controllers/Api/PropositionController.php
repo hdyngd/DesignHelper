@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StorePropositionPost;
+use App\Http\Requests\StoreMessagePost;
 use App\Http\Requests\AttachCreatorPost;
+use App\Events\MessageCreated;
+use App\Message;
 use App\Proposition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class PropositionController extends Controller
 {
@@ -31,6 +35,12 @@ class PropositionController extends Controller
         $user = auth()->user();
         $proposition = new Proposition();
         return response()->json($proposition->get($user));
+    }
+
+    public function getOne($id)
+    {
+        $proposition = new Proposition();
+        return response()->json($proposition->getOne($id));
     }
 
     /**
@@ -120,4 +130,65 @@ class PropositionController extends Controller
     {
         //
     }
+
+    public function getMessages($id)
+    {
+        $messages = DB::table('messages')
+            ->where('messages.proposition_id', '=', $id)
+            ->join('users', 'users.id', '=', 'messages.user_id')
+            ->select('messages.*', 'users.name')
+            ->orderBy('messages.created_at', 'asc')
+            ->get();
+
+        foreach ($messages as $key => $value) {
+            $messages[$key]->author = ($value->user_id === auth()->user()->id) ? 'me' : $value->user_id;
+        }
+
+        return response()->json($messages);
+    }
+
+    public function getUsers($id)
+    {
+        $proposition = Proposition::find($id);
+
+        $users[] = $proposition->client;
+        $users[] = $proposition->designer;
+
+        $res = [];
+        foreach ($users as $key => $value) {
+            if($value->id !== auth()->user()->id) $res[] = $value;
+        }
+
+        return response()->json($res);
+    }
+
+    public function storeMessage(StoreMessagePost $request)
+    {
+//        $message = new Message;
+//
+//        $message->user_id = auth()->user()->id;
+//        $message->proposition_id = $request->proposition_id;
+//        $message->content = $request->content;
+//        $message->type = $request->type;
+//        $message->save();
+
+        $message = Message::create([
+            'user_id' => auth()->user()->id,
+            'proposition_id' => $request->proposition_id,
+            'content' => $request->content,
+            'type' => $request->type
+        ]);
+
+//        $pusher = [
+//            'user_id' => $message->user_id,
+//            'proposition_id' => $message->proposition_id,
+//            'content' => $message->content,
+//            'type' => $message->type
+//        ];
+//        dd($message);
+        broadcast(new MessageCreated($message))->toOthers();
+
+        //return response()->json();
+    }
+
 }

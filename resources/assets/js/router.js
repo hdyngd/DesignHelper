@@ -16,6 +16,7 @@ import Propositions from './components/pages/Propositions'
 
 //　案件ページ
 import Proposition from './components/pages/Proposition'
+
 // 管理画面
 import Admin from './components/Admin/Index'
 import DashBoard from './components/Admin/DashBoard/DashBoard';

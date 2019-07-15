@@ -14,11 +14,11 @@ class Proposition extends Model
     ];
 
     public function client() {
-        return $this->hasOne('App\User', 'client_id');
+        return $this->hasOne('App\User', 'id', 'client_id');
     }
 
     public function designer() {
-        return $this->hasOne('App\User', 'designer_id');
+        return $this->hasOne('App\User', 'id', 'designer_id');
     }
 
     public function menu() {
@@ -69,5 +69,22 @@ class Proposition extends Model
             }
         }
         return $res;
+    }
+
+    public function getOne($id) {
+        $propositions = $this->getAll();
+
+        $res = [];
+        foreach ($propositions as $value) {
+            if($value['id'] == $id) {
+                $res[] = $value;
+            }
+        }
+        return $res;
+    }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
     }
 }

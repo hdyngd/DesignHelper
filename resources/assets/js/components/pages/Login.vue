@@ -10,11 +10,11 @@
         <div>お試しユーザ1(管理者)</div>
             <p>admin@example.com password</p>
 
-        <div>お試しユーザ2(クリエイター)</div>
-            <p>otameshi_creater@example.com xEs%592m</p>
+        <div>一般ユーザ</div>
+            <p>ippana@test.com TNNHCay1</p>
 
-        <div>お試しユーザ3(一般ユーザ)</div>
-            <p>otameshi_ippan@example.com RpQ2%SR4</p>
+        <div>クリエイター</div>
+            <p>creater_a@test.com PU9i1h=C</p>
 
     </div>
 </template>
