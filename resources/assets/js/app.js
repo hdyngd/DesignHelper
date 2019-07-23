@@ -21,25 +21,36 @@
 //     el: '#app'
 // });
 
-
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
 require('./bootstrap')
 
-Vue.use(VueRouter)
+import Vue from 'vue'
 
-Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
+import router from './router';
+window.router = router;
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        { path: '/', component: require('./components/Articles/Index.vue') },
-        { path: '/about', component: require('./components/About.vue') },
-    ]
-})
+import store from './store';
+
+Vue.use(store);
+var token =  ''//store.getters.getToken
+if (token) {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+}
+
+// import VueRouter from 'vue-router'
+
+// Vue.use(VueRouter)
+
+// Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
+
+require('./components');
+
+import Layout from "./containers/layout";
 
 const app = new Vue({
+    el: '#app',
     router,
-    el: '#app'
-})
+    store,
+    template: "<Layout/>",
+    components: { Layout },
+    props: [],
+});
