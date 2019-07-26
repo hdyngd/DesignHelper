@@ -36,11 +36,11 @@ if (token) {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 }
 
-// import VueRouter from 'vue-router'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+// import App from './App.vue';
 
-// Vue.use(VueRouter)
-
-// Vue.component('navbar', require('./components/Layouts/Navbar.vue'))
+Vue.use(ElementUI);
 
 require('./components');
 
@@ -52,5 +52,6 @@ const app = new Vue({
     store,
     template: "<Layout/>",
     components: { Layout },
+    render: h => h(Layout),
     props: [],
 });
