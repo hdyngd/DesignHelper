@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -43,6 +44,7 @@ class AuthController extends Controller
      */
     public function me()
     {
+        Log::Debug('me');
         return response()->json($this->guard()->user());
     }
 

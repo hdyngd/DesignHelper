@@ -31,9 +31,9 @@ window.router = router;
 import store from './store';
 
 Vue.use(store);
-var token =  ''//store.getters.getToken
+var token =  store.getters.getToken
 if (token) {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 }
 
 import ElementUI from 'element-ui';

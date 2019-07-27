@@ -4,26 +4,27 @@ import * as types from './mutation-types'
 export const actions = {
     api({commit, dispatch}, {url, method, params}) {
         return new Promise((resolve, reject) => {
-            // commit(types.SET_IS_LOADING, true)
-            axios[method](url, params)
+            commit(types.SET_IS_LOADING, true)
+            window.axios[method](url, params)
                 .then(({data}) => {
                     resolve(data)
                 }).catch(({response}) => {
-                // if(response.status === 401) {
-                //     const refreshToken = window.localStorage.getItem('refreshToken');
-                //     if(refreshToken) {
-                //         dispatch('requestNewToken', refreshToken);
-                //         return;
-                //     }
-                //     commit(LOGGED_OUT)
-                //     window.localStorage.setItem('token', '')
-                //     window.localStorage.setItem('user', {})
-                //     return;
-                // }
+                if(response.status === 401) {
+                    // const refreshToken = window.localStorage.getItem('refreshToken');
+                    // if(refreshToken) {
+                    //     dispatch('requestNewToken', refreshToken);
+                    //     return;
+                    // }
+                    commit(LOGGED_OUT)
+                    window.localStorage.setItem('token', '')
+                    window.localStorage.setItem('user', {})
+                    router.push('/login');
+                    // return;
+                }
                 var errors = response.data.errors
                 reject(errors)
             }).then(() => {
-                // commit(types.SET_IS_LOADING, false)
+                commit(types.SET_IS_LOADING, false)
             })
         })
     },

@@ -11,19 +11,53 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
-                    // if(data.refreshToken) {
-                    //     window.localStorage.setItem('refreshToken', data.refreshToken)
-                    // }
-                    // window.localStorage.setItem('token', data.token)
-                    // window.localStorage.setItem('user', JSON.stringify(data.user))
-                    // axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token
-                    // commit(types.LOGGED_IN, data)
-                    console.log(res);
+                    window.localStorage.setItem('token', res.access_token)
+                    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.access_token
+                    commit(types.LOGGED_IN, {token: res.access_token})
+
+                    dispatch('fetchMe');
                     resolve(res)
                 }).catch((error) => {
                     // commit(SET_ERRORS, error)
                     reject(error)
                 })
+        })
+    },
+    logout ({commit, dispatch}) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/logout',
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then(() => {
+                    window.localStorage.setItem('token', '')
+                    // window.localStorage.setItem('refreshToken', '')
+                    window.localStorage.setItem('user', {})
+                    axios.defaults.headers.common['Authorization'] = 'Bearer '
+                    commit(types.LOGGED_OUT)
+                    router.push('/login')
+                    resolve()
+                }).catch((error) => {
+                reject(error)
+            })
+        })
+    },
+    fetchMe ({commit, dispatch}) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/me',
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    window.localStorage.setItem('user', JSON.stringify(res))
+                    commit(types.SET_USER, {user: res})
+                    resolve(res)
+                }).catch((error) => {
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
         })
     },
 }

@@ -10,9 +10,9 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        // { path: '/', component: Top , beforeEnter: guest},
-        { path: '/home', component: Home},
-        { path: '/login', component: Login},
+        { path: '/', component: Home, beforeEnter: auth},
+        { path: '/home', component: Home, beforeEnter: auth},
+        { path: '/login', component: Login, beforeEnter: guest},
         // { path: '/signup', component: Signup, beforeEnter: guest},
         // { path: '/login', component: Login, beforeEnter: guest},
         // { path: '/participated', component: Participated, beforeEnter: permanent, auth},
@@ -35,12 +35,20 @@ router.beforeEach((to, from, next) => {
 })
 
 function auth(to, from, next) {
-   //  if (!store.getters.getToken) {
-   //      store.dispatch('setEntryUrl', to.path)
-   //      next('/login')  // they are not authorized, so redirect to login
-   //  } else {
-   //      next() // we are authorized, continue on to the requested route
-   // }
+    if (!store.getters.getToken) {
+        // store.dispatch('setEntryUrl', to.path)
+        next('/login')  // they are not authorized, so redirect to login
+    }
+
+    next()
+}
+
+function guest(to, from, next) {
+    if (store.getters.getToken) {
+        next('/home')
+    }
+
+    next()
 }
 
 export default router

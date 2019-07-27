@@ -4,6 +4,6 @@ import Layout from '../components/Layout';
 
 export default connect({
     gettersToProps: {
-        // isWorkroom: 'isWorkroom',
+        loading: 'getLoading',
     },
 })('layout', Layout)

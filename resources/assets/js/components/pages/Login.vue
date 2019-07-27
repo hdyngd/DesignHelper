@@ -96,7 +96,10 @@
                             password: this.model.password
                         }
 
-                        this.login(params);
+                        this.login(params)
+                            .then(() => {
+                                router.push('/home');
+                            });
 
                     } else {
                         console.log('error submit!!');
@@ -115,6 +118,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 100px;
     }
 
     .login-button {
