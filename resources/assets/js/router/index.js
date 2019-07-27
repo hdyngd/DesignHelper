@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/js/containers/Home'
+import Login from '@/js/containers/Login'
 // import Top from '@/js/components/pages/Top' // TODO
 import store from "@/js/store"
 
@@ -11,6 +12,7 @@ const router = new VueRouter({
     routes: [
         // { path: '/', component: Top , beforeEnter: guest},
         { path: '/home', component: Home},
+        { path: '/login', component: Login},
         // { path: '/signup', component: Signup, beforeEnter: guest},
         // { path: '/login', component: Login, beforeEnter: guest},
         // { path: '/participated', component: Participated, beforeEnter: permanent, auth},
