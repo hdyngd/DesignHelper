@@ -40,16 +40,9 @@
                 >Forgot password ?</a
                 >
             </el-form>
-
-            <div>管理者</div>
-            <p>admin@example.com password</p>
-
-            <div>一般</div>
-            <p>ippana@test.com TNNHCay1</p>
-
-            <div>クリエイター</div>
-            <p>creater_a@test.com PU9i1h=C</p>
-
+            <el-button @click="testAdmin">テストユーザ(管理者)</el-button>
+            <el-button @click="testGeneral">テストユーザ(一般ユーザ)</el-button>
+            <el-button @click="testCreater">テストユーザ(クリエイター)</el-button>
         </el-card>
     </div>
 </template>
@@ -116,7 +109,19 @@
                         return false;
                     }
                 });
-            }
+            },
+            testAdmin(){
+                this.model.email = 'admin@example.com'
+                this.model.password = 'password'
+            },
+            testGeneral(){
+                this.model.email = 'ippana@test.com'
+                this.model.password = 'TNNHCay1'
+            },
+            testCreater(){
+                this.model.email = 'creater_a@test.com'
+                this.model.password = 'PU9i1h=C'
+            },
         }
     };
 </script>

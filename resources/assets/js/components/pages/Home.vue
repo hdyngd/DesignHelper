@@ -3,7 +3,7 @@
         <el-col :span="6">
             <dh-side-menu></dh-side-menu>
         </el-col>
-        <el-col :span="18">
+        <el-col :span="17" :offset="1">
             <el-button>Default</el-button>
             <el-button type="primary">Primary</el-button>
             <el-button type="success">Success</el-button>
