@@ -40,6 +40,16 @@
                 >Forgot password ?</a
                 >
             </el-form>
+
+            <div>管理者</div>
+            <p>admin@example.com password</p>
+
+            <div>一般</div>
+            <p>ippana@test.com TNNHCay1</p>
+
+            <div>クリエイター</div>
+            <p>creater_a@test.com PU9i1h=C</p>
+
         </el-card>
     </div>
 </template>

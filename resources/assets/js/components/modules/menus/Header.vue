@@ -5,7 +5,7 @@
                 <el-menu-item index="1"><router-link to="/">Design Helper</router-link></el-menu-item>
             </el-col>
             <template v-if="user.name">
-                <el-col :span="2" :offset="17">
+                <el-col :span="4" :offset="15">
                     <el-menu-item index="3">
                         <router-link to="/profile">
                             <el-avatar size="small" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
@@ -16,8 +16,8 @@
                 <el-col :span="2">
                     <el-submenu index="2">
                         <template slot="title"><i class="fas fa-bars"></i></template>
-                        <el-menu-item index="2-1">
-                            <router-link to="/admin">管理画面</router-link>
+                        <el-menu-item v-if="user.role === 0" index="2-1">
+                            <router-link to="/admin/dash_board">管理画面</router-link>
                         </el-menu-item>
                         <el-menu-item index="2-2">
                             <router-link to="/proposition">案件管理</router-link>

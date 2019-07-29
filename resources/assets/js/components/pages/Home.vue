@@ -1,5 +1,5 @@
 <template>
-    <el-main class="tac">
+    <el-main>
         <el-col :span="6">
             <dh-side-menu></dh-side-menu>
         </el-col>

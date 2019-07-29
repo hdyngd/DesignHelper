@@ -2,7 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/js/containers/Home'
 import Login from '@/js/containers/Login'
-// import Top from '@/js/components/pages/Top' // TODO
+import Admin from '@/js/containers/Admin'
+import DashBoard from '@/js/containers/dash_board'
+import RegistUser from '@/js/containers/regist_user'
+import AddCategory from '@/js/containers/add_category'
+import AddMenu from '@/js/containers/add_menu'
+
 import store from "@/js/store"
 
 Vue.use(VueRouter)
@@ -11,8 +16,16 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         { path: '/', component: Home, beforeEnter: auth},
-        { path: '/home', component: Home, beforeEnter: auth},
         { path: '/login', component: Login, beforeEnter: guest},
+        { path: '/home', component: Home, beforeEnter: auth},
+        { path: '/admin', component: Admin, beforeEnter: admin,
+            children: [
+                {path: 'dash_board', component: DashBoard},
+                {path: 'regist_user', component: RegistUser},
+                {path: 'add_category', component: AddCategory},
+                {path: 'add_menu', component: AddMenu},
+            ]
+        },
         // { path: '/signup', component: Signup, beforeEnter: guest},
         // { path: '/login', component: Login, beforeEnter: guest},
         // { path: '/participated', component: Participated, beforeEnter: permanent, auth},
@@ -45,6 +58,18 @@ function auth(to, from, next) {
 
 function guest(to, from, next) {
     if (store.getters.getToken) {
+        next('/home')
+    }
+
+    next()
+}
+
+function admin(to, from, next) {
+
+    if (!store.getters.getToken) next('/login')
+
+    const user = store.getters.getUser
+    if (user.role !== 0) {
         next('/home')
     }
 
