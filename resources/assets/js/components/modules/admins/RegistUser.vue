@@ -83,7 +83,6 @@
                         this.createUser(params)
                             .then((res) => {
                                 // console.log(res)
-                                alert('password: ' + res.password);
                             })
                             .catch((error) => {
                                 console.log(error);

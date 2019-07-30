@@ -10,8 +10,14 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
+                    // console.log(res)
+                    alert('password: ' + res.password);
+                    dispatch('flushSuccess', {title: 'Success', message: res.name + ' 様の登録が完了しました。'})
                     resolve(res)
                 }).catch((error) => {
+                    for(let key in error) {
+                        dispatch('flushError', {title: 'Error', message: error[key][0]})
+                    }
                 // commit(SET_ERRORS, error)
                 reject(error)
             })
