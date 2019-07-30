@@ -16,13 +16,10 @@ use Illuminate\Support\Facades\Log;
 
 Route::post('/login', 'AuthController@login');
 
-Log::Debug('before guard');
 Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('/logout', 'AuthController@logout');
 //    Route::post('/refresh', 'AuthController@refresh');
-
-    Log::Debug('in guard');
     Route::get('/me', 'AuthController@me');
 
 //    Route::get('/me', 'AuthController@me');

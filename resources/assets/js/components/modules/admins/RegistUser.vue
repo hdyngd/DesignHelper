@@ -14,9 +14,9 @@
 
             <el-form-item label="Role" prop="role">
                 <el-radio-group v-model="ruleForm.role">
-                    <el-radio label="一般ユーザ" value="2"></el-radio>
-                    <el-radio label="クリエイター" value="1"></el-radio>
-                    <el-radio label="管理者" value="0"></el-radio>
+                    <el-radio :label="2">一般ユーザ</el-radio>
+                    <el-radio :label="1">クリエイター</el-radio>
+                    <el-radio :label="0">管理者</el-radio>
                 </el-radio-group>
             </el-form-item>
 
@@ -41,6 +41,9 @@
 </template>
 <script>
     export default {
+        props: {
+          createUser: Function
+        },
         data() {
             return {
                 ruleForm: {
@@ -67,12 +70,44 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+
+                        let password = this.getRandomString();
+                        let params = {
+                            name: this.ruleForm.name,
+                            email: this.ruleForm.email,
+                            role: Number(this.ruleForm.role),
+                            password: password,
+                            password_confirmation: password,
+                        }
+                        //console.log(params);
+                        this.createUser(params)
+                            .then((res) => {
+                                // console.log(res)
+                                alert('password: ' + res.password);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            })
+
                     } else {
                         console.log('error submit!!');
                         return false;
                     }
                 });
+            },
+            getRandomString(){
+                //使用文字の定義
+                let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&=~/*-+";
+
+                //桁数の定義
+                let len = 8;
+
+                //ランダムな文字列の生成
+                let result = "";
+                for(let i=0;i<len;i++){
+                    result += str.charAt(Math.floor(Math.random() * str.length));
+                }
+                return result;
             },
             handleAvatarSuccess(res, file) {
                 this.ruleForm.thumbnail = URL.createObjectURL(file.raw);

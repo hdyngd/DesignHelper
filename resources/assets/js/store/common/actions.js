@@ -1,5 +1,5 @@
 import * as types from './mutation-types'
-// import { LOGGED_OUT } from '../auth/mutation-types'
+import { LOGGED_OUT } from '../auth/mutation-types'
 
 export const actions = {
     api({commit, dispatch}, {url, method, params}) {
@@ -15,6 +15,7 @@ export const actions = {
                     //     dispatch('requestNewToken', refreshToken);
                     //     return;
                     // }
+                    commit(types.SET_IS_LOADING, false)
                     commit(LOGGED_OUT)
                     window.localStorage.setItem('token', '')
                     window.localStorage.setItem('user', {})
