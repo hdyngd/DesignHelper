@@ -112839,7 +112839,7 @@ var render = function() {
         "el-menu-item",
         { attrs: { index: "1" } },
         [
-          _c("i", { staticClass: "el-icon-menu" }),
+          _c("i", { staticClass: "fas fa-th-list" }),
           _vm._v(" "),
           _c("router-link", { attrs: { to: "/admin/dash_board" } }, [
             _vm._v("ダッシュボード")
@@ -112852,7 +112852,7 @@ var render = function() {
         "el-menu-item",
         { attrs: { index: "2" } },
         [
-          _c("i", { staticClass: "el-icon-menu" }),
+          _c("i", { staticClass: "fas fa-user-plus" }),
           _vm._v(" "),
           _c("router-link", { attrs: { to: "/admin/regist_user" } }, [
             _vm._v("ユーザ登録")
@@ -112865,7 +112865,7 @@ var render = function() {
         "el-menu-item",
         { attrs: { index: "3" } },
         [
-          _c("i", { staticClass: "el-icon-document" }),
+          _c("i", { staticClass: "fas fa-folder-plus" }),
           _vm._v(" "),
           _c("router-link", { attrs: { to: "/admin/add_category" } }, [
             _vm._v("カテゴリ追加")
@@ -112878,7 +112878,7 @@ var render = function() {
         "el-menu-item",
         { attrs: { index: "4" } },
         [
-          _c("i", { staticClass: "el-icon-setting" }),
+          _c("i", { staticClass: "fas fa-file-medical" }),
           _vm._v(" "),
           _c("router-link", { attrs: { to: "/admin/add_menu" } }, [
             _vm._v("メニュー追加")
