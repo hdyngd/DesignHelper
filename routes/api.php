@@ -19,16 +19,17 @@ Route::post('/login', 'AuthController@login');
 Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('/logout', 'AuthController@logout');
-//    Route::post('/refresh', 'AuthController@refresh');
     Route::get('/me', 'AuthController@me');
+    //    Route::post('/refresh', 'AuthController@refresh');
 
-//    Route::get('/me', 'AuthController@me');
-//    Route::post('/logout', 'AuthController@logout');
-
+    // TODO: only role === 0
     Route::post('/user/store', 'Auth\RegisterController@register');
     Route::post('/category/store', 'Api\CategoryController@store');
-    Route::get('/category/get', 'Api\CategoryController@index');
     Route::post('/menu/store', 'Api\MenuController@store');
+    Route::post('/proposition/attachCreator', 'Api\PropositionController@attachCreator');
+
+    // authミドルウェアだけでok
+    Route::get('/category/get', 'Api\CategoryController@index');
     Route::get('/user/get', 'Api\UserController@getAll');
     Route::get('/user/getCreator', 'Api\UserController@getCreator');
     Route::get('/menu/get', 'Api\MenuController@getAll');
@@ -37,7 +38,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/proposition/get', 'Api\PropositionController@get');
     Route::get('/proposition/get/{id}', 'Api\PropositionController@getOne');
     Route::get('/proposition/getAll', 'Api\PropositionController@getAll');
-    Route::post('/proposition/attachCreator', 'Api\PropositionController@attachCreator');
     Route::get('/messages/get/{id}', 'Api\PropositionController@getMessages');
     Route::get('/propositionUsers/get/{id}', 'Api\PropositionController@getUsers');
     Route::post('/message/store', 'Api\PropositionController@storeMessage');

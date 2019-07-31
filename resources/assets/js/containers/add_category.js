@@ -7,6 +7,7 @@ export default connect({
         // workRooms: 'getWorkRooms',
     },
     actionsToProps: {
+        addCategory: 'addCategory',
         // deleteWorkRoom: 'deleteWorkRoom',
         // createWorkRoom: 'createWorkRoom',
     },

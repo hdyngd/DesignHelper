@@ -34,7 +34,7 @@
             </el-form-item>
 
             <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
+                <el-button type="primary" @click.prevent="submitForm('ruleForm')">Create</el-button>
             </el-form-item>
         </el-form>
     </el-card>
@@ -55,7 +55,7 @@
                 rules: {
                     name: [
                         { required: true, message: 'Name is required', trigger: 'blur' },
-                        { min: 3, message: 'Length should be 3 or more characters', trigger: 'blur' }
+                        // { min: 3, message: 'Length should be 3 or more characters', trigger: 'blur' }
                     ],
                     email: [
                         { required: true, message: 'Email is required', trigger: 'blur' }

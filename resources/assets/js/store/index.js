@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import auth from '@/js/store/auth'
 import user from '@/js/store/user'
 import common from '@/js/store/common'
+import item from '@/js/store/item'
 
 Vue.use(Vuex)
 
@@ -12,5 +13,6 @@ export default new Vuex.Store({
         auth,
         user,
         common,
+        item,
     }
 })
