@@ -1,7 +1,7 @@
 <template>
     <el-tabs v-model="activeName">
         <el-tab-pane label="User" name="User">
-            <user-list></user-list>
+            <user-list :users="users"></user-list>
         </el-tab-pane>
         <el-tab-pane label="Category" name="Category">
             <category-list></category-list>
@@ -16,6 +16,9 @@
 </template>
 <script>
     export default {
+        props: {
+            users: Array
+        },
         data() {
             return {
                 activeName: 'User'
