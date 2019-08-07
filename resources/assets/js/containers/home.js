@@ -4,20 +4,21 @@ import Home from '../components/pages/Home'
 import store from "../store";
 export default connect({
     gettersToProps: {
-        // workRooms: 'getWorkRooms',
+        categories: 'getCategories',
     },
     actionsToProps: {
         // deleteWorkRoom: 'deleteWorkRoom',
         // createWorkRoom: 'createWorkRoom',
     },
     lifecycle: {
-        // beforeRouteEnter (to, from, next) {
-        //     store.dispatch('fetchWorkRooms')
-        //         .then(() => {
-        //             next()
-        //         }).catch(err => {
-        //             next('/')
-        //     });
-        // }
+        beforeRouteEnter (to, from, next) {
+            store.dispatch('fetchCategories')
+                .then(() => {
+                    next()
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
     }
 })('home-component', Home)

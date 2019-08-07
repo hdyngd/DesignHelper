@@ -7,6 +7,7 @@ import DashBoard from '@/js/containers/dash_board'
 import RegistUser from '@/js/containers/regist_user'
 import AddCategory from '@/js/containers/add_category'
 import AddMenu from '@/js/containers/add_menu'
+import MenuStore from '@/js/containers/menu_store'
 
 import store from "@/js/store"
 
@@ -17,7 +18,11 @@ const router = new VueRouter({
     routes: [
         { path: '/', component: Home, beforeEnter: auth},
         { path: '/login', component: Login, beforeEnter: guest},
-        { path: '/home', component: Home, beforeEnter: auth},
+        { path: '/home', component: Home, beforeEnter: auth,
+            children: [
+                {path: 'category/:id', component: MenuStore},
+            ]
+        },
         { path: '/admin', component: Admin, beforeEnter: admin,
             children: [
                 {path: 'dash_board', component: DashBoard},
