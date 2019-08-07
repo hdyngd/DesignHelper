@@ -4,20 +4,23 @@
             <user-list :users="users"></user-list>
         </el-tab-pane>
         <el-tab-pane label="Category" name="Category">
-            <category-list></category-list>
+            <category-list :categories="categories"></category-list>
         </el-tab-pane>
         <el-tab-pane label="Menu" name="Menu">
-            <menu-list></menu-list>
+            <menu-list :menus="menus"></menu-list>
         </el-tab-pane>
         <el-tab-pane label="Proposition" name="Proposition">
-            <proposition-list></proposition-list>
+            <proposition-list :propositions="propositions"></proposition-list>
         </el-tab-pane>
     </el-tabs>
 </template>
 <script>
     export default {
         props: {
-            users: Array
+            users: Array,
+            categories: Array,
+            menus: Array,
+            propositions: Array,
         },
         data() {
             return {

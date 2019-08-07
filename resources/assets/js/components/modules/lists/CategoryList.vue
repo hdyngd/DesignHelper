@@ -1,13 +1,64 @@
 <template>
-    <div>カテゴリリスト！</div>
+    <el-card class="box-card">
+        <el-table
+                :data="categories.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                height="500"
+                style="width: 100%"
+                :default-sort = "{prop: 'id', order: 'ascending'}">
+            <el-table-column
+                    label="ID"
+                    prop="id"
+                    sortable>
+            </el-table-column>
+            <el-table-column
+                    label="Name"
+                    prop="name"
+                    sortable>
+            </el-table-column>
+            <el-table-column
+                    label="Description"
+                    prop="description"
+                    sortable>
+            </el-table-column>
+            <el-table-column
+                    align="right">
+                <template slot="header" slot-scope="scope">
+                    <el-input
+                            v-model="search"
+                            size="mini"
+                            placeholder="Type to search"/>
+                </template>
+                <template slot-scope="scope">
+                    <el-button
+                            size="mini"
+                            @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                    <el-button
+                            size="mini"
+                            type="danger"
+                            @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-card>
 </template>
 
 <script>
     export default {
-        name: "UserList"
+        data() {
+            return {
+                search: '',
+            }
+        },
+        props: {
+            categories: Array
+        },
+        methods: {
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(index, row) {
+                console.log(index, row);
+            }
+        },
     }
 </script>
-
-<style scoped>
-
-</style>
