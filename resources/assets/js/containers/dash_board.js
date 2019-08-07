@@ -24,7 +24,7 @@ export default connect({
                         next()
                     }
                 }).catch(err => {
-                next('/')
+                console.log(err);
             });
 
             store.dispatch('fetchCategories')
@@ -35,7 +35,7 @@ export default connect({
                         next()
                     }
                 }).catch(err => {
-                next('/')
+                console.log(err);
             });
 
             store.dispatch('fetchMenus')
@@ -46,7 +46,7 @@ export default connect({
                         next()
                     }
                 }).catch(err => {
-                next('/')
+                console.log(err);
             });
 
             store.dispatch('fetchPropositions')
@@ -57,7 +57,7 @@ export default connect({
                         next()
                     }
                 }).catch(err => {
-                next('/')
+                console.log(err);
             });
         }
     }
