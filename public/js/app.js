@@ -96739,7 +96739,6 @@ var actions = {
                 method: 'post'
             };
             dispatch('api', payload).then(function (res) {
-                // console.log(res)
                 alert('password: ' + res.password);
                 dispatch('flushSuccess', { title: 'Success', message: res.name + ' 様の登録が完了しました。' });
                 resolve(res);
@@ -113043,6 +113042,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -113090,90 +113092,98 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-table",
-    {
-      staticStyle: { width: "100%" },
-      attrs: {
-        data: _vm.users.filter(function(data) {
-          return (
-            !_vm.search ||
-            data.name.toLowerCase().includes(_vm.search.toLowerCase())
-          )
-        }),
-        "default-sort": { prop: "id", order: "ascending" }
-      }
-    },
+    "el-card",
+    { staticClass: "box-card" },
     [
-      _c("el-table-column", {
-        attrs: { label: "ID", prop: "id", sortable: "" }
-      }),
-      _vm._v(" "),
-      _c("el-table-column", {
-        attrs: { label: "Name", prop: "name", sortable: "" }
-      }),
-      _vm._v(" "),
-      _c("el-table-column", {
-        attrs: { label: "Email", prop: "email", sortable: "" }
-      }),
-      _vm._v(" "),
-      _c("el-table-column", {
-        attrs: { label: "RoleName", prop: "roleName", sortable: "" }
-      }),
-      _vm._v(" "),
-      _c("el-table-column", {
-        attrs: { align: "right" },
-        scopedSlots: _vm._u([
-          {
-            key: "header",
-            fn: function(scope) {
-              return [
-                _c("el-input", {
-                  attrs: { size: "mini", placeholder: "Type to search" },
-                  model: {
-                    value: _vm.search,
-                    callback: function($$v) {
-                      _vm.search = $$v
-                    },
-                    expression: "search"
-                  }
-                })
-              ]
-            }
-          },
-          {
-            key: "default",
-            fn: function(scope) {
-              return [
-                _c(
-                  "el-button",
-                  {
-                    attrs: { size: "mini" },
-                    on: {
-                      click: function($event) {
-                        return _vm.handleEdit(scope.$index, scope.row)
-                      }
-                    }
-                  },
-                  [_vm._v("Edit")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-button",
-                  {
-                    attrs: { size: "mini", type: "danger" },
-                    on: {
-                      click: function($event) {
-                        return _vm.handleDelete(scope.$index, scope.row)
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
-                )
-              ]
-            }
+      _c(
+        "el-table",
+        {
+          staticStyle: { width: "100%" },
+          attrs: {
+            data: _vm.users.filter(function(data) {
+              return (
+                !_vm.search ||
+                data.name.toLowerCase().includes(_vm.search.toLowerCase())
+              )
+            }),
+            height: "500",
+            "default-sort": { prop: "id", order: "ascending" }
           }
-        ])
-      })
+        },
+        [
+          _c("el-table-column", {
+            attrs: { label: "ID", prop: "id", sortable: "" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { label: "Name", prop: "name", sortable: "" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { label: "Email", prop: "email", sortable: "" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { label: "RoleName", prop: "roleName", sortable: "" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { align: "right" },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(scope) {
+                  return [
+                    _c("el-input", {
+                      attrs: { size: "mini", placeholder: "Type to search" },
+                      model: {
+                        value: _vm.search,
+                        callback: function($$v) {
+                          _vm.search = $$v
+                        },
+                        expression: "search"
+                      }
+                    })
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(scope) {
+                  return [
+                    _c(
+                      "el-button",
+                      {
+                        attrs: { size: "mini" },
+                        on: {
+                          click: function($event) {
+                            return _vm.handleEdit(scope.$index, scope.row)
+                          }
+                        }
+                      },
+                      [_vm._v("Edit")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "el-button",
+                      {
+                        attrs: { size: "mini", type: "danger" },
+                        on: {
+                          click: function($event) {
+                            return _vm.handleDelete(scope.$index, scope.row)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
     ],
     1
   )
