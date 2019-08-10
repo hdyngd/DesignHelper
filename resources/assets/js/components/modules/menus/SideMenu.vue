@@ -11,8 +11,8 @@
     export default {
         name: "SideMenu",
         props: {
-            categories: Array
-        }
+            categories: Array,
+        },
     }
 </script>
 

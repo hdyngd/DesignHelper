@@ -4,7 +4,7 @@ import AddMenu from '../components/modules/admins/AddMenu'
 import store from "../store";
 export default connect({
     gettersToProps: {
-        category: 'getCategory'
+        category: 'getCategories'
         // workRooms: 'getWorkRooms',
     },
     actionsToProps: {
@@ -14,7 +14,7 @@ export default connect({
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {
-            store.dispatch('fetchCategory')
+            store.dispatch('fetchCategories')
                 .then(() => {
                     next()
                 }).catch(err => {

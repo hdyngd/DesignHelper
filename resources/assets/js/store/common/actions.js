@@ -53,6 +53,9 @@ export const actions = {
         //     message: 'This is an error message'
         // });
     },
+    setIsHome({commit, dispatch}, bool) {
+        commit(types.SET_IS_HOME, bool)
+    }
     // setIsWorkRoom ({commit}, flg) {
     //     commit(types.SET_IS_WORKROOM, flg)
     // },

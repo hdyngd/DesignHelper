@@ -14,10 +14,8 @@
     export default {
         props:{
             categories: Array,
+            isHome: Boolean,
         },
-        data: () => ({
-            isHome: location.pathname === "/home" || location.pathname === "/"
-        }),
     }
 </script>
 

@@ -5,6 +5,7 @@ import store from "../store";
 export default connect({
     gettersToProps: {
         categories: 'getCategories',
+        isHome: 'getIsHome',
     },
     actionsToProps: {
         // deleteWorkRoom: 'deleteWorkRoom',
@@ -12,6 +13,8 @@ export default connect({
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {
+            store.dispatch('setIsHome', true)
+
             store.dispatch('fetchCategories')
                 .then(() => {
                     next()

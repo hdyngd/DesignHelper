@@ -5,6 +5,7 @@ import store from "../store";
 export default connect({
     gettersToProps: {
         user: 'getUser',
+        cart: 'getCart',
     },
     actionsToProps: {
         logout: 'logout'
