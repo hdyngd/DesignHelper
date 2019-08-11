@@ -40,7 +40,7 @@
                 </el-col>
             </template>
         </el-row>
-        <shopping-cart :dialogVisible="dialogVisible"></shopping-cart>
+        <shopping-cart></shopping-cart>
     </el-menu>
 </template>
 
@@ -50,11 +50,12 @@
         props: {
             user: Object,
             cart: Array,
-            logout: Function
+            logout: Function,
+            toggleShoppingCart: Function,
         },
         data() {
             return {
-                dialogVisible: false
+                // dialogVisible: false
             };
         },
         methods: {
@@ -62,7 +63,7 @@
                 this.logout();
             },
             openCart() {
-                this.dialogVisible = true
+                this.toggleShoppingCart(true)
                 //console.log(this.cart);
             }
         }

@@ -33,8 +33,37 @@ export const actions = {
             })
         })
     },
-    addToCart({commit, dispatch}, item) {
-        commit('PUSH_ITEM_TO_CART', item)
+    addToCart({commit, dispatch, state}, item) {
+        item.amount = 1;
+        let tmp = state.cart
+        tmp.push(item)
+        commit('SET_CART', tmp)
         dispatch('flushSuccess', {title: 'Success', message: 'カートに追加しました'})
-    }
+    },
+    toggleShoppingCart({commit, dispatch}, bool) {
+        commit('SET_SHOPPING_CART_VISIBLE', bool)
+    },
+    storeProposition({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/proposition/store',
+                params: {data: data},
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    // console.log(res)
+                    commit('SET_CART', [])
+                    dispatch('flushSuccess', {title: 'Success', message: '発注しました。'})
+
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
+    },
 }

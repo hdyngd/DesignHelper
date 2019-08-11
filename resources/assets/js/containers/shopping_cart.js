@@ -2,14 +2,16 @@ import { connect } from './connect'
 
 import Header from '../components/modules/menus/Header'
 import store from "../store";
+import ShoppingCart from "../components/modules/dialogs/ShoppingCart";
 export default connect({
     gettersToProps: {
-        user: 'getUser',
+        shoppingCartVisible: 'getShoppingCartVisible',
         cart: 'getCart',
     },
     actionsToProps: {
-        logout: 'logout',
         toggleShoppingCart: 'toggleShoppingCart',
+        storeProposition: 'storeProposition',
+        // logout: 'logout'
         // deleteWorkRoom: 'deleteWorkRoom',
         // createWorkRoom: 'createWorkRoom',
     },
@@ -23,4 +25,4 @@ export default connect({
         //     });
         // }
     }
-})('dh-header', Header)
+})('shopping-cart', ShoppingCart)
