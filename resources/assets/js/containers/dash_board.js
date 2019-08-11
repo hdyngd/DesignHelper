@@ -7,9 +7,13 @@ export default connect({
         users: 'getUsers',
         categories: 'getCategories',
         menus: 'getMenus',
-        propositions: 'getPropositions'
+        propositions: 'getPropositions',
+        attachCreatorVisible: 'getAttachCreatorVisible',
+        creators: 'getCreators',
     },
     actionsToProps: {
+        toggleAttachCreator: 'toggleAttachCreator',
+        attachCreator: 'attachCreator',
         // deleteWorkRoom: 'deleteWorkRoom',
         // createWorkRoom: 'createWorkRoom',
     },
@@ -20,7 +24,7 @@ export default connect({
                 .then(() => {
 
                     count++;
-                    if(count === 4) {
+                    if(count === 5) {
                         next()
                     }
                 }).catch(err => {
@@ -31,7 +35,7 @@ export default connect({
                 .then(() => {
 
                     count++;
-                    if(count === 4) {
+                    if(count === 5) {
                         next()
                     }
                 }).catch(err => {
@@ -42,7 +46,7 @@ export default connect({
                 .then(() => {
 
                     count++;
-                    if(count === 4) {
+                    if(count === 5) {
                         next()
                     }
                 }).catch(err => {
@@ -53,7 +57,17 @@ export default connect({
                 .then(() => {
 
                     count++;
-                    if(count === 4) {
+                    if(count === 5) {
+                        next()
+                    }
+                }).catch(err => {
+                console.log(err);
+            });
+
+            store.dispatch('fetchCreators')
+                .then(() => {
+                    count++;
+                    if(count === 5) {
                         next()
                     }
                 }).catch(err => {

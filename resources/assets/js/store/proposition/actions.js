@@ -34,14 +34,21 @@ export const actions = {
         })
     },
     addToCart({commit, dispatch, state}, item) {
-        item.amount = 1;
         let tmp = state.cart
+        for (let key in tmp) {
+            if(tmp[key].id === item.id) return;
+        }
+
+        item.amount = 1;
         tmp.push(item)
         commit('SET_CART', tmp)
         dispatch('flushSuccess', {title: 'Success', message: 'カートに追加しました'})
     },
     toggleShoppingCart({commit, dispatch}, bool) {
         commit('SET_SHOPPING_CART_VISIBLE', bool)
+    },
+    toggleAttachCreator({commit, dispatch}, bool) {
+        commit('SET_ATTACH_CREATOR_VISIBLE', bool)
     },
     storeProposition({commit, dispatch}, data) {
         return new Promise((resolve, reject) => {
@@ -56,6 +63,43 @@ export const actions = {
                     commit('SET_CART', [])
                     dispatch('flushSuccess', {title: 'Success', message: '発注しました。'})
 
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
+    },
+    fetchCreators ({commit, dispatch}) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/user/getCreator',
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    // console.log(res);
+                    commit('SET_CREATORS', res)
+                    resolve(res)
+                }).catch((error) => {
+                reject(error)
+            })
+        })
+    },
+    attachCreator({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/proposition/attachCreator',
+                params: data,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('flushSuccess', {title: 'Success', message: '担当クリエイターを決定しました。'})
+                    dispatch('fetchPropositions')
                     resolve(res)
                 }).catch((error) => {
                 for(let key in error) {

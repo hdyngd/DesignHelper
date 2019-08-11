@@ -50,8 +50,9 @@
                 </template>
                 <template slot-scope="scope">
                     <el-button
+                            v-if="!(scope.row.designerName)"
                             size="mini"
-                            @click="handleEdit(scope.$index, scope.row)">Attach</el-button>
+                            @click="openDialog(scope.row)">Attach</el-button>
                     <el-button
                             size="mini"
                             type="danger"
@@ -59,6 +60,12 @@
                 </template>
             </el-table-column>
         </el-table>
+        <attach-creator
+            :attach-creator-visible="attachCreatorVisible"
+            :toggle-attach-creator="toggleAttachCreator"
+            :creators="creators"
+            :proposition-id="selectedPropositionId"
+            :attach-creator="attachCreator"></attach-creator>
     </el-card>
 </template>
 
@@ -67,10 +74,15 @@
         data() {
             return {
                 search: '',
+                selectedPropositionId: null,
             }
         },
         props: {
-            propositions: Array
+            propositions: Array,
+            creators: Array,
+            attachCreatorVisible: Boolean,
+            toggleAttachCreator: Function,
+            attachCreator: Function,
         },
         methods: {
             handleEdit(index, row) {
@@ -78,6 +90,10 @@
             },
             handleDelete(index, row) {
                 console.log(index, row);
+            },
+            openDialog(row) {
+                this.selectedPropositionId = row.id
+                this.toggleAttachCreator(true)
             }
         },
     }

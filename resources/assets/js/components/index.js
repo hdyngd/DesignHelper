@@ -13,3 +13,4 @@ Vue.component('menu-list', require('@/js/components/modules/lists/MenuList'));
 Vue.component('proposition-list', require('@/js/components/modules/lists/PropositionList'));
 Vue.component('dh-description', require('@/js/components/modules/homes/Description'));
 Vue.component('shopping-cart', require('@/js/containers/shopping_cart').default);
+Vue.component('attach-creator', require('@/js/components/modules/dialogs/AttachCreator'));

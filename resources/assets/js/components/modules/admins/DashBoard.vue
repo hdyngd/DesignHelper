@@ -10,7 +10,13 @@
             <menu-list :menus="menus"></menu-list>
         </el-tab-pane>
         <el-tab-pane label="Proposition" name="Proposition">
-            <proposition-list :propositions="propositions"></proposition-list>
+            <proposition-list
+                :propositions="propositions"
+                :attach-creator-visible="attachCreatorVisible"
+                :toggle-attach-creator="toggleAttachCreator"
+                :creators="creators"
+                :attach-creator="attachCreator"
+                ></proposition-list>
         </el-tab-pane>
     </el-tabs>
 </template>
@@ -21,6 +27,10 @@
             categories: Array,
             menus: Array,
             propositions: Array,
+            creators: Array,
+            attachCreatorVisible: Boolean,
+            toggleAttachCreator: Function,
+            attachCreator: Function,
         },
         data() {
             return {

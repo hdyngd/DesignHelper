@@ -4,6 +4,8 @@ export const state = {
     propositions: [],
     cart: [],
     shoppingCartVisible: false,
+    attachCreatorVisible: false,
+    creators: [],
 }
 
 export const mutations = {
@@ -23,5 +25,11 @@ export const mutations = {
     },
     [types.SET_SHOPPING_CART_VISIBLE] (state, payload) {
         state.shoppingCartVisible = payload
+    },
+    [types.SET_ATTACH_CREATOR_VISIBLE] (state, payload) {
+        state.attachCreatorVisible = payload
+    },
+    [types.SET_CREATORS] (state, payload) {
+        state.creators = payload
     },
 }

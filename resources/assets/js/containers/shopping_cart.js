@@ -1,6 +1,5 @@
 import { connect } from './connect'
 
-import Header from '../components/modules/menus/Header'
 import store from "../store";
 import ShoppingCart from "../components/modules/dialogs/ShoppingCart";
 export default connect({
