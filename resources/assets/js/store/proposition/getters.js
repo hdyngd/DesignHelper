@@ -4,6 +4,7 @@ export const getters = {
     getShoppingCartVisible: state => state.shoppingCartVisible,
     getAttachCreatorVisible: state => state.attachCreatorVisible,
     getCreators: state => state.creators,
+    getMyPropositions: state => state.myPropositions
 }
 
 export default getters

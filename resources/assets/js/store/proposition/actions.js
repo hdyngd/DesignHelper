@@ -110,4 +110,33 @@ export const actions = {
             })
         })
     },
+    fetchMyPropositions({commit, dispatch}) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/proposition/get',
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+
+                    const progressName = {
+                        0: "未着手",
+                        1: "着手",
+                        2: "作業中",
+                        3: "クライアント確認",
+                        4: "最終調整",
+                        5: "納品済"
+                    }
+
+                    for (let key in res) {
+                        res[key].progressName = progressName[res[key].progress]
+                    }
+
+                    commit('SET_MY_PROPOSITIONS', res)
+                    resolve(res)
+                }).catch((error) => {
+                reject(error)
+            })
+        })
+    }
 }

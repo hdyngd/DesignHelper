@@ -31,7 +31,7 @@
                             <router-link to="/admin/dash_board">管理画面</router-link>
                         </el-menu-item>
                         <el-menu-item index="2-2">
-                            <router-link to="/proposition">案件管理</router-link>
+                            <router-link to="/propositions">案件管理</router-link>
                         </el-menu-item>
                         <el-menu-item index="2-3" @click="onLogout()">
                             ログアウト

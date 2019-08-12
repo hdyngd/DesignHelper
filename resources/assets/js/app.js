@@ -42,6 +42,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 
+import Chat from 'vue-beautiful-chat'
+Vue.use(Chat)
+
 require('./components');
 
 import Layout from "./containers/layout";
