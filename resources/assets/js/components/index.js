@@ -14,3 +14,4 @@ Vue.component('proposition-list', require('@/js/components/modules/lists/Proposi
 Vue.component('dh-description', require('@/js/components/modules/homes/Description'));
 Vue.component('shopping-cart', require('@/js/containers/shopping_cart').default);
 Vue.component('attach-creator', require('@/js/components/modules/dialogs/AttachCreator'));
+Vue.component('chat', require('@/js/containers/chat').default);

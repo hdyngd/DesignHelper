@@ -138,5 +138,61 @@ export const actions = {
                 reject(error)
             })
         })
-    }
+    },
+    fetchParticipants({commit, dispatch}, propositionId) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/propositionUsers/get/' + propositionId,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+
+                    let user = [];
+                    res.forEach((item) => {
+                        user.push({
+                            id: item.id,
+                            name: item.name,
+                            imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
+                        })
+                    })
+
+                    commit('SET_PARTICIPANTS', user)
+                    resolve(res)
+                }).catch((error) => {
+                reject(error)
+            })
+        })
+
+    },
+    fetchMessageList({commit, dispatch}, propositionId) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/messages/get/' + propositionId,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+
+                    let contents = [];
+                    res.forEach((item) => {
+                        contents.push({
+                            type: item.type,
+                            author: item.author,
+                            data: {text: item.content}
+                        })
+                    })
+
+                    commit('SET_MESSAGE_LIST', contents)
+                    resolve(res)
+                }).catch((error) => {
+                reject(error)
+            })
+        })
+    },
+    // addMessage({commit, dispatch, state}, data) {
+    //     let tmp = state.messageList;
+    //     tmp.push(data)
+    //     commit('SET_MESSAGE_LIST', tmp)
+    // },
 }

@@ -7,6 +7,8 @@ export const state = {
     attachCreatorVisible: false,
     creators: [],
     myPropositions: [],
+    participants: [],
+    messageList: [],
 }
 
 export const mutations = {
@@ -28,5 +30,11 @@ export const mutations = {
     },
     [types.SET_MY_PROPOSITIONS] (state, payload) {
         state.myPropositions = payload
+    },
+    [types.SET_PARTICIPANTS] (state, payload) {
+        state.participants = payload
+    },
+    [types.SET_MESSAGE_LIST] (state, payload) {
+        state.messageList = payload
     },
 }
