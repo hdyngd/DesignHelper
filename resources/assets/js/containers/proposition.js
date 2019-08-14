@@ -11,10 +11,34 @@ export default connect({
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {
+            let max = 2;
+            let count = 0;
+
+            store.dispatch('fetchParticipants', to.params.id)
+                .then(() => {
+                    count++;
+                    if(count === max) {
+                        next()
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+            store.dispatch('fetchMessageList', to.params.id)
+                .then(() => {
+                    count++;
+                    if(count === max) {
+                        next()
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
 
             // store.dispatch('fetchMyPropositions')
             //     .then(() => {
-                    next()
+            //         next()
             //     })
             //     .catch(err => {
             //         console.log(err);

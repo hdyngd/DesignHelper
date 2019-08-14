@@ -32,6 +32,8 @@
         props: {
             participants: Array,
             messageList: Array,
+            addMessage: Function,
+            storeMessage: Function,
         },
         data() {
             return {
@@ -53,24 +55,8 @@
                         name: 'default',
                     },
                 },
-                // participants: [
-                //     // {
-                //     //     id: 'user1',
-                //     //     name: 'Matteo',
-                //     //     imageUrl: 'https://avatars3.githubusercontent.com/u/1915989?s=230&v=4'
-                //     // },
-                //     // {
-                //     //     id: 'user2',
-                //     //     name: 'Support',
-                //     //     imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
-                //     // }
-                // ], // the list of all the participant of the conversation. `name` is the user name, `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
                 // :TODO
                 titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
-                // messageList: [
-                //     // {type: 'text', author: `me`, data: {text: `Say yes!`}},
-                //     // {type: 'text', author: `user1`, data: {text: `No.`}}
-                // ], // the list of the messages to show, can be paginated and adjusted dynamically
                 // :TODO
                 newMessagesCount: 0,
                 isChatOpen: false, // to determine whether the chat window should be open or closed
@@ -103,10 +89,7 @@
                 messageStyling: true // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
             }
         },
-        created () {
-            this.setMessage(this.$route.params.id);
-            this.setUser(this.$route.params.id);
-        },
+        // TODO:
         mounted () {
             Echo.channel('chat.' + this.$route.params.id)
                 .listen('MessageCreated', (e) => {
@@ -127,7 +110,8 @@
                         default:
                     }
 
-                    this.messageList = [...this.messageList, content]
+                    this.addMessage(content);
+                    // this.messageList = [...this.messageList, content]
                 });
         },
         methods: {
@@ -138,9 +122,10 @@
                 }
             },
             onMessageWasSent(message) {
-                this.storeMessage(message);
+                const params = this.prepareMessage(message)
+                this.storeMessage(params)
                 // called when the user sends a message
-                this.messageList = [...this.messageList, message]
+                this.addMessage(message);
             },
             openChat() {
                 // called when the user clicks on the fab button to open the chat
@@ -163,40 +148,7 @@
                 m.isEdited = true;
                 m.data.text = message.data.text;
             },
-            setMessage(proposition_id) {
-                axios.get('/api/messages/get/' + proposition_id)
-                    .then(response => {
-                        response.data.forEach((item) => {
-                            let content = {
-                                type: item.type,
-                                author: item.author,
-                                data: {text: item.content}
-                            }
-                            this.messageList.push(content)
-                        })
-                        // console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            },
-            setUser(proposition_id) {
-                axios.get('/api/propositionUsers/get/' + proposition_id)
-                    .then(response => {
-                        response.data.forEach((item) => {
-                            let user = {
-                                id: item.id,
-                                name: item.name,
-                                imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
-                            }
-                            this.participants.push(user)
-                        })
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            },
-            storeMessage(message) {
+            prepareMessage(message) {
                 let params = {
                     proposition_id: this.$route.params.id,
                     type: message.type
@@ -214,13 +166,7 @@
                     default:
                 }
 
-                axios.post('/api/message/store', params)
-                    .then(response => {
-
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                return params;
             }
         }
     }

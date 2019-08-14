@@ -156,7 +156,7 @@ export const actions = {
                             imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
                         })
                     })
-
+                    console.log(user);
                     commit('SET_PARTICIPANTS', user)
                     resolve(res)
                 }).catch((error) => {
@@ -182,7 +182,7 @@ export const actions = {
                             data: {text: item.content}
                         })
                     })
-
+                    console.log(contents);
                     commit('SET_MESSAGE_LIST', contents)
                     resolve(res)
                 }).catch((error) => {
@@ -190,9 +190,25 @@ export const actions = {
             })
         })
     },
-    // addMessage({commit, dispatch, state}, data) {
-    //     let tmp = state.messageList;
-    //     tmp.push(data)
-    //     commit('SET_MESSAGE_LIST', tmp)
-    // },
+    addMessage({commit, dispatch, state}, data) {
+        let tmp = state.messageList;
+        tmp.push(data)
+        commit('SET_MESSAGE_LIST', tmp)
+    },
+    storeMessage({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/message/store',
+                params: data,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    resolve(res)
+                }).catch((error) => {
+                    commit(SET_ERRORS, error)
+                    reject(error)
+            })
+        })
+    }
 }
