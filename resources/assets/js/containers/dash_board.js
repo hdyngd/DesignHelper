@@ -10,12 +10,14 @@ export default connect({
         propositions: 'getPropositions',
         attachCreatorVisible: 'getAttachCreatorVisible',
         creators: 'getCreators',
+        dialogEditUser: 'getDialogEditUser',
     },
     actionsToProps: {
         toggleAttachCreator: 'toggleAttachCreator',
         attachCreator: 'attachCreator',
-        // deleteWorkRoom: 'deleteWorkRoom',
-        // createWorkRoom: 'createWorkRoom',
+        fetchEditUser: 'fetchEditUser',
+        toggleDialogEditUser: 'toggleDialogEditUser',
+        deleteUser: 'deleteUser',
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {

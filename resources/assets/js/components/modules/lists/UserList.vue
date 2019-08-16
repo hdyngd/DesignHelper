@@ -44,6 +44,21 @@
                 </template>
             </el-table-column>
         </el-table>
+
+        <el-dialog
+                title="ユーザー情報編集"
+                :visible.sync="dialogEditUser">
+
+            <edit-user
+                :admin="true"
+            ></edit-user>
+
+<!--            <span slot="footer" class="dialog-footer">-->
+<!--            <el-button @click="dialogEditUser = false">Cancel</el-button>-->
+<!--            <el-button type="primary" @click="dialogEditUser = false">Edit</el-button>-->
+<!--          </span>-->
+        </el-dialog>
+
     </el-card>
 </template>
 
@@ -55,14 +70,24 @@
             }
         },
         props: {
-            users: Array
+            users: Array,
+            dialogEditUser: Boolean,
+            fetchEditUser: Function,
+            toggleDialogEditUser: Function,
+            deleteUser: Function,
         },
         methods: {
             handleEdit(index, row) {
-                console.log(index, row);
+                this.fetchEditUser(row.id)
+                    .then(() => {
+                        this.toggleDialogEditUser(true)
+                    })
+                    .catch(() => {})
             },
             handleDelete(index, row) {
-                console.log(index, row);
+                if(confirm('削除してよろしいですか？')) {
+                    this.deleteUser(row.id)
+                }
             }
         },
     }

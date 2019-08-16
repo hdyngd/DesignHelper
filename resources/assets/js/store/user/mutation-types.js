@@ -1,1 +1,3 @@
 export const SET_USERS = 'SET_USERS'
+export const SET_EDIT_USER = 'SET_EDIT_USER'
+export const SET_DIALOG_EDIT_USER = 'SET_DIALOG_EDIT_USER'

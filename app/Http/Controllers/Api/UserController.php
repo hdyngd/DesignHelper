@@ -35,4 +35,23 @@ class UserController extends Controller
         $user->save();
         return response()->json();
     }
+
+    public function get($id)
+    {
+        $user = User::find($id);
+        $res = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'role' => $user->role,
+        ];
+        return response()->json($res);
+    }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return response()->json();
+    }
 }

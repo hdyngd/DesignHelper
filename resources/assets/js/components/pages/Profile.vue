@@ -5,7 +5,9 @@
                 <div slot="header" class="clearfix">
                     <h3>プロフィール</h3>
                 </div>
-                <profile-edit-form></profile-edit-form>
+                <profile-edit-form
+                    :admin="false"
+                ></profile-edit-form>
             </el-card>
         </el-col>
     </el-row>

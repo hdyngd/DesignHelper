@@ -16,3 +16,4 @@ Vue.component('shopping-cart', require('@/js/containers/shopping_cart').default)
 Vue.component('attach-creator', require('@/js/components/modules/dialogs/AttachCreator'));
 Vue.component('chat', require('@/js/containers/chat').default);
 Vue.component('profile-edit-form', require('@/js/containers/profile_edit_form').default);
+Vue.component('edit-user', require('@/js/containers/edit_user').default);

@@ -4,13 +4,13 @@ import store from "../store";
 import ProfileEditForm from "../components/modules/Edits/ProfileEditForm";
 export default connect({
     gettersToProps: {
-        user: 'getUser'
+        user: 'getEditUser',
     },
     actionsToProps: {
         editProfile: 'editProfile',
         toggleDialogEditUser: 'toggleDialogEditUser',
     },
-    lifecycle: {
+    // lifecycle: {
         // beforeRouteEnter (to, from, next) {
         //     // store.dispatch('fetchCategories')
         //     //     .then(() => {
@@ -20,5 +20,5 @@ export default connect({
         //     //         // next('/')
         //     // });
         // }
-    }
-})('profile-edit-form', ProfileEditForm)
+    // }
+})('edit-user', ProfileEditForm)

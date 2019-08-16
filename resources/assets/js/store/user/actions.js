@@ -60,7 +60,46 @@ export const actions = {
             dispatch('api', payload)
                 .then((res) => {
                     dispatch('fetchMe');
-                    dispatch('flushSuccess', {title: 'Success', message: 'プロフィール情報を変更しました。'})
+                    dispatch('fetchUsers');
+                    dispatch('flushSuccess', {title: 'Success', message: 'ユーザー情報を変更しました。'})
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
+    },
+    fetchEditUser({commit, dispatch}, id) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url: '/api/user/get/' + id,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    commit('SET_EDIT_USER', res)
+                    resolve(res)
+                }).catch((error) => {
+                    reject(error)
+                })
+        })
+    },
+    toggleDialogEditUser({commit, dispatch}, bool) {
+        commit('SET_DIALOG_EDIT_USER', bool)
+    },
+    deleteUser({commit, dispatch}, id){
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/user/delete/' + id,
+                method: 'delete'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('fetchUsers');
+                    dispatch('flushSuccess', {title: 'Success', message: 'ユーザーを削除しました。'})
                     resolve(res)
                 }).catch((error) => {
                 for(let key in error) {

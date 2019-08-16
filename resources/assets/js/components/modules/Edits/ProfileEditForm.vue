@@ -8,11 +8,11 @@
             <el-input v-model="ruleForm.email"></el-input>
         </el-form-item>
 
-        <el-form-item label="Role" prop="role">
+        <el-form-item label="Role" prop="role" v-show="admin">
             <el-radio-group v-model="ruleForm.role">
-                <el-radio disabled :label="2">一般ユーザ</el-radio>
-                <el-radio disabled :label="1">クリエイター</el-radio>
-                <el-radio disabled :label="0">管理者</el-radio>
+                <el-radio :label="2">一般ユーザ</el-radio>
+                <el-radio :label="1">クリエイター</el-radio>
+                <el-radio :label="0">管理者</el-radio>
             </el-radio-group>
         </el-form-item>
 
@@ -40,13 +40,9 @@
         name: "ProfileEditForm",
         props: {
             user: Object,
-            editProfile: Function
-        },
-        created(){
-            console.log(this.user);
-            this.ruleForm.name = this.user.name
-            this.ruleForm.email = this.user.email
-            this.ruleForm.role = this.user.role
+            admin: Boolean,
+            editProfile: Function,
+            toggleDialogEditUser: Function,
         },
         data() {
             return {
@@ -70,6 +66,14 @@
                 }
             };
         },
+        created(){
+            this.setData()
+        },
+        watch: {
+            user: function() {
+                this.setData()
+            }
+        },
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
@@ -84,6 +88,7 @@
                         // console.log(params);
                         this.editProfile(params)
                             .then((res) => {
+                                this.toggleDialogEditUser(false)
                                 // console.log(res)
                             })
                             .catch((error) => {
@@ -124,7 +129,12 @@
                     this.$message.error('Avatar picture size can not exceed 2MB!');
                 }
                 return isJPG && isLt2M;
-            }
+            },
+            setData() {
+                this.ruleForm.name = this.user.name
+                this.ruleForm.email = this.user.email
+                this.ruleForm.role = this.user.role
+            },
         }
     }
 </script>
