@@ -11,6 +11,7 @@ export default connect({
         attachCreatorVisible: 'getAttachCreatorVisible',
         creators: 'getCreators',
         dialogEditUser: 'getDialogEditUser',
+        dialogEditCategory: 'getDialogEditCategory',
     },
     actionsToProps: {
         toggleAttachCreator: 'toggleAttachCreator',
@@ -18,6 +19,9 @@ export default connect({
         fetchEditUser: 'fetchEditUser',
         toggleDialogEditUser: 'toggleDialogEditUser',
         deleteUser: 'deleteUser',
+        fetchEditCategory: 'fetchEditCategory',
+        toggleDialogEditCategory: 'toggleDialogEditCategory',
+        deleteCategory: 'deleteCategory',
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {

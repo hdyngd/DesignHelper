@@ -28,9 +28,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/menu/store', 'Api\MenuController@store');
     Route::post('/proposition/attachCreator', 'Api\PropositionController@attachCreator');
     Route::delete('/user/delete/{id}', 'Api\UserController@delete');
+    Route::post('/category/edit', 'Api\CategoryController@edit');
+    Route::delete('/category/delete/{id}', 'Api\CategoryController@delete');
 
     // authミドルウェアだけでok
     Route::get('/category/get', 'Api\CategoryController@index');
+    Route::get('/category/get/{id}', 'Api\CategoryController@get');
     Route::get('/user/get', 'Api\UserController@getAll');
     Route::get('/user/get/{id}', 'Api\UserController@get');
     Route::get('/user/getCreator', 'Api\UserController@getCreator');

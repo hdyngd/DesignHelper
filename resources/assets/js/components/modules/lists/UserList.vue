@@ -47,16 +47,12 @@
 
         <el-dialog
                 title="ユーザー情報編集"
-                :visible.sync="dialogEditUser">
+                :visible.sync="dialogEditUser"
+                :before-close="handleClose">
 
             <edit-user
                 :admin="true"
             ></edit-user>
-
-<!--            <span slot="footer" class="dialog-footer">-->
-<!--            <el-button @click="dialogEditUser = false">Cancel</el-button>-->
-<!--            <el-button type="primary" @click="dialogEditUser = false">Edit</el-button>-->
-<!--          </span>-->
         </el-dialog>
 
     </el-card>
@@ -88,6 +84,9 @@
                 if(confirm('削除してよろしいですか？')) {
                     this.deleteUser(row.id)
                 }
+            },
+            handleClose() {
+                this.toggleDialogEditUser(false)
             }
         },
     }

@@ -10,7 +10,13 @@
             ></user-list>
         </el-tab-pane>
         <el-tab-pane label="Category" name="Category">
-            <category-list :categories="categories"></category-list>
+            <category-list
+                :categories="categories"
+                :dialog-edit-category="dialogEditCategory"
+                :toggle-dialog-edit-category="toggleDialogEditCategory"
+                :delete-category="deleteCategory"
+                :fetch-edit-category="fetchEditCategory"
+            ></category-list>
         </el-tab-pane>
         <el-tab-pane label="Menu" name="Menu">
             <menu-list :menus="menus"></menu-list>
@@ -33,6 +39,7 @@
             users: Array,
             dialogEditUser: Boolean,
             categories: Array,
+            dialogEditCategory: Boolean,
             menus: Array,
             propositions: Array,
             creators: Array,
@@ -42,6 +49,9 @@
             fetchEditUser: Function,
             toggleDialogEditUser: Function,
             deleteUser: Function,
+            fetchEditCategory: Function,
+            toggleDialogEditCategory: Function,
+            deleteCategory: Function,
         },
         data() {
             return {

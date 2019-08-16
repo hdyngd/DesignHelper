@@ -1,6 +1,7 @@
 export const getters = {
-    // getCategory: state => state.category,
     getCategories: state => state.categories,
+    getEditCategory: state => state.editCategory,
+    getDialogEditCategory: state => state.dialogEditCategory,
 }
 
 export default getters

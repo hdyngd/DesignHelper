@@ -39,6 +39,14 @@
                 </template>
             </el-table-column>
         </el-table>
+
+        <el-dialog
+            title="カテゴリ編集"
+            :visible.sync="dialogEditCategory"
+            :before-close="handleClose">
+
+            <edit-category></edit-category>
+        </el-dialog>
     </el-card>
 </template>
 
@@ -50,14 +58,27 @@
             }
         },
         props: {
-            categories: Array
+            categories: Array,
+            dialogEditCategory: Boolean,
+            fetchEditCategory: Function,
+            toggleDialogEditCategory: Function,
+            deleteCategory: Function,
         },
         methods: {
             handleEdit(index, row) {
-                console.log(index, row);
+                this.fetchEditCategory(row.id)
+                    .then(() => {
+                        this.toggleDialogEditCategory(true)
+                    })
+                    .catch(() => {})
             },
             handleDelete(index, row) {
-                console.log(index, row);
+                if(confirm('削除してよろしいですか？')) {
+                    this.deleteCategory(row.id)
+                }
+            },
+            handleClose() {
+                this.toggleDialogEditCategory(false)
             }
         },
     }

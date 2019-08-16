@@ -17,3 +17,4 @@ Vue.component('attach-creator', require('@/js/components/modules/dialogs/AttachC
 Vue.component('chat', require('@/js/containers/chat').default);
 Vue.component('profile-edit-form', require('@/js/containers/profile_edit_form').default);
 Vue.component('edit-user', require('@/js/containers/edit_user').default);
+Vue.component('edit-category', require('@/js/containers/edit_category').default);
