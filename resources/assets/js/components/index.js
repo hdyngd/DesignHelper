@@ -15,3 +15,4 @@ Vue.component('dh-description', require('@/js/components/modules/homes/Descripti
 Vue.component('shopping-cart', require('@/js/containers/shopping_cart').default);
 Vue.component('attach-creator', require('@/js/components/modules/dialogs/AttachCreator'));
 Vue.component('chat', require('@/js/containers/chat').default);
+Vue.component('profile-edit-form', require('@/js/containers/profile_edit_form').default);

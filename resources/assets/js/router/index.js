@@ -10,6 +10,7 @@ import AddMenu from '@/js/containers/add_menu'
 import MyProposition from '@/js/containers/my_proposition'
 import Proposition from '@/js/containers/proposition'
 import MenuStore from '@/js/containers/menu_store'
+import Profile from '@/js/containers/profile'
 
 import store from "@/js/store"
 
@@ -25,6 +26,7 @@ const router = new VueRouter({
                 {path: 'category/:id', component: MenuStore},
             ]
         },
+        { path: '/profile', component: Profile, beforeEnter: auth},
         { path: '/propositions', component: MyProposition, beforeEnter: auth},
         { path: '/proposition/:id', component: Proposition, beforeEnter: auth},
         { path: '/admin', component: Admin, beforeEnter: admin,

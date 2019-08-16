@@ -50,4 +50,26 @@ export const actions = {
             })
         })
     },
+    editProfile ({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/user/edit',
+                params: data,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('fetchMe');
+                    dispatch('flushSuccess', {title: 'Success', message: 'プロフィール情報を変更しました。'})
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
+    },
+
 }
