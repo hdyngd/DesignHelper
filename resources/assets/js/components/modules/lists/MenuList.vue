@@ -49,6 +49,15 @@
                 </template>
             </el-table-column>
         </el-table>
+
+        <el-dialog
+                title="メニュー編集"
+                :visible.sync="dialogEditMenu"
+                :before-close="handleClose">
+
+            <edit-menu></edit-menu>
+        </el-dialog>
+
     </el-card>
 </template>
 
@@ -60,14 +69,27 @@
             }
         },
         props: {
-            menus: Array
+            menus: Array,
+            dialogEditMenu: Boolean,
+            fetchEditMenu: Function,
+            toggleDialogEditMenu: Function,
+            deleteMenu: Function,
         },
         methods: {
             handleEdit(index, row) {
-                console.log(index, row);
+                this.fetchEditMenu(row.id)
+                    .then(() => {
+                        this.toggleDialogEditMenu(true)
+                    })
+                    .catch(() => {})
             },
             handleDelete(index, row) {
-                console.log(index, row);
+                if(confirm('削除してよろしいですか？')) {
+                    this.deleteMenu(row.id)
+                }
+            },
+            handleClose() {
+                this.toggleDialogEditMenu(false)
             }
         },
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StoreMenuPost;
+use App\Http\Requests\EditMenuPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Menu;
@@ -79,10 +80,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+//    public function edit($id)
+//    {
+//        //
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -105,5 +106,38 @@ class MenuController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete($id)
+    {
+        $menu = Menu::find($id);
+        $menu->delete();
+        return response()->json();
+    }
+
+    public function edit(EditMenuPost $request)
+    {
+        $menu = Menu::find($request->input('id'));
+        $menu->name = $request->input('name');
+        $menu->category_id = $request->input('category_id');
+        $menu->price = $request->input('price');
+        $menu->description = $request->input('description');
+
+        $menu->save();
+        return response()->json();
+    }
+
+    public function getOne($id)
+    {
+        $menu = Menu::find($id);
+
+        $response = [
+            'id' => $menu->id,
+            'category_id' => $menu->category_id,
+            'name' => $menu->name,
+            'price' => $menu->price,
+            'description' => $menu->description,
+        ];
+        return response()->json($response);
     }
 }

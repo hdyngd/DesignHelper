@@ -19,7 +19,13 @@
             ></category-list>
         </el-tab-pane>
         <el-tab-pane label="Menu" name="Menu">
-            <menu-list :menus="menus"></menu-list>
+            <menu-list
+                :menus="menus"
+                :dialog-edit-menu="dialogEditMenu"
+                :toggle-dialog-edit-menu="toggleDialogEditMenu"
+                :delete-menu="deleteMenu"
+                :fetch-edit-menu="fetchEditMenu"
+            ></menu-list>
         </el-tab-pane>
         <el-tab-pane label="Proposition" name="Proposition">
             <proposition-list
@@ -41,6 +47,7 @@
             categories: Array,
             dialogEditCategory: Boolean,
             menus: Array,
+            dialogEditMenu: Boolean,
             propositions: Array,
             creators: Array,
             attachCreatorVisible: Boolean,
@@ -52,6 +59,9 @@
             fetchEditCategory: Function,
             toggleDialogEditCategory: Function,
             deleteCategory: Function,
+            fetchEditMenu: Function,
+            toggleDialogEditMenu: Function,
+            deleteMenu: Function,
         },
         data() {
             return {

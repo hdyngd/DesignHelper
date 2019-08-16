@@ -12,6 +12,7 @@ export default connect({
         creators: 'getCreators',
         dialogEditUser: 'getDialogEditUser',
         dialogEditCategory: 'getDialogEditCategory',
+        dialogEditMenu: 'getDialogEditMenu',
     },
     actionsToProps: {
         toggleAttachCreator: 'toggleAttachCreator',
@@ -22,6 +23,9 @@ export default connect({
         fetchEditCategory: 'fetchEditCategory',
         toggleDialogEditCategory: 'toggleDialogEditCategory',
         deleteCategory: 'deleteCategory',
+        fetchEditMenu: 'fetchEditMenu',
+        toggleDialogEditMenu: 'toggleDialogEditMenu',
+        deleteMenu: 'deleteMenu',
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {

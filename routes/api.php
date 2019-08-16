@@ -30,6 +30,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/user/delete/{id}', 'Api\UserController@delete');
     Route::post('/category/edit', 'Api\CategoryController@edit');
     Route::delete('/category/delete/{id}', 'Api\CategoryController@delete');
+    Route::get('/menu/getOne/{id}', 'Api\MenuController@getOne'); // こっちはメニューIDにマッチするメニューを一つ取得
+    Route::post('/menu/edit', 'Api\MenuController@edit');
+    Route::delete('/menu/delete/{id}', 'Api\MenuController@delete');
 
     // authミドルウェアだけでok
     Route::get('/category/get', 'Api\CategoryController@index');
@@ -38,7 +41,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user/get/{id}', 'Api\UserController@get');
     Route::get('/user/getCreator', 'Api\UserController@getCreator');
     Route::get('/menu/get', 'Api\MenuController@getAll');
-    Route::get('/menu/get/{id}', 'Api\MenuController@get');
+    Route::get('/menu/get/{id}', 'Api\MenuController@get'); // こっちはカテゴリIDにひもづくメニュー一覧を取得
     Route::post('/proposition/store', 'Api\PropositionController@store');
     Route::get('/proposition/get', 'Api\PropositionController@get');
     Route::get('/proposition/get/{id}', 'Api\PropositionController@getOne');
@@ -46,7 +49,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/messages/get/{id}', 'Api\PropositionController@getMessages');
     Route::get('/propositionUsers/get/{id}', 'Api\PropositionController@getUsers');
     Route::post('/message/store', 'Api\PropositionController@storeMessage');
-
-    // edit系
     Route::post('/user/edit', 'Api\UserController@edit');
 });
