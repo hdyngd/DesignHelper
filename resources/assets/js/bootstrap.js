@@ -1,4 +1,5 @@
 
+// import Vue from 'vue'
 window._ = require('lodash');
 
 /**
@@ -18,16 +19,22 @@ try {
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+import axios from 'axios';
+window.axios = axios
 
-window.axios = require('axios');
+window.axios = axios.create({
+    headers: { 'Cache-Control': 'no-cache'}
+});
 
-let token = document.head.querySelector('meta[name="csrf-token"]');
-window.axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': token,
-    'X-Requested-With': 'XMLHttpRequest'
-}
-
-//Vue.prototype.$http = window.axios
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios = require('axios');
+//
+// window.axios.defaults.headers.common = {
+//     'X-CSRF-TOKEN': window.Laravel.csrfToken,
+//     'X-Requested-With': 'XMLHttpRequest'
+// }
+//
+// Vue.prototype.$http = window.axios
 
 //window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -36,6 +43,12 @@ window.axios.defaults.headers.common = {
  * all outgoing HTTP requests automatically have it attached. This is just
  * a simple convenience so we don't have to attach every token manually.
  */
+let token = window.Laravel.csrfToken;
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
 
 // let token = document.head.querySelector('meta[name="csrf-token"]');
 //
@@ -52,15 +65,7 @@ window.axios.defaults.headers.common = {
  */
 
 import Echo from 'laravel-echo'
-
 window.Pusher = require('pusher-js');
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key',
-//     cluster: 'mt1',
-//     encrypted: true
-// });
 
 window.Echo = new Echo({
     broadcaster: 'pusher',

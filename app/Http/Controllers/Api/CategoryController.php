@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\EditCategoryPost;
 use App\Http\Requests\StoreCategoryPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -60,9 +61,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(EditCategoryPost $request)
     {
-        //
+        $category = Category::find($request->input('id'));
+        $category->name = $request->input('name');
+        $category->description = $request->input('description');
+
+        $category->save();
+        return response()->json();
     }
 
     /**
@@ -83,8 +89,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return response()->json();
+    }
+
+    public function get($id)
+    {
+        $category = Category::find($id);
+        $res = [
+            'id' => $category->id,
+            'name' => $category->name,
+            'description' => $category->description,
+        ];
+        return response()->json($res);
     }
 }

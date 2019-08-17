@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StoreMenuPost;
+use App\Http\Requests\EditMenuPost;
+use App\Progress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Menu;
 use App\Category;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -58,8 +61,22 @@ class MenuController extends Controller
      */
     public function store(StoreMenuPost $request)
     {
-        $menu = Menu::create($request->all());
-        return $menu;
+        $progress_tags = $request->input('progress_tags');
+        $params = $request->all();
+        unset($params['progress_tags']);
+
+        DB::beginTransaction();
+        try {
+            $menu = Menu::create($params);
+            $progress = new Progress();
+            $progress->store($menu->id, $progress_tags);
+            DB::commit();
+
+            return $menu;
+        } catch (\Exception $e) {
+            DB::rollback();
+            abort(500);
+        }
     }
 
     /**
@@ -79,10 +96,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+//    public function edit($id)
+//    {
+//        //
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -105,5 +122,50 @@ class MenuController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete($id)
+    {
+        $menu = Menu::find($id);
+        $menu->delete();
+        return response()->json();
+    }
+
+    public function edit(EditMenuPost $request)
+    {
+        $menu = Menu::find($request->input('id'));
+        $menu->name = $request->input('name');
+        $menu->category_id = $request->input('category_id');
+        $menu->price = $request->input('price');
+        $menu->description = $request->input('description');
+
+        $progress = new Progress();
+
+        DB::beginTransaction();
+        try {
+            $menu->save();
+            $progress->store($request->input('id'), $request->input('progress_tags'));
+            DB::commit();
+
+            return response()->json();
+        } catch (\Exception $e) {
+            DB::rollback();
+            abort(500);
+        }
+    }
+
+    public function getOne($id)
+    {
+        $menu = Menu::find($id);
+
+        $response = [
+            'id' => $menu->id,
+            'category_id' => $menu->category_id,
+            'name' => $menu->name,
+            'price' => $menu->price,
+            'description' => $menu->description,
+            'progress' => Menu::find($id)->progresses()->orderBy('order', 'asc')->get()
+        ];
+        return response()->json($response);
     }
 }

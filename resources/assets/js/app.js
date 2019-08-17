@@ -1,96 +1,60 @@
+
+// /**
+//  * First we will load all of this project's JavaScript dependencies which
+//  * includes Vue and other libraries. It is a great starting point when
+//  * building robust, powerful web applications using Vue and Laravel.
+//  */
+//
+// require('./bootstrap');
+//
+// window.Vue = require('vue');
+//
+// /**
+//  * Next, we will create a fresh Vue application instance and attach it to
+//  * the page. Then, you may begin adding components to this application
+//  * or customize the JavaScript scaffolding to fit your unique needs.
+//  */
+//
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//
+// const app = new Vue({
+//     el: '#app'
+// });
+
 require('./bootstrap')
 
+import Vue from 'vue'
 
-import Vue from 'vue';
-window.Bus = new Vue();
+import router from './router';
+window.router = router;
 
 import store from './store';
-import router from './router';
 
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
-Vue.use(VueMaterial)
+Vue.use(store);
+var token =  store.getters.getToken
+if (token) {
+    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+}
 
-import Vuelidate from 'vuelidate'
-Vue.use(Vuelidate)
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+// import App from './App.vue';
+
+Vue.use(ElementUI);
 
 import Chat from 'vue-beautiful-chat'
 Vue.use(Chat)
 
-import mutation from './mutation'
-Vue.mixin(mutation);
+require('./components');
 
-import Toasted from 'vue-toasted';
-Vue.use(Toasted, {
-    iconPack : 'material'
-})
-
-let errorOptions = {
-    type : 'error',
-    icon : 'error_outline',
-    duration : 5000
-};
-
-// register the toast with the custom message
-Vue.toasted.register('error',
-    (payload) => {
-
-        // if there is no message passed show default message
-        if(! payload.message) {
-            return "Oops.. Something Went Wrong.."
-        }
-
-        // if there is a message show it with the message
-        return "Oops.. " + payload.message;
-    },
-    errorOptions
-)
-
-let addCartOptions = {
-    message : 'カートに追加しました',
-    type : 'info',
-    icon : 'add_shopping_cart',
-    duration : 5000
-};
-// register the toast with the custom message
-Vue.toasted.register('addCart',
-    () => {
-        return "カートに追加しました";
-    },
-    addCartOptions
-)
-
-let execOrderOptions = {
-    type : 'info',
-    icon : 'info',
-    duration : 5000
-};
-// register the toast with the custom message
-Vue.toasted.register('execOrder',
-    () => {
-        return "発注しました";
-    },
-    execOrderOptions
-)
-
-let attachCreatorOptions = {
-    type : 'info',
-    icon : 'info',
-    duration : 5000
-};
-// register the toast with the custom message
-Vue.toasted.register('attachCreator',
-    () => {
-        return "担当クリエイターを決定しました";
-    },
-    attachCreatorOptions
-)
-
-window.state = store.state;
-
-Vue.component('app', require('./components/App.vue'));
+import Layout from "./containers/layout";
 
 const app = new Vue({
-    router
-}).$mount('#app');
+    el: '#app',
+    router,
+    store,
+    template: "<Layout/>",
+    components: { Layout },
+    render: h => h(Layout),
+    props: [],
+});

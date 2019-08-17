@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\EditUserPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -22,5 +23,35 @@ class UserController extends Controller
     public function getCreator()
     {
         return response()->json(User::where('role', 1)->get());
+    }
+
+    public function edit(EditUserPost $request)
+    {
+        $user = User::find($request->input('id'));
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+
+        $user->save();
+        return response()->json();
+    }
+
+    public function get($id)
+    {
+        $user = User::find($id);
+        $res = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'role' => $user->role,
+        ];
+        return response()->json($res);
+    }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return response()->json();
     }
 }

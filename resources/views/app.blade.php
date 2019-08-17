@@ -5,16 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DesignHelper</title>
+    <title>Design Helper</title>
 
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}"></link>
+    <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous"
+    />
+
+    <script>
+        window.Laravel = {
+            csrfToken: "{{ csrf_token() }}"
+        };
+    </script>
 </head>
 <body>
-<div id="app">
-    <app></app>
-</div>
-<script src="{{ mix('js/app.js') }}"></script>
+    <div id="app"></div>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
