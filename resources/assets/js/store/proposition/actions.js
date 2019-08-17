@@ -205,5 +205,25 @@ export const actions = {
                     reject(error)
             })
         })
+    },
+    editProgress({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/proposition/edit/progress',
+                params: data,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('flushSuccess', {title: 'Success', message: '進捗状況を更新しました。'})
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
     }
 }

@@ -20,3 +20,4 @@ Vue.component('profile-edit-form', require('@/js/containers/profile_edit_form').
 Vue.component('edit-user', require('@/js/containers/edit_user').default);
 Vue.component('edit-category', require('@/js/containers/edit_category').default);
 Vue.component('edit-menu', require('@/js/containers/edit_menu').default);
+Vue.component('progress-steps', require('@/js/containers/progress_steps').default);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\EditProgressPost;
 use App\Http\Requests\StorePropositionPost;
 use App\Http\Requests\StoreMessagePost;
 use App\Http\Requests\AttachCreatorPost;
@@ -189,6 +190,15 @@ class PropositionController extends Controller
         broadcast(new MessageCreated($message))->toOthers();
 
         //return response()->json();
+    }
+
+    public function editProgress(EditProgressPost $request)
+    {
+        $proposition = Proposition::find($request->input('proposition_id'));
+        $proposition->progress = $request->input('progress');
+        $proposition->save();
+
+        return response()->json();
     }
 
 }

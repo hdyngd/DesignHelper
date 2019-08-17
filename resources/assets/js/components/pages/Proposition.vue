@@ -1,5 +1,8 @@
 <template>
-    <chat></chat>
+    <div>
+        <progress-steps></progress-steps>
+        <chat></chat>
+    </div>
 </template>
 
 <script>
