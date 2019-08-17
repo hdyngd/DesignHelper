@@ -21,6 +21,10 @@
             <el-input type="textarea" v-model="ruleForm.description"></el-input>
         </el-form-item>
 
+        <el-form-item label="ProgressTag">
+            <tag-generator :dynamic-tags="dynamicTags"></tag-generator>
+        </el-form-item>
+
         <el-form-item>
             <el-button type="primary" @click.prevent="submitForm('ruleForm')">Edit</el-button>
         </el-form-item>
@@ -55,7 +59,8 @@
                         { required: true, message: 'price is required'},
                         { type: 'number', message: 'price must be a number'}
                     ]
-                }
+                },
+                dynamicTags: [],
             };
         },
         created(){
@@ -75,7 +80,8 @@
                             category_id: this.ruleForm.category,
                             name: this.ruleForm.name,
                             price: this.ruleForm.price,
-                            description: this.ruleForm.description
+                            description: this.ruleForm.description,
+                            progress_tags: this.dynamicTags,
                         }
                         //console.log(params);
                         this.editMenu(params)
@@ -109,10 +115,18 @@
                 return isJPG && isLt2M;
             },
             setData() {
+
+                let tags = [];
+                for (let index in this.menu.progress) {
+                    tags.push(this.menu.progress[index].name)
+                }
+
                 this.ruleForm.name = this.menu.name
                 this.ruleForm.price = this.menu.price
                 this.ruleForm.description = this.menu.description
                 this.ruleForm.category = this.menu.category_id
+                this.dynamicTags = tags
+
             },
         }
     }

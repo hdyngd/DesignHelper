@@ -9,20 +9,28 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
-                    const progressName = {
-                        0: "未着手",
-                        1: "着手",
-                        2: "作業中",
-                        3: "クライアント確認",
-                        4: "最終調整",
-                        5: "納品済"
-                    }
-
-                    for (let key in res) {
-                        res[key].progressName = progressName[res[key].progress]
-                    }
 
                     commit('SET_PROPOSITIONS', res)
+                    resolve(res)
+                }).catch((error) => {
+                // for(let key in error) {
+                //     dispatch('flushError', {title: 'Error', message: error[key][0]})
+                // }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
+    },
+    fetchProposition ({commit, dispatch}, propositionId) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/proposition/get/' + propositionId,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+
+                    commit('SET_PROPOSITION', res)
                     resolve(res)
                 }).catch((error) => {
                 // for(let key in error) {
@@ -119,19 +127,6 @@ export const actions = {
             dispatch('api', payload)
                 .then((res) => {
 
-                    const progressName = {
-                        0: "未着手",
-                        1: "着手",
-                        2: "作業中",
-                        3: "クライアント確認",
-                        4: "最終調整",
-                        5: "納品済"
-                    }
-
-                    for (let key in res) {
-                        res[key].progressName = progressName[res[key].progress]
-                    }
-
                     commit('SET_MY_PROPOSITIONS', res)
                     resolve(res)
                 }).catch((error) => {
@@ -156,7 +151,7 @@ export const actions = {
                             imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
                         })
                     })
-                    console.log(user);
+                    // console.log(user);
                     commit('SET_PARTICIPANTS', user)
                     resolve(res)
                 }).catch((error) => {
@@ -182,7 +177,7 @@ export const actions = {
                             data: {text: item.content}
                         })
                     })
-                    console.log(contents);
+                    // console.log(contents);
                     commit('SET_MESSAGE_LIST', contents)
                     resolve(res)
                 }).catch((error) => {

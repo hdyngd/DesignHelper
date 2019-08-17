@@ -2,6 +2,7 @@ import * as types from './mutation-types'
 
 export const state = {
     propositions: [],
+    proposition: {},
     cart: [],
     shoppingCartVisible: false,
     attachCreatorVisible: false,
@@ -14,6 +15,9 @@ export const state = {
 export const mutations = {
     [types.SET_PROPOSITIONS] (state, payload) {
         state.propositions = payload
+    },
+    [types.SET_PROPOSITION] (state, payload) {
+        state.proposition = payload
     },
     [types.SET_CART] (state, payload) {
         state.cart = payload

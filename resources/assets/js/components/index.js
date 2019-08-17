@@ -7,6 +7,7 @@ Vue.component('admin-dash-board', require('@/js/components/modules/admins/DashBo
 Vue.component('admin-regist-user', require('@/js/components/modules/admins/RegistUser'));
 Vue.component('admin-add-category', require('@/js/components/modules/admins/AddCategory'));
 Vue.component('admin-add-menu', require('@/js/components/modules/admins/AddMenu'));
+Vue.component('tag-generator', require('@/js/components/modules/admins/TagGenerator'));
 Vue.component('user-list', require('@/js/components/modules/lists/UserList'));
 Vue.component('category-list', require('@/js/components/modules/lists/CategoryList'));
 Vue.component('menu-list', require('@/js/components/modules/lists/MenuList'));

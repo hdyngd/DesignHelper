@@ -79,7 +79,7 @@ class PropositionController extends Controller
         //dd($request->all());
         $proposition = Proposition::find($request->input('proposition_id'));
         $proposition->designer_id = $request->input('designer_id');
-        $proposition->progress = 1;
+//        $proposition->progress = 1;
         $proposition->save();
 
         return response()->json();

@@ -22,4 +22,9 @@ class Menu extends Model
     {
         return $this->belongsTo('App\Category');
     }
+
+    public function progresses()
+    {
+        return $this->hasMany('App\Progress');
+    }
 }
