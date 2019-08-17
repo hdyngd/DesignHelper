@@ -172,6 +172,8 @@
     }
 </script>
 
-<style scoped>
-
+<style>
+    .sc-chat-window {
+        z-index: 100;
+    }
 </style>
