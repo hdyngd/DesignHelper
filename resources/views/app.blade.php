@@ -20,9 +20,40 @@
             csrfToken: "{{ csrf_token() }}"
         };
     </script>
+
+    <script type="text/javascript" src="https://credit.j-payment.co.jp/gateway/js/jquery.js"></script>
+    <script type="text/javascript" src="https://credit.j-payment.co.jp/gateway/js/CPToken.js"></script>
 </head>
 <body>
+{{--    <form id="mainform">--}}
+{{--        <input id="tkn" name="tkn" type="hidden" value="">--}}
+{{--        <div id="CARD_INPUT_FORM" />--}}
+{{--        <input type="button" value="購入する" onclick="doPurchase()"/>--}}
+{{--    </form>--}}
     <div id="app"></div>
+
     <script src="{{ mix('js/app.js') }}"></script>
+
+{{--    <script>--}}
+{{--        function doPurchase() {--}}
+{{--        //CP非同期通信よりカード番号入力画面を表示する--}}
+{{--            CPToken.CardInfo (--}}
+{{--            {--}}
+{{--                aid: '113408'--}}
+{{--            },--}}
+{{--            execPurchase );--}}
+{{--        }--}}
+
+{{--        // コールバック関数--}}
+{{--        function execPurchase(resultCode, errMsg) {--}}
+{{--            if (resultCode != "Success") {--}}
+{{--            // 戻り値がSuccess以外の場合はエラーメッセージを表示--}}
+{{--                window.alert(errMsg);--}}
+{{--            } else {--}}
+{{--            // スクリプトからフォームをsubmit--}}
+{{--                $("#mainform").submit();--}}
+{{--            }--}}
+{{--        }--}}
+{{--    </script>--}}
 </body>
 </html>
