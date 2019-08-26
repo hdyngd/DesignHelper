@@ -121,7 +121,7 @@
                 this.model.password = process.env.MIX_TEST_USER_GENERAL1_PASS
             },
             testGeneral2(){
-                this.model.email = 'testuser@testtestetsttest.com'
+                this.model.email = 'ippan_b@aaa.com'
                 this.model.password = process.env.MIX_TEST_USER_GENERAL2_PASS
             },
             testCreator(){
