@@ -41,9 +41,10 @@
                 >
             </el-form>
             <el-button @click="testAdmin">テストユーザ(管理者)</el-button>
-            <el-button @click="testGeneral">テストユーザ(一般ユーザ)</el-button>
-            <el-button @click="testGeneral2">テストユーザその2(一般ユーザ)</el-button>
-            <el-button @click="testCreater">テストユーザ(クリエイター)</el-button>
+            <el-button @click="testGeneral">テストユーザ(一般1)</el-button>
+            <el-button @click="testGeneral2">テストユーザ(一般2)</el-button>
+            <el-button @click="testCreator">テストユーザ(クリエイター1)</el-button>
+            <el-button @click="testCreator2">テストユーザ(クリエイター2)</el-button>
         </el-card>
     </div>
 </template>
@@ -117,15 +118,19 @@
             },
             testGeneral(){
                 this.model.email = 'ippana@test.com'
-                this.model.password = 'TNNHCay1'
-            },
-            testCreater(){
-                this.model.email = 'creater_a@test.com'
-                this.model.password = 'PU9i1h=C'
+                this.model.password = process.env.MIX_TEST_USER_GENERAL1_PASS
             },
             testGeneral2(){
                 this.model.email = 'testuser@testtestetsttest.com'
-                this.model.password = '%/0Xk8oW'
+                this.model.password = process.env.MIX_TEST_USER_GENERAL2_PASS
+            },
+            testCreator(){
+                this.model.email = 'creater_a@test.com'
+                this.model.password = process.env.MIX_TEST_USER_CREATOR1_PASS
+            },
+            testCreator2(){
+                this.model.email = 'creater_c@test.com'
+                this.model.password = process.env.MIX_TEST_USER_CREATOR2_PASS
             },
         }
     };
