@@ -20,19 +20,6 @@
                 </el-radio-group>
             </el-form-item>
 
-            <el-form-item label="Thumbnail" prop="thumbnail">
-                <el-upload
-                        class="avatar-uploader"
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        :show-file-list="false"
-                        :on-success="handleAvatarSuccess"
-                        :before-upload="beforeAvatarUpload"
-                >
-                    <img v-if="ruleForm.thumbnail" :src="ruleForm.thumbnail" class="avatar">
-                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-upload>
-            </el-form-item>
-
             <el-form-item>
                 <el-button type="primary" @click.prevent="submitForm('ruleForm')">Create</el-button>
             </el-form-item>
@@ -50,7 +37,6 @@
                     name: '',
                     email: '',
                     role: '',
-                    thumbnail: '',
                 },
                 rules: {
                     name: [
@@ -107,21 +93,6 @@
                     result += str.charAt(Math.floor(Math.random() * str.length));
                 }
                 return result;
-            },
-            handleAvatarSuccess(res, file) {
-                this.ruleForm.thumbnail = URL.createObjectURL(file.raw);
-            },
-            beforeAvatarUpload(file) {
-                const isJPG = file.type === 'image/jpeg';
-                const isLt2M = file.size / 1024 / 1024 < 2;
-
-                if (!isJPG) {
-                    this.$message.error('Avatar picture must be JPG format!');
-                }
-                if (!isLt2M) {
-                    this.$message.error('Avatar picture size can not exceed 2MB!');
-                }
-                return isJPG && isLt2M;
             }
         }
     }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Progress extends Model
 {
@@ -22,8 +23,7 @@ class Progress extends Model
     public function store($menu_id, $tags) {
 
         Progress::where('menu_id', $menu_id)->delete();
-
-        foreach ($tags as $key => $value) {
+        foreach (json_decode($tags) as $key => $value) {
             $params = [
                 'menu_id' => $menu_id,
                 'name' => $value,

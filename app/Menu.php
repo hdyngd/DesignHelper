@@ -13,7 +13,8 @@ class Menu extends Model
         'category_id',
         'name',
         'price',
-        'description'
+        'description',
+        'image'
     ];
 
     protected $dates = ['deleted_at'];

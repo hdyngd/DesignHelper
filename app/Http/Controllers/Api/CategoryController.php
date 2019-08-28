@@ -7,6 +7,8 @@ use App\Http\Requests\StoreCategoryPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -40,8 +42,27 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryPost $request)
     {
-        $category = Category::create($request->all());
-        return $category;
+        DB::beginTransaction();
+        try {
+            $url = null;
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $filename = Storage::disk('s3')->putFile('category', $image, 'public');
+                $url = Storage::disk('s3')->url($filename);
+            }
+            $category = Category::create([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'image' => $url
+            ]);
+            DB::commit();
+            return $category;
+        } catch(Exception $e) {
+            DB::rollback();
+            return null;
+        }
+//        $category = Category::create($request->all());
+//        return $category;
     }
 
     /**
@@ -63,12 +84,30 @@ class CategoryController extends Controller
      */
     public function edit(EditCategoryPost $request)
     {
-        $category = Category::find($request->input('id'));
-        $category->name = $request->input('name');
-        $category->description = $request->input('description');
+        DB::beginTransaction();
+        try {
+            $category = Category::find($request->input('id'));
+            //プロフィール画像変更があった場合
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $filename = Storage::disk('s3')->putFile('category', $image, 'public');
+                $url = Storage::disk('s3')->url($filename);
 
-        $category->save();
-        return response()->json();
+                $category->image = $url;
+            }
+            $category->name = $request->input('name');
+            $category->description = $request->input('description');
+
+            $category->save();
+
+            DB::commit();
+            return response()->json();
+
+        } catch(Exception $e) {
+            DB::rollback();
+            return null;
+        }
+
     }
 
     /**

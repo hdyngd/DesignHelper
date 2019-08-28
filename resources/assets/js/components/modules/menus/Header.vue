@@ -18,7 +18,8 @@
                 <el-col :span="4">
                     <el-menu-item index="3">
                         <router-link to="/profile">
-                            <el-avatar size="small" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
+                            <el-avatar v-if="user.thumbnail" size="small" :src="user.thumbnail"></el-avatar>
+                            <el-avatar v-else size="small" src="https://design-helper.s3-ap-northeast-1.amazonaws.com/profile/profile_default.png"></el-avatar>
                             {{ user.name }}
                         </router-link>
                     </el-menu-item>

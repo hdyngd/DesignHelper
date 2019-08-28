@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Menu;
 use App\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -61,15 +63,25 @@ class MenuController extends Controller
      */
     public function store(StoreMenuPost $request)
     {
-        $progress_tags = $request->input('progress_tags');
-        $params = $request->all();
-        unset($params['progress_tags']);
 
         DB::beginTransaction();
         try {
-            $menu = Menu::create($params);
+            $url = null;
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $filename = Storage::disk('s3')->putFile('menu', $image, 'public');
+                $url = Storage::disk('s3')->url($filename);
+            }
+
+            $menu = Menu::create([
+                'category_id' => $request->input('category_id'),
+                'name' => $request->input('name'),
+                'price' => $request->input('price'),
+                'description' => $request->input('description'),
+                'image' => $url
+            ]);
             $progress = new Progress();
-            $progress->store($menu->id, $progress_tags);
+            $progress->store($menu->id, $request->input('progress_tags'));
             DB::commit();
 
             return $menu;
@@ -143,6 +155,13 @@ class MenuController extends Controller
 
         DB::beginTransaction();
         try {
+
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $filename = Storage::disk('s3')->putFile('menu', $image, 'public');
+                $menu->image = Storage::disk('s3')->url($filename);
+            }
+
             $menu->save();
             $progress->store($request->input('id'), $request->input('progress_tags'));
             DB::commit();

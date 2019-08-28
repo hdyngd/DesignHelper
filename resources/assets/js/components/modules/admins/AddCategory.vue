@@ -12,7 +12,7 @@
                 <el-input type="textarea" v-model="ruleForm.description"></el-input>
             </el-form-item>
 
-            <el-form-item label="Thumbnail" prop="thumbnail">
+            <el-form-item label="Image" prop="thumbnail">
                 <el-upload
                         class="avatar-uploader"
                         action="https://jsonplaceholder.typicode.com/posts/"
@@ -47,17 +47,23 @@
                     name: [
                         { required: true, message: 'Category name is required', trigger: 'blur' },
                     ],
-                }
+                },
+                fileData: null,
             };
         },
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        let params = {
-                            name: this.ruleForm.name,
-                            description: this.ruleForm.description
-                        }
+                        let params = new FormData();
+                        params.append('name', this.ruleForm.name);
+                        params.append('description', this.ruleForm.description);
+                        params.append('image', this.fileData);
+
+                        // let params = {
+                        //     name: this.ruleForm.name,
+                        //     description: this.ruleForm.description
+                        // }
                         //console.log(params);
                         this.addCategory(params)
                             .then((res) => {
@@ -75,24 +81,29 @@
             },
             handleAvatarSuccess(res, file) {
                 this.ruleForm.thumbnail = URL.createObjectURL(file.raw);
+                this.filseData = file.raw;
             },
             beforeAvatarUpload(file) {
-                const isJPG = file.type === 'image/jpeg';
+                const isIMG = (file.type === 'image/jpeg' || file.type === 'image/png');
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
-                if (!isJPG) {
-                    this.$message.error('Avatar picture must be JPG format!');
+                if (!isIMG) {
+                    this.$message.error('Image picture must be JPG or PNG format!');
                 }
                 if (!isLt2M) {
-                    this.$message.error('Avatar picture size can not exceed 2MB!');
+                    this.$message.error('Image picture size can not exceed 2MB!');
                 }
-                return isJPG && isLt2M;
-            }
+                return isIMG && isLt2M;
+            },
         }
     }
 </script>
 
 <style>
+    input[type="file"] {
+        display: none;
+    }
+
     .avatar-uploader .el-upload {
         border: 1px dashed #d9d9d9;
         border-radius: 6px;

@@ -16,7 +16,7 @@
             </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="Thumbnail" prop="thumbnail">
+        <el-form-item label="Image" prop="thumbnail">
             <el-upload
                     class="avatar-uploader"
                     action="https://jsonplaceholder.typicode.com/posts/"
@@ -63,7 +63,8 @@
                     role: [
                         { required: true, message: 'Please select activity role', trigger: 'change' }
                     ],
-                }
+                },
+                fileData: null,
             };
         },
         created(){
@@ -79,12 +80,20 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
 
-                        let params = {
-                            id: this.user.id,
-                            name: this.ruleForm.name,
-                            email: this.ruleForm.email,
-                            role: Number(this.ruleForm.role),
-                        }
+                        let params = new FormData();
+                        params.append('id', this.user.id);
+                        params.append('name', this.ruleForm.name);
+                        params.append('email', this.ruleForm.email);
+                        params.append('role', Number(this.ruleForm.role));
+                        params.append('thumbnail', this.fileData);
+
+                        // let params = {
+                        //     id: this.user.id,
+                        //     name: this.ruleForm.name,
+                        //     email: this.ruleForm.email,
+                        //     role: Number(this.ruleForm.role),
+                        // }
+
                         // console.log(params);
                         this.editProfile(params)
                             .then((res) => {
@@ -101,34 +110,21 @@
                     }
                 });
             },
-            // getRandomString(){
-            //     //使用文字の定義
-            //     let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&=~/*-+";
-            //
-            //     //桁数の定義
-            //     let len = 8;
-            //
-            //     //ランダムな文字列の生成
-            //     let result = "";
-            //     for(let i=0;i<len;i++){
-            //         result += str.charAt(Math.floor(Math.random() * str.length));
-            //     }
-            //     return result;
-            // },
             handleAvatarSuccess(res, file) {
                 this.ruleForm.thumbnail = URL.createObjectURL(file.raw);
+                this.fileData = file.raw;
             },
             beforeAvatarUpload(file) {
-                const isJPG = file.type === 'image/jpeg';
+                const isIMG = (file.type === 'image/jpeg' || file.type === 'image/png');
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
-                if (!isJPG) {
-                    this.$message.error('Avatar picture must be JPG format!');
+                if (!isIMG) {
+                    this.$message.error('Avatar picture must be JPG or PNG format!');
                 }
                 if (!isLt2M) {
                     this.$message.error('Avatar picture size can not exceed 2MB!');
                 }
-                return isJPG && isLt2M;
+                return isIMG && isLt2M;
             },
             setData() {
                 this.ruleForm.name = this.user.name
@@ -140,6 +136,11 @@
 </script>
 
 <style>
+
+    input[type="file"] {
+        display: none;
+    }
+
     .avatar-uploader .el-upload {
         border: 1px dashed #d9d9d9;
         border-radius: 6px;

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -27,13 +30,30 @@ class UserController extends Controller
 
     public function edit(EditUserPost $request)
     {
-        $user = User::find($request->input('id'));
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->role = $request->input('role');
 
-        $user->save();
-        return response()->json();
+        DB::beginTransaction();
+        try {
+            $user = User::find($request->input('id'));
+            //プロフィール画像変更があった場合
+            if($request->hasFile('thumbnail')){
+                $thumbnail = $request->file('thumbnail');
+                $filename = Storage::disk('s3')->putFile('profile', $thumbnail, 'public');
+                $url = Storage::disk('s3')->url($filename);
+
+                $user->thumbnail = $url;
+            }
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->role = $request->input('role');
+
+            $user->save();
+            DB::commit();
+            return response()->json();
+
+        } catch(Exception $e) {
+            DB::rollback();
+            return null;
+        }
     }
 
     public function get($id)

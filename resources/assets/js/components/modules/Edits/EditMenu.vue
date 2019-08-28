@@ -25,6 +25,19 @@
             <tag-generator :dynamic-tags="dynamicTags"></tag-generator>
         </el-form-item>
 
+        <el-form-item label="Image" prop="thumbnail">
+            <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload"
+            >
+                <img v-if="ruleForm.thumbnail" :src="ruleForm.thumbnail" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+        </el-form-item>
+
         <el-form-item>
             <el-button type="primary" @click.prevent="submitForm('ruleForm')">Edit</el-button>
         </el-form-item>
@@ -47,6 +60,7 @@
                     name: '',
                     price: 0,
                     description: '',
+                    thumbnail: '',
                 },
                 rules: {
                     category: [
@@ -61,6 +75,7 @@
                     ]
                 },
                 dynamicTags: [],
+                fileData: null,
             };
         },
         created(){
@@ -75,14 +90,23 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        let params = {
-                            id: this.menu.id,
-                            category_id: this.ruleForm.category,
-                            name: this.ruleForm.name,
-                            price: this.ruleForm.price,
-                            description: this.ruleForm.description,
-                            progress_tags: this.dynamicTags,
-                        }
+                        let params = new FormData();
+                        params.append('id', this.menu.id);
+                        params.append('category_id', this.ruleForm.category);
+                        params.append('name', this.ruleForm.name);
+                        params.append('price', this.ruleForm.price);
+                        params.append('description', this.ruleForm.description);
+                        params.append('progress_tags', JSON.stringify(this.dynamicTags));
+                        params.append('image', this.fileData);
+
+                        // let params = {
+                        //     id: this.menu.id,
+                        //     category_id: this.ruleForm.category,
+                        //     name: this.ruleForm.name,
+                        //     price: this.ruleForm.price,
+                        //     description: this.ruleForm.description,
+                        //     progress_tags: this.dynamicTags,
+                        // }
                         //console.log(params);
                         this.editMenu(params)
                             .then((res) => {
@@ -101,18 +125,19 @@
             },
             handleAvatarSuccess(res, file) {
                 this.ruleForm.thumbnail = URL.createObjectURL(file.raw);
+                this.fileData = file.raw;
             },
             beforeAvatarUpload(file) {
-                const isJPG = file.type === 'image/jpeg';
+                const isIMG = (file.type === 'image/jpeg' || file.type === 'image/png');
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
-                if (!isJPG) {
-                    this.$message.error('Avatar picture must be JPG format!');
+                if (!isIMG) {
+                    this.$message.error('Image picture must be JPG or PNG format!');
                 }
                 if (!isLt2M) {
-                    this.$message.error('Avatar picture size can not exceed 2MB!');
+                    this.$message.error('Image picture size can not exceed 2MB!');
                 }
-                return isJPG && isLt2M;
+                return isIMG && isLt2M;
             },
             setData() {
 
@@ -133,6 +158,10 @@
 </script>
 
 <style>
+    input[type="file"] {
+        display: none;
+    }
+
     .avatar-uploader .el-upload {
         border: 1px dashed #d9d9d9;
         border-radius: 6px;

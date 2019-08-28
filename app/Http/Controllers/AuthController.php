@@ -44,7 +44,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        Log::Debug('me');
+//        Log::Debug('me');
         return response()->json($this->guard()->user());
     }
 

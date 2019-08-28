@@ -46,7 +46,8 @@
                     name: [
                         { required: true, message: 'Category name is required', trigger: 'blur' },
                     ],
-                }
+                },
+                fileData: null,
             };
         },
         created(){
@@ -61,11 +62,12 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        let params = {
-                            id: this.category.id,
-                            name: this.ruleForm.name,
-                            description: this.ruleForm.description
-                        }
+
+                        let params = new FormData();
+                        params.append('id', this.category.id);
+                        params.append('name', this.ruleForm.name);
+                        params.append('description', this.ruleForm.description);
+                        params.append('image', this.fileData);
                         //console.log(params);
                         this.editCategory(params)
                             .then((res) => {
@@ -84,18 +86,19 @@
             },
             handleAvatarSuccess(res, file) {
                 this.ruleForm.thumbnail = URL.createObjectURL(file.raw);
+                this.fileData = file.raw;
             },
             beforeAvatarUpload(file) {
-                const isJPG = file.type === 'image/jpeg';
+                const isIMG = (file.type === 'image/jpeg' || file.type === 'image/png');
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
-                if (!isJPG) {
-                    this.$message.error('Avatar picture must be JPG format!');
+                if (!isIMG) {
+                    this.$message.error('Image picture must be JPG or PNG format!');
                 }
                 if (!isLt2M) {
-                    this.$message.error('Avatar picture size can not exceed 2MB!');
+                    this.$message.error('Image picture size can not exceed 2MB!');
                 }
-                return isJPG && isLt2M;
+                return isIMG && isLt2M;
             },
             setData() {
                 this.ruleForm.name = this.category.name
@@ -106,6 +109,10 @@
 </script>
 
 <style>
+    input[type="file"] {
+        display: none;
+    }
+
     .avatar-uploader .el-upload {
         border: 1px dashed #d9d9d9;
         border-radius: 6px;
