@@ -13,9 +13,15 @@
                 <div class="text item">
                     <div>
                         <el-image
+                            v-if="item.image"
                             style="width: 100px; height: 100px"
-                            src="https://4.bp.blogspot.com/-Xce-5TfWV2E/XDXcmL1iOzI/AAAAAAABRLQ/RlZsBIYJvRUisHAZ1XnvbCiEgNQceq9LACLcBGAs/s800/pose_ukkari_man.png"
-                            fit="fill"></el-image>
+                            :src="item.image"
+                            fit="fill"/>
+                        <el-image
+                            v-else
+                            style="width: 100px; height: 100px"
+                            src="https://design-helper.s3-ap-northeast-1.amazonaws.com/menu/picture_icon.png"
+                            fit="fill"/>
                     </div>
                     <div>{{item.description}}</div>
                     <div>¥ {{item.price}}</div>
