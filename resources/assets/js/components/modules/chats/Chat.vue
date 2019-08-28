@@ -32,8 +32,10 @@
         props: {
             participants: Array,
             messageList: Array,
+            proposition: Object,
             addMessage: Function,
             storeMessage: Function,
+
         },
         data() {
             return {
@@ -55,8 +57,7 @@
                         name: 'default',
                     },
                 },
-                // :TODO
-                titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
+                titleImageUrl: this.menuImage(),
                 // :TODO
                 newMessagesCount: 0,
                 isChatOpen: false, // to determine whether the chat window should be open or closed
@@ -167,6 +168,9 @@
                 }
 
                 return params;
+            },
+            menuImage() {
+                return (this.proposition.menu.image) ? this.proposition.menu.image : 'https://design-helper.s3-ap-northeast-1.amazonaws.com/menu/picture_icon.png';
             }
         }
     }
@@ -175,5 +179,10 @@
 <style>
     .sc-chat-window {
         z-index: 100;
+    }
+
+    .sc-header--img {
+        width: 80px;
+        height: 80px;
     }
 </style>

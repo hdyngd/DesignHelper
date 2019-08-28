@@ -6,6 +6,7 @@ export default connect({
     gettersToProps: {
         participants: 'getParticipants',
         messageList: 'getMessageList',
+        proposition: 'getProposition',
     },
     actionsToProps: {
         addMessage: 'addMessage',

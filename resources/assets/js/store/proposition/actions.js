@@ -148,7 +148,7 @@ export const actions = {
                         user.push({
                             id: item.id,
                             name: item.name,
-                            imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
+                            imageUrl: (item.thumbnail) ? item.thumbnail : 'https://design-helper.s3-ap-northeast-1.amazonaws.com/profile/profile_default.png'
                         })
                     })
                     // console.log(user);
