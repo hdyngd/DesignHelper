@@ -12,5 +12,6 @@ class Message extends Model
         'proposition_id',
         'content',
         'type',
+        'url'
     ];
 }

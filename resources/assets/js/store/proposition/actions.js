@@ -171,11 +171,31 @@ export const actions = {
 
                     let contents = [];
                     res.forEach((item) => {
-                        contents.push({
-                            type: item.type,
-                            author: item.author,
-                            data: {text: item.content}
-                        })
+                        if(item.type === 'text') {
+                            contents.push({
+                                type: item.type,
+                                author: item.author,
+                                data: {text: item.content}
+                            })
+                        } else if(item.type === 'emoji') {
+                            contents.push({
+                                type: item.type,
+                                author: item.author,
+                                data: {emoji: item.content}
+                            })
+                        } else {
+                        //    file
+                            contents.push({
+                                type: item.type,
+                                author: item.author,
+                                data: {
+                                    file: {
+                                        name: item.content,
+                                        url: item.url
+                                    }
+                                }
+                            })
+                        }
                     })
                     // console.log(contents);
                     commit('SET_MESSAGE_LIST', contents)

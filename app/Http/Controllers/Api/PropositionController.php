@@ -12,6 +12,7 @@ use App\Proposition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PropositionController extends Controller
 {
@@ -165,29 +166,41 @@ class PropositionController extends Controller
 
     public function storeMessage(StoreMessagePost $request)
     {
-//        $message = new Message;
-//
-//        $message->user_id = auth()->user()->id;
-//        $message->proposition_id = $request->proposition_id;
-//        $message->content = $request->content;
-//        $message->type = $request->type;
-//        $message->save();
+        DB::beginTransaction();
+        try {
+            $url = null;
+            if($request->hasFile('file')) {
+                $file = $request->file('file');
+                $filename = Storage::disk('s3')->putFile('message', $file, 'public');
+                $url = Storage::disk('s3')->url($filename);
+            }
 
-        $message = Message::create([
-            'user_id' => auth()->user()->id,
-            'proposition_id' => $request->proposition_id,
-            'content' => $request->content,
-            'type' => $request->type
-        ]);
+            $message = Message::create([
+                'user_id' => auth()->user()->id,
+                'proposition_id' => $request->proposition_id,
+                'content' => $request->content,
+                'type' => $request->type,
+                'url' => $url
+            ]);
 
-//        $pusher = [
-//            'user_id' => $message->user_id,
-//            'proposition_id' => $message->proposition_id,
-//            'content' => $message->content,
-//            'type' => $message->type
-//        ];
-//        dd($message);
-        broadcast(new MessageCreated($message))->toOthers();
+            DB::commit();
+            broadcast(new MessageCreated($message))->toOthers();
+            return response()->json($message);
+
+        } catch(Exception $e) {
+            DB::rollback();
+            return null;
+        }
+
+//        var_dump($request->hasFile('file'));
+//        $message = Message::create([
+//            'user_id' => auth()->user()->id,
+//            'proposition_id' => $request->proposition_id,
+//            'content' => $request->content,
+//            'type' => $request->type
+//        ]);
+
+//        broadcast(new MessageCreated($message))->toOthers();
 
         //return response()->json();
     }

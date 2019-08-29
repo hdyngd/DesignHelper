@@ -58,7 +58,6 @@
                     },
                 },
                 titleImageUrl: this.menuImage(),
-                // :TODO
                 newMessagesCount: 0,
                 isChatOpen: false, // to determine whether the chat window should be open or closed
                 showTypingIndicator: '', // when set to a value matching the participant.id it shows the typing indicator for the specific user
@@ -87,32 +86,15 @@
                     }
                 }, // specifies the color scheme for the component
                 alwaysScrollToBottom: true, // when set to true always scrolls the chat to the bottom when new events are in (new message, user starts typing...)
-                messageStyling: true // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
+                messageStyling: true, // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
             }
         },
-        // TODO:
         mounted () {
             Echo.channel('chat.' + this.$route.params.id)
                 .listen('MessageCreated', (e) => {
-                    let content = {
-                        type: e.message.type,
-                        author: e.message.user_id
-                    }
-
-                    switch (e.message.type) {
-                        case 'text':
-                            content.data = {text: e.message.content}
-                            break;
-                        case 'emoji':
-                            content.data = {emoji: e.message.content}
-                            break;
-                        case 'file':
-                            return;
-                        default:
-                    }
-
+                    this.newMessagesCount++
+                    const content = this.conversionData(e.message, false)
                     this.addMessage(content);
-                    // this.messageList = [...this.messageList, content]
                 });
         },
         methods: {
@@ -125,8 +107,10 @@
             onMessageWasSent(message) {
                 const params = this.prepareMessage(message)
                 this.storeMessage(params)
-                // called when the user sends a message
-                this.addMessage(message);
+                    .then((res) => {
+                       const data = this.conversionData(res, true)
+                       this.addMessage(data);
+                    });
             },
             openChat() {
                 // called when the user clicks on the fab button to open the chat
@@ -136,13 +120,21 @@
             closeChat() {
                 // called when the user clicks on the botton to close the chat
                 this.isChatOpen = false
+                this.newMessagesCount = 0
             },
             handleScrollToTop() {
                 // called when the user scrolls message list to top
                 // leverage pagination for loading another page of messages
             },
             handleOnType() {
-                console.log('Emit typing event')
+                // const echo = this.echo
+                // if($(".sc-user-input--text").text() !== ''){
+                //     echo.whisper('editing', {});
+                // } else {
+                //     echo.whisper('edited', {});
+                // }
+                // this.showTypingIndicator = '...';
+                // console.log('Emit typing event')
             },
             editMessage(message) {
                 const m = this.messageList.find(m => m.id === message.id);
@@ -163,7 +155,12 @@
                         params.content = message.data.emoji
                         break;
                     case 'file':
-                        return;
+                        params = new FormData();
+                        params.append('proposition_id', this.$route.params.id);
+                        params.append('type', message.type);
+                        params.append('content', message.data.file.name);
+                        params.append('file', message.data.file);
+                        break;
                     default:
                 }
 
@@ -171,6 +168,32 @@
             },
             menuImage() {
                 return (this.proposition.menu.image) ? this.proposition.menu.image : 'https://design-helper.s3-ap-northeast-1.amazonaws.com/menu/picture_icon.png';
+            },
+            conversionData(data, isMe) {
+                let content = {
+                    type: data.type,
+                    author: (isMe) ? 'me' : data.user_id
+                }
+
+                switch (data.type) {
+                    case 'text':
+                        content.data = {text: data.content}
+                        break;
+                    case 'emoji':
+                        content.data = {emoji: data.content}
+                        break;
+                    case 'file':
+                        content.data = {
+                            file:  {
+                                name: data.content,
+                                url: data.url
+                            }
+                        }
+                        break;
+                    default:
+                }
+
+                return content;
             }
         }
     }

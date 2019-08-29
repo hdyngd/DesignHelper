@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 
 class CheckId implements Rule
 {
@@ -25,7 +26,7 @@ class CheckId implements Rule
      */
     public function passes($attribute, $value)
     {
-        return (auth()->user()->role === 0 || $value === auth()->user()->id);
+        return (auth()->user()->role === 0 || (int)$value === (int)auth()->user()->id);
     }
 
     /**
