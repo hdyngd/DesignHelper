@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SampleSesMailable;
 
 class UserController extends Controller
 {
@@ -48,6 +50,10 @@ class UserController extends Controller
 
             $user->save();
             DB::commit();
+
+            $to = 'hyanagida.0721@gmail.com';
+            Mail::to($to)->send(new SampleSesMailable());
+
             return response()->json();
 
         } catch(Exception $e) {
