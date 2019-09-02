@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\EditUserPost;
-use Illuminate\Http\Request;
+use App\Jobs\MailSender;
+use Illuminate\Bus\Dispatcher;
+//use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Http\Controllers\Auth;
+//use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SampleSesMailable;
+//use Illuminate\Support\Facades\Log;
+//use Illuminate\Support\Facades\Mail;
+//use App\Mail\SampleSesMailable;
 
 class UserController extends Controller
 {
@@ -30,7 +32,7 @@ class UserController extends Controller
         return response()->json(User::where('role', 1)->get());
     }
 
-    public function edit(EditUserPost $request)
+    public function edit(EditUserPost $request, Dispatcher $dispatcher)
     {
 
         DB::beginTransaction();
@@ -52,7 +54,10 @@ class UserController extends Controller
             DB::commit();
 
             $to = 'hyanagida.0721@gmail.com';
-            Mail::to($to)->send(new SampleSesMailable());
+            $mailSender = new MailSender($to);
+            $dispatcher->dispatch($mailSender);
+//            $to = 'hyanagida.0721@gmail.com';
+//            Mail::to($to)->queue(new SampleSesMailable());
 
             return response()->json();
 
