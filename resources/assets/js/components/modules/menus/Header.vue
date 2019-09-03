@@ -34,7 +34,10 @@
                         <el-menu-item index="2-2">
                             <router-link to="/propositions">案件管理</router-link>
                         </el-menu-item>
-                        <el-menu-item index="2-3" @click="onLogout()">
+                        <el-menu-item index="2-3">
+                            <router-link to="/information">お知らせ</router-link>
+                        </el-menu-item>
+                        <el-menu-item index="2-4" @click="onLogout()">
                             ログアウト
                         </el-menu-item>
                     </el-submenu>

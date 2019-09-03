@@ -18,6 +18,10 @@
             <i class="fas fa-file-medical"></i>
             <router-link to="/admin/add_menu">メニュー追加</router-link>
         </el-menu-item>
+        <el-menu-item index="5">
+            <i class="fas fa-paper-plane"></i>
+            <router-link to="/admin/send_dm">お知らせ作成</router-link>
+        </el-menu-item>
     </el-menu>
 </template>
 

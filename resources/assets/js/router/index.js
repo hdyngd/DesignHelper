@@ -7,8 +7,10 @@ import DashBoard from '@/js/containers/dash_board'
 import RegistUser from '@/js/containers/regist_user'
 import AddCategory from '@/js/containers/add_category'
 import AddMenu from '@/js/containers/add_menu'
+import SendDm from '@/js/containers/send_dm'
 import MyProposition from '@/js/containers/my_proposition'
 import Proposition from '@/js/containers/proposition'
+import Information from '@/js/containers/information'
 import MenuStore from '@/js/containers/menu_store'
 import Profile from '@/js/containers/profile'
 
@@ -29,12 +31,14 @@ const router = new VueRouter({
         { path: '/profile', component: Profile, beforeEnter: auth},
         { path: '/propositions', component: MyProposition, beforeEnter: auth},
         { path: '/proposition/:id', component: Proposition, beforeEnter: auth},
+        { path: '/information', component: Information, beforeEnter: auth},
         { path: '/admin', component: Admin, beforeEnter: admin,
             children: [
                 {path: 'dash_board', component: DashBoard},
                 {path: 'regist_user', component: RegistUser},
                 {path: 'add_category', component: AddCategory},
                 {path: 'add_menu', component: AddMenu},
+                {path: 'send_dm', component: SendDm},
             ]
         },
         // { path: '/signup', component: Signup, beforeEnter: guest},

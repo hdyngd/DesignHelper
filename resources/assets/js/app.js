@@ -45,6 +45,13 @@ Vue.use(ElementUI);
 import Chat from 'vue-beautiful-chat'
 Vue.use(Chat)
 
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
+// use
+Vue.use(mavonEditor)
+
+
 require('./components');
 
 import Layout from "./containers/layout";
