@@ -55,36 +55,42 @@ export const actions = {
     },
     setIsHome({commit, dispatch}, bool) {
         commit(types.SET_IS_HOME, bool)
-    }
-    // setIsWorkRoom ({commit}, flg) {
-    //     commit(types.SET_IS_WORKROOM, flg)
-    // },
-    // flushMessage ({commit}) {
-    //     commit(types.SET_ERRORS, [])
-    // },
-    // setError({commit}, message) {
-    //     commit(types.SET_ERRORS, [message])
-    // },
-    // contact({dispatch}, param) {
-    //     return new Promise((resolve, reject) => {
-    //         const payload = {
-    //             url : '/api/contact',
-    //             method: 'post',
-    //             param
-    //         }
-    //         dispatch('api', payload)
-    //             .then((_) => {
-    //                 resolve()
-    //             })
-    //             .catch((_) => {
-    //                 reject()
-    //             })
-    //     })
-    // },
-    // setEntryUrl({commit}, url) {
-    //     commit(types.SET_ENTRY_URL, url)
-    // },
-    // removeEntryUrl({commit}) {
-    //     commit(types.REMOVE_ENTRY_URL, url)
-    // }
+    },
+    sendInformation ({commit, dispatch}, params) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/information/store',
+                params: params,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('flushSuccess', {title: 'Success', message: 'お知らせを送信しました。'})
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    console.log(error)
+                    // dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
+    },
+    fileUpload ({commit, dispatch}, params) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/information/fileUpload',
+                params: params,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    resolve(res)
+                }).catch((error) => {
+                    reject(error)
+                })
+        })
+    },
+
 }

@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/menu/getOne/{id}', 'Api\MenuController@getOne'); // こっちはメニューIDにマッチするメニューを一つ取得
     Route::post('/menu/edit', 'Api\MenuController@edit');
     Route::delete('/menu/delete/{id}', 'Api\MenuController@delete');
+    Route::post('/information/store', 'Api\InformationController@store');
+    Route::post('/information/fileUpload', 'Api\InformationController@fileUpload');
 
     // authミドルウェアだけでok
     Route::get('/category/get', 'Api\CategoryController@index');
