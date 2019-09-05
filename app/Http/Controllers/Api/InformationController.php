@@ -57,4 +57,22 @@ class InformationController extends Controller
 
         return response()->json($res);
     }
+
+    public function get()
+    {
+        $informations = Information::all();
+        $information_files = Information_file::all();
+
+        $files = [];
+        foreach ($information_files as $value) {
+            $files[$value->information_id][] = $value;
+        }
+
+        foreach ($informations as $key => $value) {
+            $informations[$key]['files'] = (array_key_exists($value->id, $files)) ? $files[$value->id] : [];
+        }
+
+        return response()->json($informations);
+
+    }
 }

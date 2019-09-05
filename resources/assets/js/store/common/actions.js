@@ -92,5 +92,20 @@ export const actions = {
                 })
         })
     },
+    fetchInformations({commit, dispatch}, params) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url: '/api/information/get',
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    commit('SET_INFORMATIONS', res)
+                    resolve(res)
+                }).catch((error) => {
+                reject(error)
+            })
+        })
+    }
 
 }

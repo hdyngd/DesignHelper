@@ -11,4 +11,8 @@ class Information_file extends Model
         'url',
         'information_id',
     ];
+
+    public function information() {
+        return $this->belongsTo('App\Information');
+    }
 }

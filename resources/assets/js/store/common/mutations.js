@@ -3,6 +3,7 @@ import * as types from './mutation-types'
 export const state = {
     loading: false,
     isHome: false,
+    informations: [],
 }
 
 export const mutations = {
@@ -13,5 +14,8 @@ export const mutations = {
     [types.SET_IS_HOME] (state, payload) {
         state.isHome = payload
         // state.refreshToken = payload.refreshToken
+    },
+    [types.SET_INFORMATIONS] (state, payload) {
+        state.informations = payload
     },
 }

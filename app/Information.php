@@ -18,4 +18,8 @@ class Information extends Model
     {
         return $this->hasMany('App\Information_file');
     }
+
+    public function fetch() {
+
+    }
 }

@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/propositionUsers/get/{id}', 'Api\PropositionController@getUsers');
     Route::post('/message/store', 'Api\PropositionController@storeMessage');
     Route::post('/user/edit', 'Api\UserController@edit');
+    Route::get('/information/get', 'Api\InformationController@get');
 
     Route::post('/proposition/edit/progress', 'Api\PropositionController@editProgress');
 });
