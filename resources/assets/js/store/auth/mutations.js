@@ -4,6 +4,7 @@ export const state = {
     token: window.localStorage.getItem('token') || '',
     // refreshToken: window.localStorage.getItem('refreshToken') || '',
     user: window.localStorage.getItem('user') != {} ? JSON.parse(window.localStorage.getItem('user')) : {},
+    emailToken: '',
 }
 
 export const mutations = {
@@ -19,4 +20,8 @@ export const mutations = {
         // state.refreshToken = null
         state.user = {}
     },
+    [types.SET_EMAIL_TOKEN] (state, payload) {
+        state.emailToken = payload.emailToken
+    },
+
 }

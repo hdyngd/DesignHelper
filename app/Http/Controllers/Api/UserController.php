@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\EditUserPost;
 use App\Jobs\MailSender;
 use Illuminate\Bus\Dispatcher;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 //use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 //use Illuminate\Support\Facades\Log;
@@ -19,7 +20,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'setPassword']]);
     }
 
     public function getAll()
@@ -83,6 +84,22 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+        return response()->json();
+    }
+
+    public function setPassword(Request $request)
+    {
+        $user = User::where('email_verify_token', $request->input('token'))->first();
+        
+        if($user) {
+            $user->email_verify_token = null;
+            $user->email_verified = 1;
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+        } else {
+            return abort(422);
+        }
+
         return response()->json();
     }
 }

@@ -60,4 +60,26 @@ export const actions = {
             })
         })
     },
+    setEmailToken({commit}, emailToken) {
+        commit(types.SET_EMAIL_TOKEN, {emailToken: emailToken});
+    },
+    setPassword({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/set_password',
+                params: data,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    commit(types.SET_EMAIL_TOKEN, {emailToken: ''});
+                    dispatch('flushSuccess', {title: 'Success', message: 'パスワードを設定しました。'})
+                    resolve(res)
+                }).catch((error) => {
+                commit(types.SET_EMAIL_TOKEN, {emailToken: ''});
+                dispatch('flushError', {title: 'Error', message: 'パスワード設定に失敗しました。'})
+                reject(error)
+            })
+        })
+    }
 }
