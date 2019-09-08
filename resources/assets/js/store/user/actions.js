@@ -10,7 +10,7 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
-                    alert('password: ' + res.password);
+                    // alert('password: ' + res.password);
                     dispatch('flushSuccess', {title: 'Success', message: res.name + ' 様の登録が完了しました。'})
                     resolve(res)
                 }).catch((error) => {

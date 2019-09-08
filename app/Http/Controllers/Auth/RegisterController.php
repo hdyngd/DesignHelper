@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Jobs\RegistUser;
+use App\Mail\RegistUserMail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Bus\Dispatcher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -66,12 +71,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'role' => $data['role'],
             'password' => bcrypt($data['password']),
+            'email_verify_token' => str_random(10)
         ]);
+
+        Mail::to($user->email)->send(new RegistUserMail($user->name, $user->email_verify_token));
+//        $registUser = new RegistUser($user);
+//        $dispatcher = new Dispatcher();
+//        $dispatcher->dispatch($registUser);
+
+
+        return $user;
     }
 
     /**

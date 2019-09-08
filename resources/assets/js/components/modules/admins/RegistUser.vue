@@ -65,7 +65,7 @@
                             password: password,
                             password_confirmation: password,
                         }
-                        //console.log(params);
+                        // console.log(params);
                         this.createUser(params)
                             .then((res) => {
                                 // console.log(res)
