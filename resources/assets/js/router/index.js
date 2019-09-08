@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/js/containers/Home'
 import Login from '@/js/containers/Login'
 import SetPassword from '@/js/containers/set_password'
+import ResetPassword from '@/js/containers/reset_password'
 import Admin from '@/js/containers/Admin'
 import DashBoard from '@/js/containers/dash_board'
 import RegistUser from '@/js/containers/regist_user'
@@ -24,7 +25,8 @@ const router = new VueRouter({
     routes: [
         { path: '/', component: Home, beforeEnter: auth},
         { path: '/login', component: Login, beforeEnter: guest},
-        { path: '/email_verification/:token', component: SetPassword, beforeEnter: guest},
+        { path: '/verification/:token', component: SetPassword, beforeEnter: guest},
+        { path: '/reset_password', component: ResetPassword, beforeEnter: guest},
         { path: '/home', component: Home, beforeEnter: auth,
             children: [
                 {path: 'category/:id', component: MenuStore},

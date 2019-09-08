@@ -81,5 +81,21 @@ export const actions = {
                 reject(error)
             })
         })
+    },
+    resetPassword({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/reset_password',
+                params: data,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('flushSuccess', {title: 'Success', message: 'パスワード再設定用リンクを送信しました。メールボックスを確認してください。'})
+                    resolve(res)
+                }).catch((error) => {
+                reject(error)
+            })
+        })
     }
 }

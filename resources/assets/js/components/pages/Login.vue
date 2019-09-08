@@ -36,9 +36,9 @@
                     >Login</el-button
                     >
                 </el-form-item>
-                <a class="forgot-password" href="#"
-                >Forgot password ?</a
-                >
+                <router-link class="forgot-password" to="/reset_password">
+                    Forgot password ?
+                </router-link>
             </el-form>
             <el-button @click="testAdmin">テストユーザ(管理者)</el-button>
             <el-button @click="testGeneral">テストユーザ(一般1)</el-button>

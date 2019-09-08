@@ -24,7 +24,7 @@
     下記リンクよりEmailアドレスの認証およびログインパスワードの設定をお願いします。
 </p>
 <p>
-    <a href="{{ url('email_verification/'.$token) }}">{{ url('email_verification/'.$token) }}</a>
+    <a href="{{ url('verification/'.$token) }}">{{ url('verification/'.$token) }}</a>
 </p>
 <p>
     ※心当たりがない場合は、何もせずこのメールを削除してください。

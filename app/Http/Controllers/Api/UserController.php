@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\DB;
 //use Illuminate\Support\Facades\Log;
 //use Illuminate\Support\Facades\Mail;
 //use App\Mail\SampleSesMailable;
+use App\Jobs\ResetPasswordJob;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'setPassword']]);
+        $this->middleware('auth:api', ['except' => ['login', 'setPassword', 'resetPassword']]);
     }
 
     public function getAll()
@@ -98,6 +99,23 @@ class UserController extends Controller
             $user->save();
         } else {
             return abort(422);
+        }
+
+        return response()->json();
+    }
+
+    public function resetPassword(Request $request, Dispatcher $dispatcher)
+    {
+        $user = User::where('email', $request->input('email'))->first();
+
+        if($user) {
+            $token = str_random(10);
+            $user->email_verify_token = $token;
+            $user->save();
+
+            $resetPasswordMail = new ResetPasswordJob($user->email, $user->email_verify_token);
+            $dispatcher->dispatch($resetPasswordMail);
+
         }
 
         return response()->json();

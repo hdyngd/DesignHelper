@@ -54,6 +54,11 @@
                             required: true,
                             message: "Password is required",
                         },
+                        {
+                            min: 6,
+                            message: "Password length should be at least 6 characters",
+                            trigger: "blur"
+                        }
                     ]
                 }
             };
