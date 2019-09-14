@@ -28,8 +28,6 @@ class EditUserPost extends FormRequest
         return [
             'id' => ['required', new CheckId],
             'name' => 'required',
-            // TODO:
-//            'email' => 'required|unique:users',
             'email' => 'required',
             'role' =>  'required|numeric',
         ];

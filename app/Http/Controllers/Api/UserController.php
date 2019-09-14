@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Email_verification;
 use App\Http\Requests\EditUserPost;
-use App\Jobs\MailSender;
+use App\Jobs\EmailVerify;
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,14 +15,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 //use Illuminate\Support\Facades\Log;
 //use Illuminate\Support\Facades\Mail;
-//use App\Mail\SampleSesMailable;
 use App\Jobs\ResetPasswordJob;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'setPassword', 'resetPassword']]);
+        $this->middleware('auth:api', ['except' => ['login', 'setPassword', 'resetPassword', 'emailVerify']]);
     }
 
     public function getAll()
@@ -40,6 +40,35 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $user = User::find($request->input('id'));
+
+            $message = false;
+            //emailを変更しようとしている時
+            if($user->email !== $request->input('email')) {
+
+                //emailの重複チェック
+                $isDuplicate = User::where('email', $request->input('email'))->first();
+                if($isDuplicate) {
+                    return response()->json([
+                        'errors' => ['email' => ["email duplicate!!"]],
+                        'status' => 422,
+                    ], 422);
+                }
+
+                //DB登録
+                $emailVerification = Email_verification::create([
+                    'user_id' => $user->id,
+                    'email' => $request->input('email'),
+                    'token' => str_random(10),
+                ]);
+
+                $message = true;
+
+                //email送信
+                $mail = new EmailVerify($emailVerification->email, $emailVerification->token, $user->name);
+                $dispatcher->dispatch($mail);
+            }
+
+
             //プロフィール画像変更があった場合
             if($request->hasFile('thumbnail')){
                 $thumbnail = $request->file('thumbnail');
@@ -49,19 +78,13 @@ class UserController extends Controller
                 $user->thumbnail = $url;
             }
             $user->name = $request->input('name');
-            $user->email = $request->input('email');
             $user->role = $request->input('role');
+            $user->email = $user->email;
 
             $user->save();
             DB::commit();
 
-            $to = 'hyanagida.0721@gmail.com';
-            $mailSender = new MailSender($to);
-            $dispatcher->dispatch($mailSender);
-//            $to = 'hyanagida.0721@gmail.com';
-//            Mail::to($to)->queue(new SampleSesMailable());
-
-            return response()->json();
+            return response()->json($message);
 
         } catch(Exception $e) {
             DB::rollback();
@@ -119,5 +142,21 @@ class UserController extends Controller
         }
 
         return response()->json();
+    }
+
+    public function emailVerify($token)
+    {
+        $token = Email_verification::where('token', $token)->first();
+
+        if($token) {
+            $user = User::find($token->user_id);
+            $user->email = $token->email;
+            $user->save();
+
+            $token->delete();
+
+            return response()->json();
+        }
+        return abort(404);
     }
 }

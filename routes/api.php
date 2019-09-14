@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 Route::post('/login', 'AuthController@login');
 Route::post('/set_password', 'Api\UserController@setPassword');
 Route::post('/reset_password', 'Api\UserController@resetPassword');
+Route::get('/user/emailVerify/{token}', 'Api\UserController@emailVerify');
 
 Route::group(['middleware' => 'auth:api'], function () {
 

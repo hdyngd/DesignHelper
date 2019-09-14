@@ -61,7 +61,15 @@ export const actions = {
                 .then((res) => {
                     dispatch('fetchMe');
                     dispatch('fetchUsers');
-                    dispatch('flushSuccess', {title: 'Success', message: 'ユーザー情報を変更しました。'})
+
+                    // email変更の有無によってメッセージを変える。
+                    if(res) {
+                        dispatch('flushSuccess', {title: 'Success', message: 'Emailはまだ変更されていません。送付されたメールにより認証を行ってください。'})
+                    } else {
+                        dispatch('flushSuccess', {title: 'Success', message: 'ユーザー情報を変更しました。'})
+                    }
+
+
                     resolve(res)
                 }).catch((error) => {
                 for(let key in error) {
@@ -110,5 +118,24 @@ export const actions = {
             })
         })
     },
+    emailVerify({dispatch}, token) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url: '/api/user/emailVerify/' + token,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('fetchMe');
+                    dispatch('flushSuccess', {title: 'Success', message: 'Emailアドレスが変更されました。'})
+                    router.push('/');
+                    resolve(res)
+                }).catch((error) => {
+                    dispatch('flushError', {title: 'Error', message: '無効なリンクです。'})
+                    router.push('/');
+                    reject(error)
+            })
+        })
+    }
 
 }

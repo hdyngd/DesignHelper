@@ -4,6 +4,7 @@ import Home from '@/js/containers/Home'
 import Login from '@/js/containers/Login'
 import SetPassword from '@/js/containers/set_password'
 import ResetPassword from '@/js/containers/reset_password'
+import EmailVerification from '@/js/containers/email_verification'
 import Admin from '@/js/containers/Admin'
 import DashBoard from '@/js/containers/dash_board'
 import RegistUser from '@/js/containers/regist_user'
@@ -26,6 +27,7 @@ const router = new VueRouter({
         { path: '/', component: Home, beforeEnter: auth},
         { path: '/login', component: Login, beforeEnter: guest},
         { path: '/verification/:token', component: SetPassword, beforeEnter: guest},
+        { path: '/email_verification/:token', component: EmailVerification},
         { path: '/reset_password', component: ResetPassword, beforeEnter: guest},
         { path: '/home', component: Home, beforeEnter: auth,
             children: [
@@ -45,14 +47,6 @@ const router = new VueRouter({
                 {path: 'send_dm', component: SendDm},
             ]
         },
-
-        // { path: '/signup', component: Signup, beforeEnter: guest},
-        // { path: '/login', component: Login, beforeEnter: guest},
-        // { path: '/participated', component: Participated, beforeEnter: permanent, auth},
-        // { path: '/user_list/:workroom', component: UserList, beforeEnter: permanent, auth},
-        // { path: '/enter/:workroom', component: Enter, beforeEnter: enter},
-        // { path: '/escalation', component: Escalation, beforeEnter: escalation},
-        // { path: '/:workroom', component: WorkRoom},
     ]
 })
 
