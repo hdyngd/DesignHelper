@@ -1,25 +1,31 @@
 <template>
-    <el-col :span="20" :offset="2">
-        <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item v-for="item in informations" :key="item.id" :title="item.title" :name="item.id">
-                <vue-markdown>{{ item.content }}</vue-markdown>
-
-                <template v-if="item.files">
-                    <div v-for="file in item.files" :key="file.id">
-                        <el-link type="primary" icon="el-icon-download" :href="file.url" target="_blank">{{file.name}}  </el-link>
-                    </div>
-                </template>
-            </el-collapse-item>
-        </el-collapse>
-    </el-col>
+    <el-table
+            :data="informations"
+            style="width:640px;">
+        <el-table-column
+                fixed
+                prop="title"
+                label="タイトル"
+                width="300">
+        </el-table-column>
+        <el-table-column
+                prop="updated_at"
+                label="更新日"
+                width="220">
+        </el-table-column>
+        <el-table-column
+                fixed="right"
+                label="Operations"
+                width="120">
+            <template slot-scope="scope">
+                <el-button @click="handleClick(scope.$index, scope.row)" type="text" size="small">詳細</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
 </template>
 
 <script>
-    import VueMarkdown from 'vue-markdown'
     export default {
-        components: {
-            VueMarkdown
-        },
         props: {
             informations: Array,
         },
@@ -29,8 +35,8 @@
             };
         },
         methods: {
-            handleChange(val) {
-                // console.log(val);
+            handleClick(index, row) {
+                router.push('/information/'+row.id);
             }
         }
     }

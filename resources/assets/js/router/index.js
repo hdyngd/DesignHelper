@@ -14,6 +14,7 @@ import SendDm from '@/js/containers/send_dm'
 import MyProposition from '@/js/containers/my_proposition'
 import Proposition from '@/js/containers/proposition'
 import Information from '@/js/containers/information'
+import InformationDetail from '@/js/containers/information_detail'
 import MenuStore from '@/js/containers/menu_store'
 import Profile from '@/js/containers/profile'
 
@@ -38,6 +39,7 @@ const router = new VueRouter({
         { path: '/propositions', component: MyProposition, beforeEnter: auth},
         { path: '/proposition/:id', component: Proposition, beforeEnter: auth},
         { path: '/information', component: Information, beforeEnter: auth},
+        { path: '/information/:id', component: InformationDetail, beforeEnter: auth},
         { path: '/admin', component: Admin, beforeEnter: admin,
             children: [
                 {path: 'dash_board', component: DashBoard},
