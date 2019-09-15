@@ -21,13 +21,13 @@
                     <div>¥ {{item.price}}</div>
                 </div>
                 <div class="bottom clearfix">
-                    <el-input-number style="float: right;" v-model="item.amount" :min="0" :max="100"></el-input-number>
+                    <el-input-number style="float: right;" v-model="amounts[index]" :min="0" :max="100"></el-input-number>
                 </div>
             </el-card>
         </el-col>
 
         <span slot="footer" class="dialog-footer">
-            <el-input class="el-input" placeholder="0" v-model="totalPrice" :disabled="true">
+            <el-input class="el-input" v-model="totalPrice" placeholder="0" :disabled="true">
                 <template slot="prepend">Total : ¥</template>
             </el-input>
             <el-button @click="closeCart">Cancel</el-button>
@@ -41,6 +41,7 @@
         name: "ShoppingCart",
         props: {
             cart: Array,
+            amounts: Array,
             shoppingCartVisible: Boolean,
             toggleShoppingCart: Function,
             storeProposition: Function,
@@ -48,41 +49,29 @@
         computed: {
             totalPrice: function() {
                 let total = 0;
-                for (let i in this.cart) {
-                    total += this.cart[i].price * this.cart[i].amount;
+                for (let i in this.amounts) {
+                    total += this.cart[i].price * this.amounts[i];
                 }
                 return total;
             }
         },
-        // data() {
-        //     return {
-        //         amounts: 0,
-        //     };
-        // },
-        // created() {
-        //     for (let key in this.cart) {
-        //         this.amounts[key] = this.cart[key].amount
-        //     }
-        // },
         methods:{
             closeCart() {
                 this.toggleShoppingCart(false)
             },
             confirmOrder() {
                 if(confirm('この内容で発注してよろしいですか？')) {
+                    for (let i in this.cart) {
+                        this.cart[i].amount = this.amounts[i];
+                    }
+
                     this.storeProposition(this.cart)
                         .then(() => {
                             this.toggleShoppingCart(false)
                         })
                         .catch(() => {});
-                    // for(let key in this.cart) {
-                    //     this.cart[key].amount = this.amounts[key];
-                    // }
                 }
             },
-            // handleChange(event) {
-            //     console.log(event);
-            // }
         },
     }
 </script>

@@ -47,9 +47,12 @@ export const actions = {
             if(tmp[key].id === item.id) return;
         }
 
+        let tmpAmounts = state.amounts
         item.amount = 1;
         tmp.push(item)
+        tmpAmounts.push(1);
         commit('SET_CART', tmp)
+        commit('SET_AMOUNTS', tmpAmounts)
         dispatch('flushSuccess', {title: 'Success', message: 'カートに追加しました'})
     },
     toggleShoppingCart({commit, dispatch}, bool) {
@@ -69,6 +72,7 @@ export const actions = {
                 .then((res) => {
                     // console.log(res)
                     commit('SET_CART', [])
+                    commit('SET_AMOUNTS', [])
                     dispatch('flushSuccess', {title: 'Success', message: '発注しました。'})
 
                     resolve(res)
