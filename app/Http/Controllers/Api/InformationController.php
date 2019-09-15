@@ -43,6 +43,39 @@ class InformationController extends Controller
         }
     }
 
+    public function edit(StoreInformationPost $request)
+    {
+        DB::beginTransaction();
+        try {
+            $information = Information::find($request->input('id'));
+
+            $information->title = $request->input('title');
+            $information->content = htmlspecialchars($request->input('content'));
+            $information->save();
+
+            // 一旦全部けしてから再挿入
+            Information_file::where('information_id', $information->id)->delete();
+
+            $files = json_decode($request->input('files'), true);
+
+            if($request->input('files')){
+                foreach ($files as $value) {
+                    Information_file::create([
+                        'information_id' => $information->id,
+                        'name' => $value['name'],
+                        'url' => $value['url']
+                    ]);
+                }
+            }
+
+            DB::commit();
+            return $information;
+        } catch (\Exception $e) {
+            DB::rollback();
+            abort(500);
+        }
+    }
+
     public function fileUpload(Request $request)
     {
         $res = [];
@@ -74,5 +107,21 @@ class InformationController extends Controller
 
         return response()->json($informations);
 
+    }
+
+    public function getOne($id){
+        $information = Information::find($id);
+        $files  = Information_file::where('information_id', $id)->get();
+
+        $information['files'] = $files;
+        return response()->json($information);
+    }
+
+    public function delete($id)
+    {
+        $information = Information::find($id);
+        $information->delete();
+        Information_file::where('information_id', $id)->delete();
+        return response()->json();
     }
 }

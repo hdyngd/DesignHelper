@@ -4,6 +4,8 @@ export const state = {
     loading: false,
     isHome: false,
     informations: [],
+    dialogEditInformation: false,
+    editInformation: {},
 }
 
 export const mutations = {
@@ -17,5 +19,13 @@ export const mutations = {
     },
     [types.SET_INFORMATIONS] (state, payload) {
         state.informations = payload
+    },
+    [types.SET_DIALOG_EDIT_INFORMATION] (state, payload) {
+        state.dialogEditInformation = payload
+        // state.refreshToken = Capayload.refreshToken
+    },
+    [types.SET_EDIT_INFORMATION] (state, payload) {
+        state.editInformation = payload
+        // state.refreshToken = payload.refreshToken
     },
 }

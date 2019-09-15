@@ -77,6 +77,28 @@ export const actions = {
             })
         })
     },
+    editInformation ({commit, dispatch}, params) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/information/edit',
+                params: params,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('fetchInformations');
+                    dispatch('flushSuccess', {title: 'Success', message: 'お知らせを編集しました。'})
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    console.log(error)
+                    // dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
+    },
     fileUpload ({commit, dispatch}, params) {
         return new Promise((resolve, reject) => {
             const payload = {
@@ -92,7 +114,7 @@ export const actions = {
                 })
         })
     },
-    fetchInformations({commit, dispatch}, params) {
+    fetchInformations({commit, dispatch}) {
         return new Promise((resolve, reject) => {
             const payload = {
                 url: '/api/information/get',
@@ -106,6 +128,45 @@ export const actions = {
                 reject(error)
             })
         })
+    },
+    toggleDialogEditInformation({commit, dispatch}, bool) {
+        commit('SET_DIALOG_EDIT_INFORMATION', bool)
+    },
+    fetchEditInformation({commit, dispatch}, id) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url: '/api/information/get/' + id,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    commit('SET_EDIT_INFORMATION', res)
+                    resolve(res)
+                }).catch((error) => {
+                reject(error)
+            })
+        })
+    },
+    deleteInformation({commit, dispatch}, id) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/information/delete/' + id,
+                method: 'delete'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('fetchInformations');
+                    dispatch('flushSuccess', {title: 'Success', message: 'お知らせを削除しました。'})
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
     }
+
 
 }

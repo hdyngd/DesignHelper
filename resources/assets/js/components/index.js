@@ -12,6 +12,7 @@ Vue.component('user-list', require('@/js/components/modules/lists/UserList'));
 Vue.component('category-list', require('@/js/components/modules/lists/CategoryList'));
 Vue.component('menu-list', require('@/js/components/modules/lists/MenuList'));
 Vue.component('proposition-list', require('@/js/components/modules/lists/PropositionList'));
+Vue.component('information-list', require('@/js/components/modules/lists/InformationList'));
 Vue.component('dh-description', require('@/js/components/modules/homes/Description'));
 Vue.component('shopping-cart', require('@/js/containers/shopping_cart').default);
 Vue.component('attach-creator', require('@/js/components/modules/dialogs/AttachCreator'));
@@ -20,4 +21,5 @@ Vue.component('profile-edit-form', require('@/js/containers/profile_edit_form').
 Vue.component('edit-user', require('@/js/containers/edit_user').default);
 Vue.component('edit-category', require('@/js/containers/edit_category').default);
 Vue.component('edit-menu', require('@/js/containers/edit_menu').default);
+Vue.component('edit-information', require('@/js/containers/edit_information').default);
 Vue.component('progress-steps', require('@/js/containers/progress_steps').default);

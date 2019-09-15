@@ -37,6 +37,15 @@
                 :fetch-edit-user="fetchEditUser"
                 ></proposition-list>
         </el-tab-pane>
+        <el-tab-pane label="Information" name="Information">
+            <information-list
+                :informations="informations"
+                :dialog-edit-information="dialogEditInformation"
+                :toggle-dialog-edit-information="toggleDialogEditInformation"
+                :fetch-edit-information="fetchEditInformation"
+                :delete-information="deleteInformation"
+            ></information-list>
+        </el-tab-pane>
     </el-tabs>
 </template>
 <script>
@@ -62,11 +71,20 @@
             fetchEditMenu: Function,
             toggleDialogEditMenu: Function,
             deleteMenu: Function,
+            informations: Array,
+            dialogEditInformation: Boolean,
+            toggleDialogEditInformation: Function,
+            fetchEditInformation: Function,
+            deleteInformation: Function,
         },
         data() {
             return {
                 activeName: 'User'
             };
         },
+        // created() {
+        //     console.log(this);
+        // }
+
     };
 </script>
