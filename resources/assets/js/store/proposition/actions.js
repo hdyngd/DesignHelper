@@ -55,6 +55,16 @@ export const actions = {
         commit('SET_AMOUNTS', tmpAmounts)
         dispatch('flushSuccess', {title: 'Success', message: 'カートに追加しました'})
     },
+    deleteItem({commit, state}, index){
+        let tmpCart = state.cart;
+        let tmpAmounts = state.amounts;
+
+        tmpCart.splice(index, 1);
+        tmpAmounts.splice(index, 1);
+
+        commit('SET_CART', tmpCart)
+        commit('SET_AMOUNTS', tmpAmounts)
+    },
     toggleShoppingCart({commit, dispatch}, bool) {
         commit('SET_SHOPPING_CART_VISIBLE', bool)
     },
