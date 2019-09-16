@@ -26,12 +26,12 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/', component: Home, beforeEnter: auth},
+        { path: '/', component: Home, beforeEnter: home},
         { path: '/login', component: Login, beforeEnter: guest},
-        { path: '/verification/:token', component: SetPassword, beforeEnter: guest},
+        { path: '/verification/:token', component: SetPassword},
         { path: '/email_verification/:token', component: EmailVerification},
         { path: '/reset_password', component: ResetPassword, beforeEnter: guest},
-        { path: '/home', component: Home, beforeEnter: auth,
+        { path: '/home', component: Home, beforeEnter: home,
             children: [
                 {path: 'category/:id', component: MenuStore},
             ]
@@ -83,8 +83,32 @@ function guest(to, from, next) {
     next()
 }
 
-function admin(to, from, next) {
+function home(to, from, next) {
+    // 認証ずみかどうか
+    if (!store.getters.getToken) {
+        // store.dispatch('setEntryUrl', to.path)
+        next('/login')  // they are not authorized, so redirect to login
+        return;
+    }
 
+    const user = store.getters.getUser;
+    // 管理者なら管理画面へ
+    if(user.role === 0) {
+        next('/admin/dash_board')
+        return;
+    }
+
+    //クリエイターなら案件管理画面へ
+    if(user.role === 1) {
+        next('/propositions')
+        return;
+    }
+
+    //一般ユーザならhome画面へ
+    next()
+}
+
+function admin(to, from, next) {
     if (!store.getters.getToken) next('/login')
 
     const user = store.getters.getUser

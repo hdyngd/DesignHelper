@@ -15,8 +15,10 @@ export const actions = {
                     window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.access_token
                     commit(types.LOGGED_IN, {token: res.access_token})
 
-                    dispatch('fetchMe');
-                    resolve(res)
+                    dispatch('fetchMe')
+                        .then(() => {
+                            resolve()
+                        });
                 }).catch((error) => {
                     // commit(SET_ERRORS, error)
                     reject(error)
