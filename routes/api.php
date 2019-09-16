@@ -23,23 +23,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('/logout', 'AuthController@logout');
     Route::get('/me', 'AuthController@me');
-    //    Route::post('/refresh', 'AuthController@refresh');
-
-    // TODO: only role === 0
-    Route::post('/user/store', 'Auth\RegisterController@register');
-    Route::post('/category/store', 'Api\CategoryController@store');
-    Route::post('/menu/store', 'Api\MenuController@store');
-    Route::post('/proposition/attachCreator', 'Api\PropositionController@attachCreator');
-    Route::delete('/user/delete/{id}', 'Api\UserController@delete');
-    Route::post('/category/edit', 'Api\CategoryController@edit');
-    Route::delete('/category/delete/{id}', 'Api\CategoryController@delete');
-    Route::get('/menu/getOne/{id}', 'Api\MenuController@getOne'); // こっちはメニューIDにマッチするメニューを一つ取得
-    Route::post('/menu/edit', 'Api\MenuController@edit');
-    Route::delete('/menu/delete/{id}', 'Api\MenuController@delete');
-    Route::post('/information/store', 'Api\InformationController@store');
-    Route::post('/information/fileUpload', 'Api\InformationController@fileUpload');
-    Route::post('/information/edit', 'Api\InformationController@edit');
-    Route::delete('/information/delete/{id}', 'Api\InformationController@delete');
 
     // authミドルウェアだけでok
     Route::get('/category/get', 'Api\CategoryController@index');
@@ -61,4 +44,23 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/information/get/{id}', 'Api\InformationController@getOne');
 
     Route::post('/proposition/edit/progress', 'Api\PropositionController@editProgress');
+});
+
+
+// 管理者のみアクセス可能
+Route::middleware('auth:api', 'admin')->group(function () {
+    Route::post('/user/store', 'Auth\RegisterController@register');
+    Route::post('/category/store', 'Api\CategoryController@store');
+    Route::post('/menu/store', 'Api\MenuController@store');
+    Route::post('/proposition/attachCreator', 'Api\PropositionController@attachCreator');
+    Route::delete('/user/delete/{id}', 'Api\UserController@delete');
+    Route::post('/category/edit', 'Api\CategoryController@edit');
+    Route::delete('/category/delete/{id}', 'Api\CategoryController@delete');
+    Route::get('/menu/getOne/{id}', 'Api\MenuController@getOne'); // こっちはメニューIDにマッチするメニューを一つ取得
+    Route::post('/menu/edit', 'Api\MenuController@edit');
+    Route::delete('/menu/delete/{id}', 'Api\MenuController@delete');
+    Route::post('/information/store', 'Api\InformationController@store');
+    Route::post('/information/fileUpload', 'Api\InformationController@fileUpload');
+    Route::post('/information/edit', 'Api\InformationController@edit');
+    Route::delete('/information/delete/{id}', 'Api\InformationController@delete');
 });
