@@ -31,10 +31,10 @@
                         <el-menu-item v-if="user.role === 0" index="2-1">
                             <router-link to="/admin/dash_board">管理画面</router-link>
                         </el-menu-item>
-                        <el-menu-item index="2-2">
+                        <el-menu-item v-if="user.role === 1 || user.role === 2" index="2-2">
                             <router-link to="/propositions">案件管理</router-link>
                         </el-menu-item>
-                        <el-menu-item index="2-3">
+                        <el-menu-item v-if="user.role === 1 || user.role === 2" index="2-3">
                             <router-link to="/information">お知らせ</router-link>
                         </el-menu-item>
                         <el-menu-item index="2-4" @click="onLogout()">
