@@ -17,6 +17,7 @@ import Information from '@/js/containers/information'
 import InformationDetail from '@/js/containers/information_detail'
 import MenuStore from '@/js/containers/menu_store'
 import Profile from '@/js/containers/profile'
+import NotFound from '@/js/components/modules/utilities/NotFound'
 
 import store from "@/js/store"
 
@@ -49,6 +50,8 @@ const router = new VueRouter({
                 {path: 'send_dm', component: SendDm},
             ]
         },
+        { path: '/404', component: NotFound},
+        { path: '*', redirect: '/404'},
     ]
 })
 
