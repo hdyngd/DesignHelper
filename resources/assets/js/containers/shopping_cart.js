@@ -11,6 +11,7 @@ export default connect({
     actionsToProps: {
         toggleShoppingCart: 'toggleShoppingCart',
         storeProposition: 'storeProposition',
+        deleteItem: 'deleteItem',
         // logout: 'logout'
         // deleteWorkRoom: 'deleteWorkRoom',
         // createWorkRoom: 'createWorkRoom',
