@@ -1,12 +1,16 @@
 <template>
-    <div>
-        <vue-markdown>{{ information.content }}</vue-markdown>
-        <template v-if="information.files">
-            <div v-for="file in information.files" :key="file.id">
-                <el-link type="primary" icon="el-icon-download" :href="file.url" target="_blank">{{file.name}}  </el-link>
+    <el-col :span="20" :offset="2">
+        <el-card class="box-card">
+            <div>
+                <vue-markdown>{{ information.content }}</vue-markdown>
+                <template v-if="information.files">
+                    <div v-for="file in information.files" :key="file.id">
+                        <el-link type="primary" icon="el-icon-download" :href="file.url" target="_blank">{{file.name}}  </el-link>
+                    </div>
+                </template>
             </div>
-        </template>
-    </div>
+        </el-card>
+    </el-col>
 </template>
 
 <script>
