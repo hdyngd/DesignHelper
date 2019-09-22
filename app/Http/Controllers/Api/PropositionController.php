@@ -102,8 +102,19 @@ class PropositionController extends Controller
         $path = 'gateway/gateway_token.aspx';
         $options = [
             'http_errors' => false,
-            'json' => json_encode($params),
+            'json' => [
+                "aid" => env('MIX_ROBOTPAYMENT_AID'),
+                "jb" => 'AUTH',
+                "rt" => 0,
+                "tkn" => $token,
+                "pn" => $phoneNumber,
+                "Em" => auth()->user()->email,
+                "am" => $amount,
+                "tx" => 0,
+                "sf" => 0
+            ]
         ];
+
         $response = $client->request('POST', $path, $options);
         $responseBody = $response->getBody()->getContents();
 
