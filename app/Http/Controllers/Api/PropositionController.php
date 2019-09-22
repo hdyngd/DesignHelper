@@ -102,6 +102,10 @@ class PropositionController extends Controller
         $path = 'gateway/gateway_token.aspx';
         $options = [
             'http_errors' => false,
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json'
+            ],
             'json' => [
                 "aid" => env('MIX_ROBOTPAYMENT_AID'),
                 "jb" => 'AUTH',
