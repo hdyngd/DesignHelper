@@ -123,24 +123,37 @@ export const actions = {
     payment({dispatch, getters}, data){
         return new Promise((resolve, reject) => {
             const payload = {
-                aid : "113408",
-                jb: "AUTH",
-                rt: 0,
-                tkn: "a1J4OTFHaFhEME5DU3ZRdG53Rk9DcFJJN1VpQVp1Rk5LWEpWSllvTGR5SzJJYUdSZnNaUlNBZXh2TFh3dHBsYg==a1J4OTFHaFhEME5DU3ZRdG53Rk9DcFJJN1VpQVp1Rk5LWEpWSllvTGR5SzJJYUdSZnNaUlNBZXh2TFh3dHBsYg==",
-                pn: "000111112222",
-                Em: "hyanagida.0721@gmail.com",
-                am: 30000,
-                tx: 2400,
-                sf: 0,
+                url : '/api/proposition/payment',
+                params: {data: data, token: getters.getCreditToken},
+                method: 'post',
             }
-            axios.post('https://credit.j-payment.co.jp/gateway/gateway_token.aspx', payload)
+            dispatch('api', payload)
                 .then((res) => {
-                    console.log(res)
+                    console.log(res);
                     resolve(res)
-                }).catch((err) => {
-                    console.log(err)
-                    reject(err)
+                }).catch((error) => {
+                    console.log(error);
+                    reject(error)
             })
+            // const payload = {
+            //     aid : "113408",
+            //     jb: "AUTH",
+            //     rt: 0,
+            //     tkn: "a1J4OTFHaFhEME5DU3ZRdG53Rk9DcFJJN1VpQVp1Rk5LWEpWSllvTGR5SzJJYUdSZnNaUlNBZXh2TFh3dHBsYg==a1J4OTFHaFhEME5DU3ZRdG53Rk9DcFJJN1VpQVp1Rk5LWEpWSllvTGR5SzJJYUdSZnNaUlNBZXh2TFh3dHBsYg==",
+            //     pn: "000111112222",
+            //     Em: "hyanagida.0721@gmail.com",
+            //     am: 30000,
+            //     tx: 2400,
+            //     sf: 0,
+            // }
+            // axios.post('https://credit.j-payment.co.jp/gateway/gateway_token.aspx', payload)
+            //     .then((res) => {
+            //         console.log(res)
+            //         resolve(res)
+            //     }).catch((err) => {
+            //         console.log(err)
+            //         reject(err)
+            // })
         })
     },
     fetchCreators ({commit, dispatch}) {

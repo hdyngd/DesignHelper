@@ -76,6 +76,12 @@ class PropositionController extends Controller
         return response()->json();
     }
 
+    public function payment(Request $request)
+    {
+        var_dump($request->all());
+        exit();
+    }
+
     public function attachCreator(AttachCreatorPost $request)
     {
         //dd($request->all());

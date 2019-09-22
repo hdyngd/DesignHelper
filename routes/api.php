@@ -24,7 +24,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/logout', 'AuthController@logout');
     Route::get('/me', 'AuthController@me');
 
-    // authミドルウェアだけでok
     Route::get('/category/get', 'Api\CategoryController@index');
     Route::get('/category/get/{id}', 'Api\CategoryController@get');
     Route::get('/user/get', 'Api\UserController@getAll');
@@ -33,6 +32,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/menu/get', 'Api\MenuController@getAll');
     Route::get('/menu/get/{id}', 'Api\MenuController@get'); // こっちはカテゴリIDにひもづくメニュー一覧を取得
     Route::post('/proposition/store', 'Api\PropositionController@store');
+    Route::post('/proposition/payment', 'Api\PropositionController@payment');
     Route::get('/proposition/get', 'Api\PropositionController@get');
     Route::get('/proposition/get/{id}', 'Api\PropositionController@getOne');
     Route::get('/proposition/getAll', 'Api\PropositionController@getAll');
@@ -42,8 +42,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/user/edit', 'Api\UserController@edit');
     Route::get('/information/get', 'Api\InformationController@get');
     Route::get('/information/get/{id}', 'Api\InformationController@getOne');
-
     Route::post('/proposition/edit/progress', 'Api\PropositionController@editProgress');
+
 });
 
 
