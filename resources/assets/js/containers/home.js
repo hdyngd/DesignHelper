@@ -13,7 +13,7 @@ export default connect({
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {
-            if(to.params.tkn) console.log(to.params.tkn);
+            if(to.query.tkn) console.log(to.query.tkn);
 
             store.dispatch('setIsHome', true)
 
