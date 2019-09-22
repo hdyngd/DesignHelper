@@ -13,6 +13,8 @@ export default connect({
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {
+            if(to.params.tkn) console.log(to.params.tkn);
+
             store.dispatch('setIsHome', true)
 
             store.dispatch('fetchCategories')

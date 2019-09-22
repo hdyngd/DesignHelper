@@ -39,6 +39,11 @@
             </el-input>
             <el-button @click="closeCart">Cancel</el-button>
             <el-button type="primary" @click="confirmOrder">Confirm</el-button>
+            <form id="mainform">
+                <input id="tkn" name="tkn" type="hidden" value="">
+                <div id="CARD_INPUT_FORM" />
+                <el-button type="primary" @click="doPurchase()">クレジットテスト</el-button>
+            </form>
         </span>
     </el-dialog>
 </template>
@@ -83,7 +88,29 @@
             handleDeleteItem(index){
                 this.deleteItem(index);
                 // console.log(index);
-            }
+            },
+
+            // クレジット関係
+            doPurchase() {
+
+                CPToken.CardInfo (
+                    {
+                        aid: process.env.MIX_ROBOTPAYMENT_AID
+                    },
+                    this.execPurchase
+                );
+            },
+            execPurchase(resultCode, errMsg) {
+                history.replaceState('','','/home');
+
+                if (resultCode != "Success") {
+                // 戻り値がSuccess以外の場合はエラーメッセージを表示
+                window.alert(errMsg);
+                } else {
+                    // スクリプトからフォームをsubmit
+                    $("#mainform").submit();
+                }
+            },
         },
     }
 </script>
