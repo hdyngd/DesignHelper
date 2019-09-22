@@ -97,6 +97,7 @@ class PropositionController extends Controller
             "tx" => 0,
             "sf" => 0
         ];
+        var_dump($params);
 
         $client = new Client(['base_uri' => 'https://credit.j-payment.co.jp/']);
         $path = 'gateway/gateway_token.aspx';
