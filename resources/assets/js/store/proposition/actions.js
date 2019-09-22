@@ -73,8 +73,8 @@ export const actions = {
     },
     saveShoppingCart({getters}) {
         return new Promise((resolve) => {
-            const cart = getters.cart;
-            const amounts = getters.amounts;
+            const cart = getters.getCart;
+            const amounts = getters.getAmounts;
             window.localStorage.setItem('cart', JSON.stringify(cart))
             window.localStorage.setItem('amounts', JSON.stringify(amounts))
             resolve()
