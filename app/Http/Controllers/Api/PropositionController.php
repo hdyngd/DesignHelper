@@ -9,6 +9,7 @@ use App\Http\Requests\AttachCreatorPost;
 use App\Events\MessageCreated;
 use App\Message;
 use App\Proposition;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -78,8 +79,35 @@ class PropositionController extends Controller
 
     public function payment(Request $request)
     {
-        var_dump($request->all());
-        exit();
+        $token = $request->input('token');
+        $amount = 0;
+        foreach ($request->input('data') as $value) {
+            $amount += $value['amount'] * $value['price'];
+        }
+        $phoneNumber = '0000000'. str_pad(auth()->user()->id, 4, 0, STR_PAD_LEFT);
+
+        $params = [
+            "aid" => env('MIX_ROBOTPAYMENT_AID'),
+            "jb" => 'AUTH',
+            "rt" => 0,
+            "tkn" => $token,
+            "pn" => $phoneNumber,
+            "Em" => auth()->user()->email,
+            "am" => $amount,
+            "tx" => 0,
+            "sf" => 0
+        ];
+
+        $client = new Client(['base_uri' => 'https://credit.j-payment.co.jp/']);
+        $path = 'gateway/gateway_token.aspx';
+        $options = [
+            'http_errors' => false,
+            'json' => $params,
+        ];
+        $response = $client->request('POST', $path, $options);
+        $responseBody = $response->getBody()->getContents();
+
+        return response()->json($responseBody);
     }
 
     public function attachCreator(AttachCreatorPost $request)
