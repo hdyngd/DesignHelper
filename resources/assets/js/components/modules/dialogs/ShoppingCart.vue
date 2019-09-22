@@ -58,6 +58,7 @@
             toggleShoppingCart: Function,
             storeProposition: Function,
             deleteItem: Function,
+            saveShoppingCart: Function,
         },
         computed: {
             totalPrice: function() {
@@ -101,14 +102,15 @@
                 );
             },
             execPurchase(resultCode, errMsg) {
-                history.replaceState('','','/home');
-
                 if (resultCode != "Success") {
                 // 戻り値がSuccess以外の場合はエラーメッセージを表示
                 window.alert(errMsg);
                 } else {
-                    // スクリプトからフォームをsubmit
-                    $("#mainform").submit();
+                    history.replaceState('','','/home');
+                    this.saveShoppingCart().then(() => {
+                        // スクリプトからフォームをsubmit
+                        $("#mainform").submit();
+                    });
                 }
             },
         },

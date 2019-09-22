@@ -12,18 +12,6 @@ export default connect({
         toggleShoppingCart: 'toggleShoppingCart',
         storeProposition: 'storeProposition',
         deleteItem: 'deleteItem',
-        // logout: 'logout'
-        // deleteWorkRoom: 'deleteWorkRoom',
-        // createWorkRoom: 'createWorkRoom',
+        saveShoppingCart: 'saveShoppingCart',
     },
-    lifecycle: {
-        // beforeRouteEnter (to, from, next) {
-        //     store.dispatch('fetchWorkRooms')
-        //         .then(() => {
-        //             next()
-        //         }).catch(err => {
-        //             next('/')
-        //     });
-        // }
-    }
 })('shopping-cart', ShoppingCart)

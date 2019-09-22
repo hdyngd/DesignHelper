@@ -13,7 +13,10 @@ export default connect({
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {
-            if(to.query.tkn) console.log(to.query.tkn);
+            if(to.query.tkn) {
+                store.dispatch('restoreShoppingCart', to.query.tkn)
+                store.dispatch('toggleShoppingCart', true)
+            }
 
             store.dispatch('setIsHome', true)
 

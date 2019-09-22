@@ -11,6 +11,7 @@ export const state = {
     myPropositions: [],
     participants: [],
     messageList: [],
+    creditToken: '',
 }
 
 export const mutations = {
@@ -45,5 +46,8 @@ export const mutations = {
     },
     [types.SET_MESSAGE_LIST] (state, payload) {
         state.messageList = payload
+    },
+    [types.SET_CREDIT_TOKEN] (state, payload) {
+        state.creditToken = payload
     },
 }

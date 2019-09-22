@@ -71,6 +71,22 @@ export const actions = {
     toggleAttachCreator({commit, dispatch}, bool) {
         commit('SET_ATTACH_CREATOR_VISIBLE', bool)
     },
+    saveShoppingCart({getters}) {
+        return new Promise((resolve) => {
+            const cart = getters.cart;
+            const amounts = getters.amounts;
+            window.localStorage.setItem('cart', JSON.stringify(cart))
+            window.localStorage.setItem('amounts', JSON.stringify(amounts))
+            resolve()
+        })
+    },
+    restoreShoppingCart({commit}, token) {
+        commit('SET_CART', JSON.parse(window.localStorage.getItem('cart')))
+        commit('SET_AMOUNTS', JSON.parse(window.localStorage.getItem('amounts')))
+        localStorage.removeItem('cart');
+        localStorage.removeItem('amounts');
+        commit('SET_CREDIT_TOKEN', token)
+    },
     storeProposition({commit, dispatch}, data) {
         return new Promise((resolve, reject) => {
             const payload = {
