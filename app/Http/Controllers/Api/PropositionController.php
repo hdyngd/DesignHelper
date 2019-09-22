@@ -88,7 +88,7 @@ class PropositionController extends Controller
 
         $params = [
             "aid" => env('MIX_ROBOTPAYMENT_AID'),
-            "jb" => 'AUTH',
+            "jb" => 'CAPTURE',
             "rt" => 0,
             "tkn" => $token,
             "pn" => $phoneNumber,
@@ -102,11 +102,11 @@ class PropositionController extends Controller
         $path = 'gateway/gateway_token.aspx';
         $options = [
             'http_errors' => false,
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
-            ],
-            'json' => [
+//            'headers' => [
+//                'Accept' => 'application/json',
+//                'Content-Type' => 'application/json'
+//            ],
+            'form_params' => [
                 "aid" => env('MIX_ROBOTPAYMENT_AID'),
                 "jb" => 'AUTH',
                 "rt" => 0,
