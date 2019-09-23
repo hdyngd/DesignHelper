@@ -62,6 +62,9 @@
             deleteItem: Function,
             saveShoppingCart: Function,
         },
+        mounted() {
+            if(this.creditToken) history.replaceState('','','/home');
+        },
         computed: {
             totalPrice: function() {
                 let total = 0;

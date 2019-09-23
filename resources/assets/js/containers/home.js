@@ -14,9 +14,7 @@ export default connect({
     lifecycle: {
         beforeRouteEnter (to, from, next) {
             if(to.query.tkn) {
-                store.dispatch('restoreShoppingCart', to.query.tkn).then(() => {
-                    history.replaceState('','','/home');
-                })
+                store.dispatch('restoreShoppingCart', to.query.tkn)
                 store.dispatch('toggleShoppingCart', true)
                 store.dispatch('flushSuccess', {title: 'Success', message: 'クレジットカード情報が入力されました。'})
             }
