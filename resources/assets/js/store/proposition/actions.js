@@ -113,7 +113,8 @@ export const actions = {
                         reject(error)
                     })
                 }).catch((error) => {
-                    dispatch('flushError', {title: 'Error', message: "クレジットカード決済に失敗しました。"})
+                    dispatch('flushError', {title: 'Error', message: "クレジットカード決済に失敗しました。クレジットカード情報を再入力してください。"})
+                    commit('SET_CREDIT_TOKEN', "")
                     reject(error)
                 })
         })
