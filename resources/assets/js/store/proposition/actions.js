@@ -132,7 +132,9 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
-                    if (res.res == "OK") {
+                    console.log(res);
+                    console.log(res.res);
+                    if (res == "OK\r") {
                         resolve(res)
                     }else {
                         reject(res)
