@@ -81,11 +81,14 @@ export const actions = {
         })
     },
     restoreShoppingCart({commit}, token) {
-        commit('SET_CART', JSON.parse(window.localStorage.getItem('cart')))
-        commit('SET_AMOUNTS', JSON.parse(window.localStorage.getItem('amounts')))
-        localStorage.removeItem('cart');
-        localStorage.removeItem('amounts');
-        commit('SET_CREDIT_TOKEN', token)
+        return new Promise((resolve) => {
+            commit('SET_CART', JSON.parse(window.localStorage.getItem('cart')))
+            commit('SET_AMOUNTS', JSON.parse(window.localStorage.getItem('amounts')))
+            localStorage.removeItem('cart');
+            localStorage.removeItem('amounts');
+            commit('SET_CREDIT_TOKEN', token)
+            resolve()
+        });
     },
     storeProposition({commit, dispatch}, data) {
         return new Promise((resolve, reject) => {
@@ -129,6 +132,13 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
+                    console.log({res});
+                    console.log((res == "OK\n"));
+                    console.log((res === "OK\n"));
+                    console.log((res == "OK"));
+                    console.log((res === "OK"));
+
+
                     if (res == "OK\n") {
                         resolve(res)
                     }else {
