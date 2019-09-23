@@ -38,11 +38,12 @@
                 <template slot="prepend">Total : ¥</template>
             </el-input>
             <el-button @click="closeCart">Cancel</el-button>
-            <el-button type="primary" @click="confirmOrder">Confirm</el-button>
+            <el-button v-if="creditToken" type="primary" @click="confirmOrder">確認</el-button>
+            <el-button v-else type="primary" @click="doPurchase">クレジットカード情報入力</el-button>
             <form id="mainform">
                 <input id="tkn" name="tkn" type="hidden" value="">
                 <div id="CARD_INPUT_FORM" />
-                <el-button type="primary" @click="doPurchase()">クレジットテスト</el-button>
+<!--                <el-button type="primary" @click="doPurchase()">クレジットテスト</el-button>-->
             </form>
         </span>
     </el-dialog>
@@ -54,6 +55,7 @@
         props: {
             cart: Array,
             amounts: Array,
+            creditToken: String,
             shoppingCartVisible: Boolean,
             toggleShoppingCart: Function,
             storeProposition: Function,

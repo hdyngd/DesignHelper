@@ -6,7 +6,8 @@ export default connect({
     gettersToProps: {
         shoppingCartVisible: 'getShoppingCartVisible',
         cart: 'getCart',
-        amounts: 'getAmounts'
+        amounts: 'getAmounts',
+        creditToken: 'getCreditToken'
     },
     actionsToProps: {
         toggleShoppingCart: 'toggleShoppingCart',

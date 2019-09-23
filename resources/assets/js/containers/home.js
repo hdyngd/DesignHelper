@@ -16,6 +16,7 @@ export default connect({
             if(to.query.tkn) {
                 store.dispatch('restoreShoppingCart', to.query.tkn)
                 store.dispatch('toggleShoppingCart', true)
+                store.dispatch('flushSuccess', {title: 'Success', message: 'クレジットカード情報が入力されました。'})
             }
 
             store.dispatch('setIsHome', true)
