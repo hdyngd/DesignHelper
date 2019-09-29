@@ -79,8 +79,6 @@
                 this.toggleShoppingCart(false)
             },
             confirmOrder() {
-                alert("誤まって決済されないように念の為止めておく。動かす時コレ外す。");
-                return;
                 
                 if(confirm('この内容で発注してよろしいですか？')) {
                     for (let i in this.cart) {
