@@ -7,13 +7,15 @@
 
             <template v-if="user.name">
 
-                <el-col :span="1" :offset="14">
+                <el-col v-if="user.role === 2" :span="1" :offset="14">
                     <el-menu-item index="4">
                         <el-badge :value="cart.length" class="item">
                             <el-button type="text" class="button" @click="openCart"><i class="fas fa-shopping-cart"></i></el-button>
                         </el-badge>
                     </el-menu-item>
                 </el-col>
+
+                <el-col v-else :span="15"><div>&nbsp;</div></el-col>
 
                 <el-col :span="4">
                     <el-menu-item index="3">
