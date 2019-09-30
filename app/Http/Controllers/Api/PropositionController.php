@@ -212,9 +212,9 @@ class PropositionController extends Controller
 
             $message = Message::create([
                 'user_id' => auth()->user()->id,
-                'proposition_id' => $request->proposition_id,
-                'content' => $request->content,
-                'type' => $request->type,
+                'proposition_id' => $request->input('proposition_id'),
+                'content' => $request->input('content'),
+                'type' => $request->input('type'),
                 'url' => $url
             ]);
 
@@ -226,18 +226,6 @@ class PropositionController extends Controller
             DB::rollback();
             return null;
         }
-
-//        var_dump($request->hasFile('file'));
-//        $message = Message::create([
-//            'user_id' => auth()->user()->id,
-//            'proposition_id' => $request->proposition_id,
-//            'content' => $request->content,
-//            'type' => $request->type
-//        ]);
-
-//        broadcast(new MessageCreated($message))->toOthers();
-
-        //return response()->json();
     }
 
     public function editProgress(EditProgressPost $request)
