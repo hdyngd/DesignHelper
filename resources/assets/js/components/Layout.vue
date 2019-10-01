@@ -7,6 +7,7 @@
     <div v-loading="loading">
         <dh-header></dh-header>
         <router-view></router-view>
+        <dh-footer></dh-footer>
     </div>
 <!--        </div>-->
 <!--        <footer-cenq v-if="!isWorkroom"></footer-cenq>-->

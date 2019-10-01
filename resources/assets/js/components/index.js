@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 Vue.component('dh-header', require('@/js/containers/header').default);
+Vue.component('dh-footer', require('@/js/components/modules/menus/Footer'));
 Vue.component('dh-side-menu', require('@/js/components/modules/menus/SideMenu'));
 Vue.component('admin-side-menu', require('@/js/components/modules/menus/AdminSideMenu'));
 Vue.component('admin-dash-board', require('@/js/components/modules/admins/DashBoard'));
