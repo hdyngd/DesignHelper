@@ -14,6 +14,7 @@ class Menu extends Model
         'name',
         'price',
         'description',
+        'display',
         'image'
     ];
 

@@ -31,6 +31,11 @@
                     sortable>
             </el-table-column>
             <el-table-column
+                    label="Display"
+                    prop="displayName"
+                    sortable>
+            </el-table-column>
+            <el-table-column
                     align="right">
                 <template slot="header" slot-scope="scope">
                     <el-input

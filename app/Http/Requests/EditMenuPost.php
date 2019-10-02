@@ -29,6 +29,7 @@ class EditMenuPost extends FormRequest
 //            'name' => 'required|unique:menus',
             'name' => 'required',
             'price' =>  'required|numeric',
+            'display' => 'required',
         ];
     }
 }

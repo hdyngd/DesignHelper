@@ -9,6 +9,13 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
+                    const displayNameList = {
+                        0: '非表示',
+                        1: '表示'
+                    }
+                    for (let key in res) {
+                        res[key].displayName = displayNameList[res[key].display]
+                    }
                     commit('SET_MENUS', res)
                     resolve(res)
                 }).catch((error) => {

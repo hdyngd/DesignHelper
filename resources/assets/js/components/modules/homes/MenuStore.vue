@@ -27,7 +27,11 @@
                     <div>¥ {{item.price}}</div>
                 </div>
                 <div class="bottom clearfix">
-                    <el-button style="float: right;" type="text" class="button" @click="onAddToCart(index)"><i class="fas fa-cart-plus"></i></el-button>
+                    <el-button v-if="item.display == 1" style="float: right;" type="text" class="button" @click="onAddToCart(index)"><i class="fas fa-cart-plus"></i></el-button>
+
+                    <el-tooltip v-else class="item" effect="dark" content="Sold out" placement="top-start">
+                        <el-button style="float: right;" type="text" class="button"><i class="fas fa-cart-plus" style="color: gray;"></i></el-button>
+                    </el-tooltip>
                 </div>
             </el-card>
         </el-col>

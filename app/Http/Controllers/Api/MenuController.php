@@ -27,7 +27,7 @@ class MenuController extends Controller
 
     public function getAll()
     {
-        $menus = Menu::select('menus.id', 'menus.name', 'price', 'menus.description', 'category_id', 'categories.name as categoryName')
+        $menus = Menu::select('menus.id', 'menus.name', 'price', 'menus.description', 'category_id', 'display', 'categories.name as categoryName')
             ->join('categories', 'categories.id', '=', 'menus.category_id')
             ->get();
         return response()->json($menus);
@@ -78,6 +78,7 @@ class MenuController extends Controller
                 'name' => $request->input('name'),
                 'price' => $request->input('price'),
                 'description' => $request->input('description'),
+                'display' => $request->input('display'),
                 'image' => $url
             ]);
             $progress = new Progress();
@@ -150,6 +151,7 @@ class MenuController extends Controller
         $menu->category_id = $request->input('category_id');
         $menu->price = $request->input('price');
         $menu->description = $request->input('description');
+        $menu->display = $request->input('display');
 
         $progress = new Progress();
 
@@ -183,6 +185,7 @@ class MenuController extends Controller
             'name' => $menu->name,
             'price' => $menu->price,
             'description' => $menu->description,
+            'display' => $menu->display,
             'progress' => Menu::find($id)->progresses()->orderBy('order', 'asc')->get()
         ];
         return response()->json($response);

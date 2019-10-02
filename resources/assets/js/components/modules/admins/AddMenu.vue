@@ -25,6 +25,13 @@
                 <el-input type="textarea" v-model="ruleForm.description"></el-input>
             </el-form-item>
 
+            <el-form-item label="Display" prop="display">
+                <el-radio-group v-model="ruleForm.display">
+                    <el-radio :label="1">表示</el-radio>
+                    <el-radio :label="0">非表示</el-radio>
+                </el-radio-group>
+            </el-form-item>
+
             <el-form-item label="ProgressTag">
                 <tag-generator :dynamic-tags="dynamicTags"></tag-generator>
             </el-form-item>
@@ -62,6 +69,7 @@
                     price: 0,
                     description: '',
                     thumbnail: '',
+                    display: '',
                 },
                 rules: {
                     category: [
@@ -73,7 +81,10 @@
                     price: [
                         { required: true, message: 'price is required'},
                         { type: 'number', message: 'price must be a number'}
-                    ]
+                    ],
+                    display: [
+                        { required: true, message: 'Please select activity display', trigger: 'change' }
+                    ],
                 },
                 dynamicTags: ['未着手', '着手', '作業中'],
                 fileData: null,
@@ -88,18 +99,10 @@
                         params.append('name', this.ruleForm.name);
                         params.append('price', this.ruleForm.price);
                         params.append('description', this.ruleForm.description);
+                        params.append('display', this.ruleForm.display);
                         params.append('progress_tags', JSON.stringify(this.dynamicTags));
                         params.append('image', this.fileData);
 
-                        // let params = {price
-                        //     category_id: this.ruleForm.category,
-                        //     name: this.ruleForm.name,
-                        //     price: this.ruleForm.price,
-                        //     description: this.ruleForm.description,
-                        //     progress_tags: this.dynamicTags,
-                        // }
-
-                        //console.log(params);
                         this.addMenu(params)
                             .then((res) => {
                                 // console.log(res)

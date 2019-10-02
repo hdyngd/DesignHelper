@@ -27,6 +27,7 @@ class StoreMenuPost extends FormRequest
             'category_id' => 'required',
             'name' => 'required|unique:menus',
             'price' =>  'required|numeric',
+            'display' => 'required',
         ];
     }
 }
