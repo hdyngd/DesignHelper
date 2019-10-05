@@ -45,6 +45,9 @@
                     </el-submenu>
                 </el-col>
             </template>
+            <el-col v-else :offset="18" :span="3">
+                <el-menu-item index="2"><router-link to="/signup">新規登録</router-link></el-menu-item>
+            </el-col>
         </el-row>
         <shopping-cart></shopping-cart>
     </el-menu>
