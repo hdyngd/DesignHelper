@@ -37,7 +37,7 @@
                             <router-link to="/propositions">案件管理</router-link>
                         </el-menu-item>
                         <el-menu-item v-if="user.role === 1 || user.role === 2" index="2-3">
-                            <router-link to="/information">お知らせ</router-link>
+                            <router-link to="/information">ニュース</router-link>
                         </el-menu-item>
                         <el-menu-item index="2-4" @click="onLogout()">
                             ログアウト

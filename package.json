@@ -22,6 +22,7 @@
         "element-ui": "^2.11.1",
         "laravel-echo": "^1.5.4",
         "mavon-editor": "^2.7.5",
+        "moment-timezone": "^0.5.26",
         "pusher-js": "^5.0.0",
         "vue-beautiful-chat": "^2.2.2",
         "vue-markdown": "^2.2.4",

@@ -33,6 +33,10 @@
         props: {
             informations: Array,
         },
+        // mounted() {
+        //     let date = Moment.tz("2019-10-3 20:34:15", "Asia/Tokyo")
+        //     console.log(date.format());
+        // },
         data() {
             return {
                 activeNames: []

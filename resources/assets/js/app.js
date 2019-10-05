@@ -55,6 +55,7 @@ import 'mavon-editor/dist/css/index.css'
 // use
 Vue.use(mavonEditor)
 
+// window.Moment = require('moment-timezone');
 
 require('./components');
 
