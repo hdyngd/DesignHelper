@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Log;
 */
 
 Route::post('/login', 'AuthController@login');
+Route::post('/user/signUp', 'Auth\RegisterController@register');
+Route::get('/user/sendVerifyMail/{email}', 'Api\UserController@sendVerifyMail');
 Route::post('/set_password', 'Api\UserController@setPassword');
 Route::post('/reset_password', 'Api\UserController@resetPassword');
 Route::get('/user/emailVerify/{token}', 'Api\UserController@emailVerify');
+Route::get('/user/signUpEmailVerify/{token}', 'Api\UserController@signUpEmailVerify');
 
 Route::group(['middleware' => 'auth:api'], function () {
 
@@ -50,6 +53,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 // 管理者のみアクセス可能
 Route::middleware('auth:api', 'admin')->group(function () {
     Route::post('/user/store', 'Auth\RegisterController@register');
+    Route::get('/user/sendTempRegistMail/{email}', 'Api\UserController@sendTempRegistMail');
     Route::post('/category/store', 'Api\CategoryController@store');
     Route::post('/menu/store', 'Api\MenuController@store');
     Route::post('/proposition/attachCreator', 'Api\PropositionController@attachCreator');

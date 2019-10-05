@@ -10,8 +10,10 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
+                    console.log(res);
                     // alert('password: ' + res.password);
                     dispatch('flushSuccess', {title: 'Success', message: res.name + ' 様の登録が完了しました。'})
+                    dispatch('sendTempRegistMail', res.email);
                     resolve(res)
                 }).catch((error) => {
                     for(let key in error) {
@@ -20,6 +22,57 @@ export const actions = {
                 // commit(SET_ERRORS, error)
                 reject(error)
             })
+        })
+    },
+    sendTempRegistMail({dispatch}, email) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/user/sendTempRegistMail/'+email,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then(() => {})
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    },
+    signUp ({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/user/signUp',
+                params: data,
+                method: 'post'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    // alert('password: ' + res.password);
+                    dispatch('sendVerifyMail', res.email)
+                    dispatch('flushSuccess', {title: 'Success', message: '送付されたメールによりメールアドレスの認証を行ってください。'});
+                    router.push('/');
+                    resolve(res)
+                }).catch((error) => {
+                for(let key in error) {
+                    dispatch('flushError', {title: 'Error', message: error[key][0]})
+                }
+                // commit(SET_ERRORS, error)
+                reject(error)
+            })
+        })
+    },
+    sendVerifyMail({dispatch}, email) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url : '/api/user/sendVerifyMail/'+email,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((error) => {
+                    reject(error)
+                })
         })
     },
     fetchUsers ({commit, dispatch}) {
@@ -127,13 +180,31 @@ export const actions = {
             dispatch('api', payload)
                 .then((res) => {
                     dispatch('fetchMe');
-                    dispatch('flushSuccess', {title: 'Success', message: 'Emailアドレスが変更されました。'})
+                    dispatch('flushSuccess', {title: 'Success', message: 'Emailアドレスが認証されました。'})
                     router.push('/');
                     resolve(res)
                 }).catch((error) => {
                     dispatch('flushError', {title: 'Error', message: '無効なリンクです。'})
                     router.push('/');
                     reject(error)
+            })
+        })
+    },
+    signUpEmailVerify({dispatch}, token) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                url: '/api/user/signUpEmailVerify/' + token,
+                method: 'get'
+            }
+            dispatch('api', payload)
+                .then((res) => {
+                    dispatch('flushSuccess', {title: 'Success', message: 'Emailアドレスが認証されました。'})
+                    router.push('/');
+                    resolve(res)
+                }).catch((error) => {
+                dispatch('flushError', {title: 'Error', message: '無効なリンクです。'})
+                router.push('/');
+                reject(error)
             })
         })
     }

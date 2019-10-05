@@ -12,16 +12,16 @@
 </style>
 <body>
 <h1>
-    Design Helper 登録Emailアドレス変更の確認
+    Design Helper Emailアドレスの認証
 </h1>
 <p>
     {{ $name  }}様
 </p>
 <p>
-    登録Emailアドレスの変更を行います。
+    Emailアドレスの認証を行います。
 </p>
 <p>
-    下記リンクによりEmailアドレスの変更を完了してください。
+    下記リンクによりEmailアドレスの認証を完了してください。
 </p>
 <p>
     <a href="{{ url('email_verification/'.$token) }}">{{ url('email_verification/'.$token) }}</a>

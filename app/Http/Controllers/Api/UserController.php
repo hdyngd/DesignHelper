@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Email_verification;
 use App\Http\Requests\EditUserPost;
 use App\Jobs\EmailVerify;
+use App\Jobs\SignUpEmailVerify;
+use App\Mail\RegistUserMail;
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 //use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 //use Illuminate\Support\Facades\Log;
@@ -21,7 +24,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'setPassword', 'resetPassword', 'emailVerify']]);
+        $this->middleware('auth:api', ['except' => ['login', 'setPassword', 'resetPassword', 'emailVerify', 'sendVerifyMail', 'signUpEmailVerify']]);
     }
 
     public function getAll()
@@ -146,8 +149,8 @@ class UserController extends Controller
 
     public function emailVerify($token)
     {
-        $token = Email_verification::where('token', $token)->first();
 
+        $token = Email_verification::where('token', $token)->first();
         if($token) {
             $user = User::find($token->user_id);
             $user->email = $token->email;
@@ -158,5 +161,35 @@ class UserController extends Controller
             return response()->json();
         }
         return abort(404);
+    }
+
+    public function signUpEmailVerify($token)
+    {
+        $user = User::where('email_verify_token', $token)->first();
+        if($user) {
+            $user->email_verify_token = null;
+            $user->email_verified = 1;
+            $user->save();
+
+            return response()->json();
+        }
+        return abort(404);
+    }
+
+    //
+    public function sendTempRegistMail($email)
+    {
+        $user = User::where('email', $email)->first();
+        Mail::to($user->email)->send(new RegistUserMail($user->name, $user->email_verify_token));
+    }
+
+    public function sendVerifyMail($email, Dispatcher $dispatcher)
+    {
+        $user = User::where('email', $email)->first();
+        //email送信
+        $mail = new SignUpEmailVerify($user->email, $user->email_verify_token, $user->name);
+        $dispatcher->dispatch($mail);
+
+        return response()->json();
     }
 }

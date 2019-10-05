@@ -43,8 +43,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except(['register']);
-        $this->middleware('auth:api')->only(['register']);
+//        $this->middleware('guest')->except(['register']);
+//        $this->middleware('auth:api')->only(['register']);
     }
 
     /**
@@ -79,8 +79,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'email_verify_token' => str_random(10)
         ]);
-
-        Mail::to($user->email)->send(new RegistUserMail($user->name, $user->email_verify_token));
+//        Mail::to($user->email)->send(new RegistUserMail($user->name, $user->email_verify_token));
 //        $registUser = new RegistUser($user);
 //        $dispatcher = new Dispatcher();
 //        $dispatcher->dispatch($registUser);

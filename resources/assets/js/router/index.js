@@ -2,10 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/js/containers/Home'
 import Login from '@/js/containers/Login'
-import SignUp from '@/js/components/pages/SignUp'
+import SignUp from '@/js/containers/signup'
 import SetPassword from '@/js/containers/set_password'
 import ResetPassword from '@/js/containers/reset_password'
 import EmailVerification from '@/js/containers/email_verification'
+import SignUpEmailVerification from '@/js/containers/signup_email_verification'
 import Admin from '@/js/containers/Admin'
 import DashBoard from '@/js/containers/dash_board'
 import RegistUser from '@/js/containers/regist_user'
@@ -32,6 +33,7 @@ const router = new VueRouter({
         { path: '/login', component: Login, beforeEnter: guest},
         { path: '/verification/:token', component: SetPassword},
         { path: '/email_verification/:token', component: EmailVerification},
+        { path: '/signup_email_verification/:token', component: SignUpEmailVerification},
         { path: '/reset_password', component: ResetPassword, beforeEnter: guest},
         { path: '/home', component: Home, beforeEnter: home,
             children: [
