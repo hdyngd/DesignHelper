@@ -11,7 +11,7 @@
                         width="300">
                 </el-table-column>
                 <el-table-column
-                        prop="updated_at"
+                        prop="displayTime"
                         label="更新日"
                         width="220">
                 </el-table-column>

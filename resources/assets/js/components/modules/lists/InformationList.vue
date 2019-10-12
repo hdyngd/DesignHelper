@@ -17,7 +17,7 @@
             </el-table-column>
             <el-table-column
                     label="LastModifiedDate"
-                    prop="updated_at"
+                    prop="displayTime"
                     sortable>
             </el-table-column>
             <el-table-column

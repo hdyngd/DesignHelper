@@ -122,6 +122,15 @@ export const actions = {
             }
             dispatch('api', payload)
                 .then((res) => {
+
+                    // x日前の表示をするための細工
+                    for(let i in res) {
+                        let date = Moment(res[i].updated_at);
+                        date.locale('ja');
+                        date.tz('Asia/Tokyo');
+                        res[i].displayTime = date.fromNow();
+                    }
+
                     commit('SET_INFORMATIONS', res)
                     resolve(res)
                 }).catch((error) => {
