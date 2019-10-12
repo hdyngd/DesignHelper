@@ -7,22 +7,23 @@
                 <el-table-column
                         fixed
                         prop="title"
-                        label="タイトル"
-                        width="300">
+                        label="タイトル">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.$index, scope.row)" type="text" size="small">{{ scope.row.title }}</el-button>
+                    </template>
                 </el-table-column>
                 <el-table-column
                         prop="displayTime"
-                        label="更新日"
-                        width="220">
+                        label="更新日">
                 </el-table-column>
-                <el-table-column
-                        fixed="right"
-                        label="Operations"
-                        width="120">
-                    <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.$index, scope.row)" type="text" size="small">詳細</el-button>
-                    </template>
-                </el-table-column>
+<!--                <el-table-column-->
+<!--                        fixed="right"-->
+<!--                        label="Operations"-->
+<!--                        width="120">-->
+<!--                    <template slot-scope="scope">-->
+<!--                        <el-button @click="handleClick(scope.$index, scope.row)" type="text" size="small">→</el-button>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
             </el-table>
         </el-card>
     </el-col>
