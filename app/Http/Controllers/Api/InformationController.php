@@ -10,6 +10,7 @@ use App\Http\Requests\StoreInformationPost;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class InformationController extends Controller
 {
@@ -101,10 +102,16 @@ class InformationController extends Controller
             $files[$value->information_id][] = $value;
         }
 
+        $updated_at = [];
         foreach ($informations as $key => $value) {
             $informations[$key]['files'] = (array_key_exists($value->id, $files)) ? $files[$value->id] : [];
+
+            // sort用
+            $updated_at[$key] = (new Carbon($value->updated_at))->toDateTimeString();
         }
 
+        $informations = $informations->toArray();
+        array_multisort($updated_at, SORT_DESC, $informations);
         return response()->json($informations);
 
     }
