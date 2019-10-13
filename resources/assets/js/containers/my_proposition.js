@@ -7,7 +7,9 @@ export default connect({
         propositions: 'getMyPropositions'
     },
     actionsToProps: {
-
+        // fetchParticipants: 'fetchParticipants',
+        // fetchMessageList: 'fetchMessageList',
+        // fetchProposition: 'fetchProposition',
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {

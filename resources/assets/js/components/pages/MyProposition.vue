@@ -5,7 +5,16 @@
                     :data="propositions.filter(data => !search || data.menuName.toLowerCase().includes(search.toLowerCase()))"
                     height="500"
                     style="width: 100%"
-                    :default-sort = "{prop: 'id', order: 'ascending'}">
+                    :default-sort = "{prop: 'id', order: 'ascending'}"
+                    @expand-change="handleExpandChange">
+
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+<!--                        <progress-steps></progress-steps>-->
+<!--                        <chat></chat>-->
+                    </template>
+                </el-table-column>
+
                 <el-table-column
                         label="ID"
                         prop="id"
@@ -71,6 +80,9 @@
         },
         props: {
             propositions: Array,
+            // fetchParticipants: Function,
+            // fetchMessageList: Function,
+            // fetchProposition: Function,
         },
         methods: {
             handleEdit(index, row) {
@@ -78,6 +90,12 @@
             },
             handleDelete(index, row) {
                 console.log(index, row);
+            },
+            handleExpandChange(row) {
+                // this.fetchParticipants(row.id);
+                // this.fetchMessageList(row.id);
+                // this.fetchProposition(row.id);
+                console.log(row);
             }
         },
     }
