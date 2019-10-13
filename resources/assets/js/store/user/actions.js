@@ -52,12 +52,13 @@ export const actions = {
                     router.push('/');
                     resolve(res)
                 }).catch((error) => {
-                for(let key in error) {
-                    dispatch('flushError', {title: 'Error', message: error[key][0]})
-                }
-                // commit(SET_ERRORS, error)
-                reject(error)
-            })
+                    dispatch('flushError', {title: 'Error', message: 'このメールアドレスは既に登録されています'})
+                    // for(let key in error) {
+                    //     dispatch('flushError', {title: 'Error', message: error[key][0]})
+                    // }
+                    // commit(SET_ERRORS, error)
+                    reject(error)
+                })
         })
     },
     sendVerifyMail({dispatch}, email) {
