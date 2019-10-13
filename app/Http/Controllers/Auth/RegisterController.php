@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -57,7 +58,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|confirmed',
             'role' => 'required'
         ]);
@@ -79,13 +80,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'email_verify_token' => str_random(10)
         ]);
-//        Mail::to($user->email)->send(new RegistUserMail($user->name, $user->email_verify_token));
-//        $registUser = new RegistUser($user);
-//        $dispatcher = new Dispatcher();
-//        $dispatcher->dispatch($registUser);
-
-
         return $user;
+
     }
 
     /**
