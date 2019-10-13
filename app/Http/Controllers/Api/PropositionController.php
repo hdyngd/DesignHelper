@@ -7,13 +7,18 @@ use App\Http\Requests\StorePropositionPost;
 use App\Http\Requests\StoreMessagePost;
 use App\Http\Requests\AttachCreatorPost;
 use App\Events\MessageCreated;
+use App\Jobs\AssignedProposition;
 use App\Message;
 use App\Proposition;
 use GuzzleHttp\Client;
+use Illuminate\Bus\Dispatcher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use App\User;
+use App\Jobs\AttachedCreator;
 
 class PropositionController extends Controller
 {
@@ -111,13 +116,22 @@ class PropositionController extends Controller
         return response()->json($responseBody);
     }
 
-    public function attachCreator(AttachCreatorPost $request)
+    public function attachCreator(AttachCreatorPost $request, Dispatcher $dispatcher)
     {
         //dd($request->all());
         $proposition = Proposition::find($request->input('proposition_id'));
         $proposition->designer_id = $request->input('designer_id');
 //        $proposition->progress = 1;
         $proposition->save();
+
+        $creator = User::find($proposition->designer_id);
+        $client = User::find($proposition->client_id);
+
+        //email送信
+        $toClient = new AttachedCreator($client);
+        $toCreator = new AssignedProposition($creator);
+        $dispatcher->dispatch($toClient);
+        $dispatcher->dispatch($toCreator);
 
         return response()->json();
     }
