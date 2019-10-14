@@ -47,6 +47,24 @@ class PropositionController extends Controller
         return response()->json($proposition->get($user));
     }
 
+//    public function get(Dispatcher $dispatcher)
+//    {
+//        $user = auth()->user();
+//        $proposition = new Proposition();
+//
+//        // 管理者にも通知メール
+//        $managers = User::where('role', 0)->get();
+//        $managers = $managers->toArray();
+//        $mail = new Occurrence($managers);
+//        $dispatcher->dispatch($mail);
+//
+//        // 発注者に通知メール
+//        $test = new Paymented(auth()->user()->email, auth()->user()->name);
+//        $dispatcher->dispatch($test);
+//
+//        return response()->json($proposition->get($user));
+//    }
+
     public function getOne($id)
     {
         $proposition = new Proposition();

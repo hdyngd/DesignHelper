@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OccurrnceMail extends Mailable
+class OccurrenceMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,7 +18,7 @@ class OccurrnceMail extends Mailable
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct()
     {
         $this->title = '[DesignHelper] 案件発生通知';
     }
