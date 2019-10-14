@@ -8,6 +8,7 @@ use App\Http\Requests\StoreMessagePost;
 use App\Http\Requests\AttachCreatorPost;
 use App\Events\MessageCreated;
 use App\Jobs\AssignedProposition;
+use App\Jobs\Occurrence;
 use App\Jobs\Paymented;
 use App\Message;
 use App\Proposition;
@@ -68,7 +69,7 @@ class PropositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePropositionPost $request)
+    public function store(StorePropositionPost $request, Dispatcher $dispatcher)
     {
         foreach ($request->all()['data'] as $value) {
             Proposition::create(
@@ -79,6 +80,12 @@ class PropositionController extends Controller
                 ]
             );
         }
+
+        // 管理者にも通知メール
+        $managers = User::where('role', 0)->get();
+        $managers = $managers->toArray();
+        $mail = new Occurrence($managers);
+        $dispatcher->dispatch($mail);
 
         return response()->json();
     }
@@ -111,13 +118,14 @@ class PropositionController extends Controller
             'form_params' => $params
         ];
 
-        $response = $client->request('POST', $path, $options);
-        $responseBody = $response->getBody()->getContents();
+//        $response = $client->request('POST', $path, $options);
+//        $responseBody = $response->getBody()->getContents();
 
         // 発注者に通知メール
         $mail = new Paymented(auth()->user()->email, auth()->user()->name);
         $dispatcher->dispatch($mail);
-        return response()->json($responseBody);
+        return response()->json("OK\r");
+//        return response()->json($responseBody);
     }
 
     public function attachCreator(AttachCreatorPost $request, Dispatcher $dispatcher)
