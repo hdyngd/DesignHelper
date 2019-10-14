@@ -47,24 +47,6 @@ class PropositionController extends Controller
         return response()->json($proposition->get($user));
     }
 
-//    public function get(Dispatcher $dispatcher)
-//    {
-//        $user = auth()->user();
-//        $proposition = new Proposition();
-//
-//        // 管理者にも通知メール
-//        $managers = User::where('role', 0)->get();
-//        $managers = $managers->toArray();
-//        $mail = new Occurrence($managers);
-//        $dispatcher->dispatch($mail);
-//
-//        // 発注者に通知メール
-//        $test = new Paymented(auth()->user()->email, auth()->user()->name);
-//        $dispatcher->dispatch($test);
-//
-//        return response()->json($proposition->get($user));
-//    }
-
     public function getOne($id)
     {
         $proposition = new Proposition();
@@ -136,14 +118,14 @@ class PropositionController extends Controller
             'form_params' => $params
         ];
 
-//        $response = $client->request('POST', $path, $options);
-//        $responseBody = $response->getBody()->getContents();
+        $response = $client->request('POST', $path, $options);
+        $responseBody = $response->getBody()->getContents();
 
         // 発注者に通知メール
         $mail = new Payment(auth()->user()->email, auth()->user()->name);
         $dispatcher->dispatch($mail);
-        return response()->json("OK\r");
-//        return response()->json($responseBody);
+
+        return response()->json($responseBody);
     }
 
     public function attachCreator(AttachCreatorPost $request, Dispatcher $dispatcher)
