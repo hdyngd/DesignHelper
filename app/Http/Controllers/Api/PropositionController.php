@@ -111,17 +111,13 @@ class PropositionController extends Controller
             'form_params' => $params
         ];
 
+        $response = $client->request('POST', $path, $options);
+        $responseBody = $response->getBody()->getContents();
 
-        //テストのためコメントアウト
-//        $response = $client->request('POST', $path, $options);
-//        $responseBody = $response->getBody()->getContents();
-
-//        return response()->json($responseBody);
-
+        // 発注者に通知メール
         $mail = new Paymented(auth()->user()->email, auth()->user()->name);
         $dispatcher->dispatch($mail);
-
-        return response()->json("OK\r");
+        return response()->json($responseBody);
     }
 
     public function attachCreator(AttachCreatorPost $request, Dispatcher $dispatcher)

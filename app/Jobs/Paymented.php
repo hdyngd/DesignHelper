@@ -36,7 +36,6 @@ class Paymented implements ShouldQueue
      */
     public function handle()
     {
-        $user = Auth::user();
         Mail::to($this->to)->send(new PaymentedMail($this->name));
     }
 }
