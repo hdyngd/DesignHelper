@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\PaymentedMail;
+use App\Mail\PaymentMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
-class Paymented implements ShouldQueue
+class Payment implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -36,6 +36,6 @@ class Paymented implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->to)->send(new PaymentedMail($this->name));
+        Mail::to($this->to)->send(new PaymentMail($this->name));
     }
 }

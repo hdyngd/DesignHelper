@@ -9,7 +9,7 @@ use App\Http\Requests\AttachCreatorPost;
 use App\Events\MessageCreated;
 use App\Jobs\AssignedProposition;
 use App\Jobs\IssueOccurrence;
-use App\Jobs\Paymented;
+use App\Jobs\Payment;
 use App\Message;
 use App\Proposition;
 use GuzzleHttp\Client;
@@ -140,7 +140,7 @@ class PropositionController extends Controller
 //        $responseBody = $response->getBody()->getContents();
 
         // 発注者に通知メール
-        $mail = new Paymented(auth()->user()->email, auth()->user()->name);
+        $mail = new Payment(auth()->user()->email, auth()->user()->name);
         $dispatcher->dispatch($mail);
         return response()->json("OK\r");
 //        return response()->json($responseBody);
