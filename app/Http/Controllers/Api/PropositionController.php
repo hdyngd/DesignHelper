@@ -8,6 +8,7 @@ use App\Http\Requests\StoreMessagePost;
 use App\Http\Requests\AttachCreatorPost;
 use App\Events\MessageCreated;
 use App\Jobs\AssignedProposition;
+use App\Jobs\Paymented;
 use App\Message;
 use App\Proposition;
 use GuzzleHttp\Client;
@@ -82,7 +83,7 @@ class PropositionController extends Controller
         return response()->json();
     }
 
-    public function payment(Request $request)
+    public function payment(Request $request, Dispatcher $dispatcher)
     {
         $token = $request->input('token');
         $amount = 0;
@@ -110,10 +111,17 @@ class PropositionController extends Controller
             'form_params' => $params
         ];
 
-        $response = $client->request('POST', $path, $options);
-        $responseBody = $response->getBody()->getContents();
 
-        return response()->json($responseBody);
+        //テストのためコメントアウト
+//        $response = $client->request('POST', $path, $options);
+//        $responseBody = $response->getBody()->getContents();
+
+//        return response()->json($responseBody);
+
+        $mail = new Paymented();
+        $dispatcher->dispatch($mail);
+
+        return response()->json("OK\r");
     }
 
     public function attachCreator(AttachCreatorPost $request, Dispatcher $dispatcher)
