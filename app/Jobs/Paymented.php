@@ -15,14 +15,18 @@ class Paymented implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private $to = '';
+    private $name = '';
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $to, string $name)
     {
-
+        $this->to = $to;
+        $this->name = $name;
     }
 
     /**
@@ -32,6 +36,7 @@ class Paymented implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to(auth()->user()->email)->send(new PaymentedMail(auth()->user()->name));
+        $user = Auth::user();
+        Mail::to($this->to)->send(new PaymentedMail($this->name));
     }
 }

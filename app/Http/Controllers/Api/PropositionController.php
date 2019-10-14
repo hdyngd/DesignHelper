@@ -118,7 +118,7 @@ class PropositionController extends Controller
 
 //        return response()->json($responseBody);
 
-        $mail = new Paymented();
+        $mail = new Paymented(auth()->user()->email, auth()->user()->name);
         $dispatcher->dispatch($mail);
 
         return response()->json("OK\r");
