@@ -8,7 +8,7 @@ use App\Http\Requests\StoreMessagePost;
 use App\Http\Requests\AttachCreatorPost;
 use App\Events\MessageCreated;
 use App\Jobs\AssignedProposition;
-use App\Jobs\Occurrence;
+use App\Jobs\IssueOccurrence;
 use App\Jobs\Paymented;
 use App\Message;
 use App\Proposition;
@@ -102,7 +102,7 @@ class PropositionController extends Controller
         // 管理者にも通知メール
         $managers = User::where('role', 0)->get();
         $managers = $managers->toArray();
-        $mail = new Occurrence($managers);
+        $mail = new IssueOccurrence($managers);
         $dispatcher->dispatch($mail);
 
         return response()->json();

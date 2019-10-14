@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\OccurrenceMail;
+use App\Mail\IssueOccurrenceMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
-class Occurrence implements ShouldQueue
+class IssueOccurrence implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -35,7 +35,7 @@ class Occurrence implements ShouldQueue
     public function handle()
     {
         foreach ($this->managers as $value) {
-            Mail::to($value['email'])->send(new OccurrenceMail());
+            Mail::to($value['email'])->send(new IssueOccurrenceMail());
         }
     }
 }
