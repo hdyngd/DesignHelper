@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Information;
 use App\Information_file;
+use App\Jobs\ReceiveInformation;
+use Illuminate\Bus\Dispatcher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInformationPost;
@@ -14,7 +16,7 @@ use Carbon\Carbon;
 
 class InformationController extends Controller
 {
-    public function store(StoreInformationPost $request)
+    public function store(StoreInformationPost $request, Dispatcher $dispatcher)
     {
         DB::beginTransaction();
         try {
@@ -36,6 +38,9 @@ class InformationController extends Controller
                 }
             }
 
+            $mail = new ReceiveInformation($information->id);
+            $dispatcher->dispatch($mail);
+
             DB::commit();
             return $information;
         } catch (\Exception $e) {
@@ -44,7 +49,7 @@ class InformationController extends Controller
         }
     }
 
-    public function edit(StoreInformationPost $request)
+    public function edit(StoreInformationPost $request, Dispatcher $dispatcher)
     {
         DB::beginTransaction();
         try {
@@ -68,6 +73,9 @@ class InformationController extends Controller
                     ]);
                 }
             }
+
+            $mail = new ReceiveInformation($information->id);
+            $dispatcher->dispatch($mail);
 
             DB::commit();
             return $information;
