@@ -10,7 +10,7 @@
 
                 <el-table-column type="expand">
                     <template slot-scope="props">
-<!--                        <progress-steps></progress-steps>-->
+                        <progress-steps :proposition="props.row"></progress-steps>
 <!--                        <chat></chat>-->
                     </template>
                 </el-table-column>
