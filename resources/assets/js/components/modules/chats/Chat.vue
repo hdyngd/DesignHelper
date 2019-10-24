@@ -6,7 +6,7 @@
                 :onMessageWasSent="onMessageWasSent"
                 :messageList="messageList"
                 :newMessagesCount="newMessagesCount"
-                :isOpen="isChatOpen"
+                :isOpen="isChatOpenState"
                 :close="closeChat"
                 :icons="icons"
                 :open="openChat"
@@ -35,6 +35,9 @@
             proposition: Object,
             addMessage: Function,
             storeMessage: Function,
+            isChatOpenState: Boolean,
+            chatToggle: Function,
+            propositionId: Number,
 
         },
         data() {
@@ -59,7 +62,7 @@
                 },
                 titleImageUrl: this.menuImage(),
                 newMessagesCount: 0,
-                isChatOpen: false, // to determine whether the chat window should be open or closed
+                isChatOpen: this.isChatOpenState, // to determine whether the chat window should be open or closed
                 showTypingIndicator: '', // when set to a value matching the participant.id it shows the typing indicator for the specific user
                 colors: {
                     header: {
@@ -90,7 +93,7 @@
             }
         },
         mounted () {
-            Echo.channel('chat.' + this.$route.params.id)
+            Echo.channel('chat.' + this.propositionId)
                 .listen('MessageCreated', (e) => {
                     this.newMessagesCount++
                     const content = this.conversionData(e.message, false)
@@ -114,12 +117,14 @@
             },
             openChat() {
                 // called when the user clicks on the fab button to open the chat
-                this.isChatOpen = true
+                // this.isChatOpen = true
+                this.chatToggle(true);
                 this.newMessagesCount = 0
             },
             closeChat() {
                 // called when the user clicks on the botton to close the chat
-                this.isChatOpen = false
+                // this.isChatOpen = false
+                this.chatToggle(false);
                 this.newMessagesCount = 0
             },
             handleScrollToTop() {
@@ -143,7 +148,7 @@
             },
             prepareMessage(message) {
                 let params = {
-                    proposition_id: this.$route.params.id,
+                    proposition_id: this.propositionId,
                     type: message.type
                 };
 
@@ -156,7 +161,7 @@
                         break;
                     case 'file':
                         params = new FormData();
-                        params.append('proposition_id', this.$route.params.id);
+                        params.append('proposition_id', this.propositionId);
                         params.append('type', message.type);
                         params.append('content', message.data.file.name);
                         params.append('file', message.data.file);

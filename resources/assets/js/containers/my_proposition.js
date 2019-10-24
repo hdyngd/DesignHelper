@@ -4,12 +4,12 @@ import store from "../store";
 import MyProposition from "../components/pages/MyProposition";
 export default connect({
     gettersToProps: {
-        propositions: 'getMyPropositions'
+        propositions: 'getMyPropositions',
+        isChatOpen: 'getIsChatOpen',
     },
     actionsToProps: {
-        // fetchParticipants: 'fetchParticipants',
-        // fetchMessageList: 'fetchMessageList',
-        // fetchProposition: 'fetchProposition',
+        chatToggle: 'chatToggle',
+        fetchChat: 'fetchChat',
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {

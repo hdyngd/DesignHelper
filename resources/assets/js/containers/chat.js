@@ -7,10 +7,13 @@ export default connect({
         participants: 'getParticipants',
         messageList: 'getMessageList',
         proposition: 'getProposition',
+        isChatOpenState: 'getIsChatOpen',
+        propositionId: 'getPropositionId',
     },
     actionsToProps: {
         addMessage: 'addMessage',
         storeMessage: 'storeMessage',
+        chatToggle: 'chatToggle',
 
     },
     // lifecycle: {

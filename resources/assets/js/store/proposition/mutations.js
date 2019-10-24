@@ -12,6 +12,8 @@ export const state = {
     participants: [],
     messageList: [],
     creditToken: '',
+    isChatOpen: false,
+    propositionId: '',
 }
 
 export const mutations = {
@@ -49,5 +51,11 @@ export const mutations = {
     },
     [types.SET_CREDIT_TOKEN] (state, payload) {
         state.creditToken = payload
+    },
+    [types.SET_IS_CHAT_OPEN] (state, payload) {
+        state.isChatOpen = payload
+    },
+    [types.SET_PROPOSITION_ID] (state, payload) {
+        state.propositionId = payload
     },
 }

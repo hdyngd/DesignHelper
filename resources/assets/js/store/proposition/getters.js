@@ -10,6 +10,8 @@ export const getters = {
     getParticipants: state => state.participants,
     getMessageList: state => state.messageList,
     getCreditToken: state => state.creditToken,
+    getIsChatOpen: state => state.isChatOpen,
+    getPropositionId: state => state.propositionId,
 }
 
 export default getters

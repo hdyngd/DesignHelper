@@ -306,5 +306,47 @@ export const actions = {
                 reject(error)
             })
         })
+    },
+    chatToggle({commit}, bool) {
+        commit('SET_IS_CHAT_OPEN', bool);
+    },
+    fetchChat({commit, dispatch}, id) {
+        commit('SET_PROPOSITION_ID', id);
+
+        let max = 3;
+        let count = 0;
+        dispatch('fetchParticipants', id)
+            .then(() => {
+                count++;
+                if(count === max) {
+                    commit('SET_IS_CHAT_OPEN', true);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        dispatch('fetchMessageList', id)
+            .then(() => {
+                count++;
+                if(count === max) {
+                    commit('SET_IS_CHAT_OPEN', true);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        dispatch('fetchProposition', id)
+            .then(() => {
+                count++;
+                if(count === max) {
+                    commit('SET_IS_CHAT_OPEN', true);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
+
 }

@@ -11,7 +11,11 @@
                 <el-table-column type="expand">
                     <template slot-scope="props">
                         <progress-steps :proposition="props.row"></progress-steps>
-<!--                        <chat></chat>-->
+<!--                        <template v-if="props.row.designer_id !== null">-->
+<!--                            <el-button v-if="isChatOpen" type="primary" icon="el-icon-close" circle @click.stop="closeChat"></el-button>-->
+<!--                            <el-button v-else type="primary" icon="el-icon-chat-line-round" circle @click.stop="openChat(props.row.id)"></el-button>-->
+<!--                        </template>-->
+                            <!--                        <chat></chat>-->
                     </template>
                 </el-table-column>
 
@@ -59,15 +63,20 @@
                                 placeholder="Type to search"/>
                     </template>
                     <template slot-scope="scope">
-                        <router-link :to="'/proposition/' + scope.row.id">
-                            <el-button size="mini">
-                                Detail
-                            </el-button>
-                        </router-link>
+                        <template v-if="scope.row.designer_id !== null">
+                            <el-button v-if="isChatOpen" type="primary" icon="el-icon-close" circle @click.stop="closeChat"></el-button>
+                            <el-button v-else type="primary" icon="el-icon-chat-line-round" circle @click.stop="openChat(scope.row.id)"></el-button>
+                        </template>
+<!--                        <router-link :to="'/proposition/' + scope.row.id">-->
+<!--                            <el-button size="mini">-->
+<!--                                Detail-->
+<!--                            </el-button>-->
+<!--                        </router-link>-->
                     </template>
                 </el-table-column>
             </el-table>
         </el-card>
+        <chat v-if="isChatOpen"></chat>
     </el-col>
 </template>
 
@@ -80,6 +89,9 @@
         },
         props: {
             propositions: Array,
+            isChatOpen: Boolean,
+            chatToggle: Function,
+            fetchChat: Function,
             // fetchParticipants: Function,
             // fetchMessageList: Function,
             // fetchProposition: Function,
@@ -96,7 +108,15 @@
                 // this.fetchMessageList(row.id);
                 // this.fetchProposition(row.id);
                 console.log(row);
+            },
+            closeChat() {
+                this.chatToggle(false);
+            },
+            openChat(id) {
+                this.fetchChat(id);
+                // this.chatToggle(true);
             }
+
         },
     }
 </script>
