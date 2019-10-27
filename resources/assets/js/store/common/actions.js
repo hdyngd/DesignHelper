@@ -56,6 +56,9 @@ export const actions = {
     setIsHome({commit, dispatch}, bool) {
         commit(types.SET_IS_HOME, bool)
     },
+    setIsTop({commit, dispatch}, bool) {
+        commit(types.SET_IS_TOP, bool)
+    },
     sendInformation ({commit, dispatch}, params) {
         return new Promise((resolve, reject) => {
             const payload = {

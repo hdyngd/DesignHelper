@@ -6,6 +6,7 @@ export default connect({
     gettersToProps: {
         categories: 'getCategories',
         isHome: 'getIsHome',
+        isTop: 'getIsTop',
     },
     actionsToProps: {
         // deleteWorkRoom: 'deleteWorkRoom',
@@ -20,6 +21,9 @@ export default connect({
             }
 
             store.dispatch('setIsHome', true)
+
+            // Topページフラグをオフに。カートへ追加ボタンをアクティブ化
+            store.dispatch('setIsTop', false)
 
             store.dispatch('fetchCategories')
                 .then(() => {

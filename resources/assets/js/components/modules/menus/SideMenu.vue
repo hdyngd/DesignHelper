@@ -11,7 +11,8 @@
                     style="width: 50px; height: 50px"
                     src="https://design-helper.s3-ap-northeast-1.amazonaws.com/menu/picture_icon.png"
                     fit="fill"/>
-            <router-link :to="'/home/category/' + item.id">{{ item.name }}</router-link>
+            <router-link v-if="isTop" :to="'/category/' + item.id">{{ item.name }}</router-link>
+            <router-link v-else :to="'/home/category/' + item.id">{{ item.name }}</router-link>
         </el-menu-item>
     </el-menu>
 </template>
@@ -21,6 +22,7 @@
         name: "SideMenu",
         props: {
             categories: Array,
+            isTop: Boolean,
         },
     }
 </script>

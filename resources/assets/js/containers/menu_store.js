@@ -5,11 +5,13 @@ import store from "../store";
 export default connect({
     gettersToProps: {
         category: 'getCategory',
-        menus: 'getMenus'
+        menus: 'getMenus',
+        isTop: 'getIsTop',
     },
     actionsToProps: {
         fetchMenu: 'fetchMenu',
         addToCart: 'addToCart',
+        flushSuccess: 'flushSuccess',
     },
     lifecycle: {
         beforeRouteEnter (to, from, next) {

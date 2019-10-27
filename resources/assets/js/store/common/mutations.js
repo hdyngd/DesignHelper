@@ -3,6 +3,7 @@ import * as types from './mutation-types'
 export const state = {
     loading: false,
     isHome: false,
+    isTop: false,
     informations: [],
     dialogEditInformation: false,
     editInformation: {},
@@ -15,6 +16,10 @@ export const mutations = {
     },
     [types.SET_IS_HOME] (state, payload) {
         state.isHome = payload
+        // state.refreshToken = payload.refreshToken
+    },
+    [types.SET_IS_TOP] (state, payload) {
+        state.isTop = payload
         // state.refreshToken = payload.refreshToken
     },
     [types.SET_INFORMATIONS] (state, payload) {

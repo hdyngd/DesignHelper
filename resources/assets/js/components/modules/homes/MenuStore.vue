@@ -46,6 +46,8 @@
             category: Object,
             fetchMenu: Function,
             addToCart: Function,
+            isTop: Boolean,
+            flushSuccess: Function,
         },
         //動的ルートの時、パラメータのみの変更はインスタンス再利用のためlifecyclehookが呼ばれない。
         //だから、$route をwatchすることで変更を検知、任意のアクションを定義できる。
@@ -56,7 +58,12 @@
         },
         methods: {
             onAddToCart(index) {
-                this.addToCart(this.category.menus[index])
+                if(this.isTop) {
+                    this.flushSuccess({title: 'Success', message: '発注を行うためには会員である必要があります。'});
+                    router.push('/signup');
+                } else {
+                    this.addToCart(this.category.menus[index])
+                }
             }
         }
     }

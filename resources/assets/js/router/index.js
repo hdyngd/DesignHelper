@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Top from '@/js/containers/Top'
 import Home from '@/js/containers/Home'
 import Login from '@/js/containers/Login'
 import SignUp from '@/js/containers/signup'
@@ -28,7 +29,11 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/', component: Home, beforeEnter: home},
+        { path: '/', component: Top, beforeEnter: guest,
+            children: [
+                {path: 'category/:id', component: MenuStore},
+            ]
+        },
         { path: '/signup', component: SignUp, beforeEnter: guest},
         { path: '/login', component: Login, beforeEnter: guest},
         { path: '/verification/:token', component: SetPassword},

@@ -21,19 +21,19 @@ Route::post('/set_password', 'Api\UserController@setPassword');
 Route::post('/reset_password', 'Api\UserController@resetPassword');
 Route::get('/user/emailVerify/{token}', 'Api\UserController@emailVerify');
 Route::get('/user/signUpEmailVerify/{token}', 'Api\UserController@signUpEmailVerify');
+Route::get('/category/get', 'Api\CategoryController@index');
+Route::get('/menu/get/{id}', 'Api\MenuController@get'); // こっちはカテゴリIDにひもづくメニュー一覧を取得
 
 Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('/logout', 'AuthController@logout');
     Route::get('/me', 'AuthController@me');
 
-    Route::get('/category/get', 'Api\CategoryController@index');
     Route::get('/category/get/{id}', 'Api\CategoryController@get');
     Route::get('/user/get', 'Api\UserController@getAll');
     Route::get('/user/get/{id}', 'Api\UserController@get');
     Route::get('/user/getCreator', 'Api\UserController@getCreator');
     Route::get('/menu/get', 'Api\MenuController@getAll');
-    Route::get('/menu/get/{id}', 'Api\MenuController@get'); // こっちはカテゴリIDにひもづくメニュー一覧を取得
     Route::post('/proposition/store', 'Api\PropositionController@store');
     Route::post('/proposition/payment', 'Api\PropositionController@payment');
     Route::get('/proposition/get', 'Api\PropositionController@get');

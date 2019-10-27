@@ -5,7 +5,7 @@
                 <el-menu-item index="1"><router-link to="/">Design Helper</router-link></el-menu-item>
             </el-col>
 
-            <template v-if="user.name">
+            <template v-if="user !== null && 'name' in user">
 
                 <el-col v-if="user.role === 2" :span="1" :offset="14">
                     <el-menu-item index="4">
@@ -45,9 +45,14 @@
                     </el-submenu>
                 </el-col>
             </template>
-            <el-col v-else :offset="18" :span="3">
-                <el-menu-item index="2"><router-link to="/signup">新規登録</router-link></el-menu-item>
-            </el-col>
+            <template v-else>
+                <el-col :offset="15" :span="3">
+                    <el-menu-item index="2"><router-link to="/login">ログイン</router-link></el-menu-item>
+                </el-col>
+                <el-col :span="3">
+                    <el-menu-item index="3"><router-link to="/signup">新規登録</router-link></el-menu-item>
+                </el-col>
+            </template>
         </el-row>
         <shopping-cart></shopping-cart>
     </el-menu>
