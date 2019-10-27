@@ -3,10 +3,11 @@ import { LOGGED_OUT } from '../auth/mutation-types'
 import { Notification } from 'element-ui';
 
 export const actions = {
-    api({commit, dispatch}, {url, method, params}) {
+    // api({commit, dispatch}, {url, method, params}) {
+    api({commit, dispatch}, datas) {
         return new Promise((resolve, reject) => {
             commit(types.SET_IS_LOADING, true)
-            window.axios[method](url, params)
+            window.axios[datas.method](datas.url, datas.params)
                 .then(({data}) => {
                     resolve(data)
                 }).catch(({response}) => {
@@ -20,7 +21,8 @@ export const actions = {
                     commit(LOGGED_OUT)
                     window.localStorage.setItem('token', '')
                     window.localStorage.setItem('user', {})
-                    const payload = {title: 'Error', message: '認証の有効期限が切れています。再度ログインをしてください。'}
+                    const errMess = ('errorMessage' in datas) ? datas.errorMessage : '認証の有効期限が切れています。再度ログインをしてください。';
+                    const payload = {title: 'Error', message: errMess}
                     dispatch('flushError', payload)
                     router.push('/login');
                     // return;

@@ -7,7 +7,8 @@ export const actions = {
             const payload = {
                 url : '/api/login',
                 params: data,
-                method: 'post'
+                method: 'post',
+                errorMessage: 'メールアドレスまたは、パスワードが間違っています。',
             }
             dispatch('api', payload)
                 .then((res) => {

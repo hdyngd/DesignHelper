@@ -93,6 +93,7 @@
             }
         },
         mounted () {
+            console.log("マウント!!");
             Echo.channel('chat.' + this.propositionId)
                 .listen('MessageCreated', (e) => {
                     this.newMessagesCount++
