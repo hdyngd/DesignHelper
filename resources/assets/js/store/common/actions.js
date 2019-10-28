@@ -3,7 +3,6 @@ import { LOGGED_OUT } from '../auth/mutation-types'
 import { Notification } from 'element-ui';
 
 export const actions = {
-    // api({commit, dispatch}, {url, method, params}) {
     api({commit, dispatch}, datas) {
         return new Promise((resolve, reject) => {
             commit(types.SET_IS_LOADING, true)
