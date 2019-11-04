@@ -1,6 +1,6 @@
 <template>
     <el-main>
-        <el-col :span="6">
+        <el-col :span="6" class="sub_menu">
             <dh-side-menu :categories="categories" :isTop="isTop"></dh-side-menu>
         </el-col>
         <el-col :span="17" :offset="1">

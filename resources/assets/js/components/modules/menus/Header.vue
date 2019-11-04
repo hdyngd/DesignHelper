@@ -1,5 +1,5 @@
 <template>
-    <el-menu mode="horizontal">
+    <el-menu mode="horizontal" class="main_menu">
         <el-row>
             <el-col :span="3">
                 <el-menu-item index="1"><router-link to="/">Design Helper</router-link></el-menu-item>
