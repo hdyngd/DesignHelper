@@ -16,17 +16,19 @@
                 <router-link v-else :to="'/home/category/' + item.id">{{ item.name }}</router-link>
             </el-menu-item>
         </el-menu>
-        <div>
-            <router-link :to="'/login'"><img src="/images/custom/img_1.png"/></router-link>
-        </div>
-        <div>
-            <router-link :to="'/login'"><img src="/images/custom/img_2.png"/></router-link>
-        </div>
-        <div>
-            <router-link :to="'/login'"><img src="/images/custom/img_3.png"/></router-link>
-        </div>
-        <div>
-            <router-link :to="'/login'"><img src="/images/custom/img_4.png"/></router-link>
+        <div class="s2_menu">
+            <div>
+                <router-link :to="'/login'"><img src="/images/custom/img_1.png"/></router-link>
+            </div>
+            <div>
+                <router-link :to="'/login'"><img src="/images/custom/img_2.png"/></router-link>
+            </div>
+            <div>
+                <router-link :to="'/login'"><img src="/images/custom/img_3.png"/></router-link>
+            </div>
+            <div>
+                <router-link :to="'/login'"><img src="/images/custom/img_4.png"/></router-link>
+            </div>
         </div>
     </div>
 </template>
