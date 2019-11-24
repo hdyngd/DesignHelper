@@ -1,7 +1,7 @@
 <template>
     <el-col :span="20" :offset="2">
         <el-card class="box-card">
-            <div>
+            <div class="news_wrap">
                 <vue-markdown>{{ information.content }}</vue-markdown>
                 <template v-if="information.files">
                     <div v-for="file in information.files" :key="file.id">
