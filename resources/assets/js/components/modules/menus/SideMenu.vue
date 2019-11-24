@@ -25,6 +25,9 @@
         <div>
             <router-link :to="'/login'"><img src="/images/custom/img_3.png"/></router-link>
         </div>
+        <div>
+            <router-link :to="'/login'"><img src="/images/custom/img_4.png"/></router-link>
+        </div>
     </div>
 </template>
 
