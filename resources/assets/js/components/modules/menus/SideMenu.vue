@@ -4,12 +4,12 @@
             <el-menu-item v-for="item in categories" :key="item.id">
                 <el-image
                         v-if="item.image"
-                        style="width: 50px; height: 50px"
+                        style="width: 25px; height: 25px"
                         :src="item.image"
                         fit="fill"/>
                 <el-image
                         v-else
-                        style="width: 50px; height: 50px"
+                        style="width: 25px; height: 25px"
                         src="https://design-helper.s3-ap-northeast-1.amazonaws.com/menu/picture_icon.png"
                         fit="fill"/>
                 <router-link v-if="isTop" :to="'/category/' + item.id">{{ item.name }}</router-link>
