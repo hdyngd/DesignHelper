@@ -1,6 +1,6 @@
 <template>
     <el-dialog
-            title="Shopping Cart"
+            title="買い物カゴ"
             :visible.sync="shoppingCartVisible"
             width="80%"
             :before-close="closeCart">
@@ -35,7 +35,7 @@
 
         <span slot="footer" class="dialog-footer">
             <el-input class="el-input" v-model="totalPrice" placeholder="0" :disabled="true">
-                <template slot="prepend">Total : ¥</template>
+                <template slot="prepend">合計 : ¥</template>
             </el-input>
             <el-button @click="closeCart">Cancel</el-button>
             <el-button v-if="creditToken" type="primary" @click="confirmOrder">確認</el-button>

@@ -25,32 +25,32 @@
                         sortable>
                 </el-table-column>
                 <el-table-column
-                        label="Menu"
+                        label="メニュー名"
                         prop="menuName"
                         sortable>
                 </el-table-column>
                 <el-table-column
-                        label="Amount"
+                        label="発注数"
                         prop="amount"
                         sortable>
                 </el-table-column>
+<!--                <el-table-column-->
+<!--                        label="発注者"-->
+<!--                        prop="clientName"-->
+<!--                        sortable>-->
+<!--                </el-table-column>-->
                 <el-table-column
-                        label="Orderer"
-                        prop="clientName"
-                        sortable>
-                </el-table-column>
-                <el-table-column
-                        label="Creator"
+                        label="担当者"
                         prop="designerName"
                         sortable>
                 </el-table-column>
                 <el-table-column
-                        label="Progress"
+                        label="進捗"
                         prop="progressName"
                         sortable>
                 </el-table-column>
                 <el-table-column
-                        label="OrderDate"
+                        label="発注日"
                         prop="created_at"
                         sortable>
                 </el-table-column>
